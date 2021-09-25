@@ -8,6 +8,7 @@ config.js
 dataModels.txt
 pagesModels.txt
 toDos.txt
+design.txt
 
 # testing
 /coverage
