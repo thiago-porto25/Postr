@@ -4,6 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
+config.js
+dataModels.txt
+pagesModels.txt
+toDos.txt
 
 # testing
 /coverage
