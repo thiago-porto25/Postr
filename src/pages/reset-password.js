@@ -1,5 +1,5 @@
-import React from 'react'
+import { ResetPasswordTemplate } from '../components/templates'
 
 export default function ResetPassword() {
-  return <div></div>
+  return <ResetPasswordTemplate />
 }

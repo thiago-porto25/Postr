@@ -1,5 +1,5 @@
-import React from 'react'
+import { NotFoundTemplate } from '../components/templates'
 
 export default function NotFound() {
-  return <div></div>
+  return <NotFoundTemplate />
 }

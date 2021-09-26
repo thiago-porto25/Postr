@@ -1,5 +1,5 @@
-import React from 'react'
+import { ConversationTemplate } from '../components/templates'
 
 export default function Conversation() {
-  return <div></div>
+  return <ConversationTemplate />
 }

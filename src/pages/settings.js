@@ -1,5 +1,5 @@
-import React from 'react'
+import { SettingsTemplate } from '../components/templates'
 
 export default function Settings() {
-  return <div></div>
+  return <SettingsTemplate />
 }

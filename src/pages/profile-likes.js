@@ -1,5 +1,5 @@
-import React from 'react'
+import { ProfileLikesTemplate } from '../components/templates'
 
 export default function ProfileLikes() {
-  return <div></div>
+  return <ProfileLikesTemplate />
 }

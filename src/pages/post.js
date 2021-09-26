@@ -1,5 +1,5 @@
-import React from 'react'
+import { PostTemplate } from '../components/templates'
 
 export default function Post() {
-  return <div></div>
+  return <PostTemplate />
 }

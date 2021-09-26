@@ -1,5 +1,5 @@
-import React from 'react'
+import { ProfileTemplate } from '../components/templates'
 
 export default function Profile() {
-  return <div></div>
+  return <ProfileTemplate />
 }

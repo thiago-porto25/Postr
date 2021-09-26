@@ -1,5 +1,5 @@
-import React from 'react'
+import { SearchTemplate } from '../components/templates'
 
 export default function Search() {
-  return <div></div>
+  return <SearchTemplate />
 }

@@ -1,5 +1,5 @@
-import React from 'react'
+import { SignupTemplate } from '../components/templates'
 
 export default function Signup() {
-  return <div></div>
+  return <SignupTemplate />
 }

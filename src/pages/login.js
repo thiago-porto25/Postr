@@ -1,5 +1,5 @@
-import React from 'react'
+import { LoginTemplate } from '../components/templates'
 
 export default function Login() {
-  return <div></div>
+  return <LoginTemplate />
 }
