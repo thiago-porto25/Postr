@@ -5,8 +5,8 @@
 /.pnp
 .pnp.js
 config.js
-dataModels.txt
-pagesModels.txt
+
+*Models.txt
 toDos.txt
 design.txt
 
