@@ -26,6 +26,8 @@ export default function LoginForm({ setError }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     setError('Testing testing my friend')
+    setEmail('')
+    setPassword('')
   }
 
   return (
