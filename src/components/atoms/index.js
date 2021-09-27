@@ -1,3 +1,7 @@
 export { default as BigButton } from './BigButton'
 export { default as Logo } from './Logo'
 export { default as AuthTitle } from './AuthTitle'
+export { default as AuthLink } from './AuthLink'
+export { default as Dot } from './Dot'
+export { default as SpecialInput } from './SpecialInput'
+export { default as AuthMessage } from './AuthMessage'

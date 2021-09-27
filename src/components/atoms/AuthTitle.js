@@ -1,5 +1,11 @@
-import React from 'react'
+import styled from 'styled-components'
 
-export default function AuthTitle() {
-  return <div></div>
+const Title = styled.h1`
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 30px;
+  margin: 0;
+`
+
+export default function AuthTitle({ children }) {
+  return <Title>{children}</Title>
 }
