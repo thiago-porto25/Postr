@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Para = styled.p`
   text-align: center;
-  padding: 1rem 0.5rem;
+  padding: 0 0.5rem;
 
   &.success {
     color: var(--success);
