@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import * as ROUTES from '../../constants/routes'
 
 const Image = styled.img`
   width: 100%;
@@ -6,5 +8,9 @@ const Image = styled.img`
 `
 
 export default function Logo() {
-  return <Image src="/images/logo.png" alt="Postr Logo" />
+  return (
+    <Link to={ROUTES.HOME}>
+      <Image src="/images/logo.png" alt="Postr Logo" />
+    </Link>
+  )
 }
