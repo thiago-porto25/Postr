@@ -7,7 +7,7 @@ import { useState } from 'react'
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.8rem;
   height: 100%;
   width: 100%;
 
