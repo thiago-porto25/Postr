@@ -6,7 +6,7 @@ const Container = styled.main`
   padding: 2rem 0;
   max-width: 350px;
   width: 90%;
-  height: 100vh;
+  height: calc(100vh - 4rem);
 `
 
 export default function LoginTemplate() {
