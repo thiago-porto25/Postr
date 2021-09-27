@@ -13,16 +13,32 @@ const Container = styled.section`
   }
 
   .start-text-container {
-    font-family: 'Ubuntu', sans-serif;
+    width: fit-content;
 
     h1 {
+      width: fit-content;
       font-size: 70px;
+
+      @media (max-width: 1150px) {
+        font-size: 60px;
+      }
+
+      @media (max-width: 1000px) {
+        font-size: 70px;
+      }
+
+      @media (max-width: 550px) {
+        font-size: 55px;
+      }
+
+      @media (max-width: 320px) {
+        font-size: 40px;
+      }
     }
   }
 
   .start-sub-container {
-    font-family: 'Ubuntu', sans-serif;
-    width: fit-content;
+    width: 280px;
 
     button:last-of-type {
       margin-top: 0.7rem;
@@ -31,7 +47,21 @@ const Container = styled.section`
     h3 {
       width: fit-content;
       font-size: 36px;
+
+      @media (max-width: 400px) {
+        width: 100%;
+      }
+
+      @media (max-width: 340px) {
+        font-size: 30px;
+      }
     }
+  }
+
+  .start-sub-container,
+  .start-text-container {
+    font-family: 'Ubuntu', sans-serif;
+    width: fit-content;
   }
 `
 
