@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { BigButton, SpecialInput } from '../atoms'
+import { loginWithFirebase } from '../../services/firebase'
 
 const Form = styled.form`
   display: flex;
@@ -17,17 +18,26 @@ const Form = styled.form`
   }
 `
 
-export default function LoginForm({ setError }) {
+export default function LoginForm({ setMessage }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const isDisabled = email.length > 7 && password.length > 5 ? false : true
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setError('Testing testing my friend')
-    setEmail('')
-    setPassword('')
+
+    setLoading(true)
+
+    await loginWithFirebase({
+      email,
+      password,
+      setMessage,
+      setEmail,
+      setPassword,
+      setLoading,
+    })
   }
 
   return (
@@ -49,7 +59,12 @@ export default function LoginForm({ setError }) {
         />
       </div>
 
-      <BigButton disabled={isDisabled} type="submit" color="blue">
+      <BigButton
+        isLoading={loading}
+        disabled={isDisabled}
+        type="submit"
+        color="blue"
+      >
         Log in
       </BigButton>
     </Form>
