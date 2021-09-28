@@ -24,7 +24,7 @@ const Container = styled.section`
 `
 
 export default function LoginOrg() {
-  const [error, setError] = useState({ type: '', text: '' })
+  const [message, setMessage] = useState({ type: '', text: '' })
 
   return (
     <Container>
@@ -37,16 +37,16 @@ export default function LoginOrg() {
       </div>
 
       <div className="reset-form-container">
-        <ResetPasswordForm setError={setError} />
+        <ResetPasswordForm setMessage={setMessage} />
       </div>
 
       <div className="reset-links-container">
         <AuthLink to={ROUTES.LOGIN}>Log In to Postr</AuthLink>
       </div>
 
-      {error && (
+      {message && (
         <div className="reset-error-container">
-          <AuthMessage type={error.type} text={error.text} />
+          <AuthMessage type={message.type} text={message.text} />
         </div>
       )}
     </Container>

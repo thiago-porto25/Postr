@@ -38,7 +38,7 @@ export default function LoginOrg() {
       </div>
 
       <div className="login-form-container">
-        <LoginForm setError={setError} />
+        <LoginForm setMessage={setError} />
       </div>
 
       <div className="login-links-container">
