@@ -8,7 +8,7 @@ const Container = styled.div`
   span {
     position: absolute;
     pointer-events: none;
-    left: 5px;
+    left: 10px;
     top: 15px;
     transition: 0.2s ease all;
     color: var(--darkGrey);
@@ -31,7 +31,7 @@ const Container = styled.div`
   input:focus + span,
   input:not(:focus):valid + span,
   input:not([value='']) + span {
-    top: 4px;
+    top: 6px;
     bottom: 10px;
     left: 8px;
     font-size: 11px;
