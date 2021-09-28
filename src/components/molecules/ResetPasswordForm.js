@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { BigButton, SpecialInput } from '../atoms'
+import { sendResetPasswordWithFirebase } from '../../services/firebase'
 
 const Form = styled.form`
   display: flex;
@@ -17,18 +18,24 @@ const Form = styled.form`
   }
 `
 
-export default function ResetPasswordForm({ setError }) {
+export default function ResetPasswordForm({ setMessage }) {
   const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState('')
 
   const isDisabled = email.length > 7 ? false : true
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setError({
-      type: 'success',
-      text: 'E-mail sent successfully! Check your inbox for the reset link!',
+
+    setLoading(true)
+
+    await sendResetPasswordWithFirebase({
+      email,
+      setEmail,
+      setMessage,
     })
-    setEmail('')
+
+    setLoading(false)
   }
 
   return (
@@ -42,7 +49,12 @@ export default function ResetPasswordForm({ setError }) {
         />
       </div>
 
-      <BigButton disabled={isDisabled} type="submit" color="blue">
+      <BigButton
+        isLoading={loading}
+        disabled={isDisabled}
+        type="submit"
+        color="blue"
+      >
         Reset Password
       </BigButton>
     </Form>
