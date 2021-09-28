@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { BigButton, SpecialInput } from '../atoms'
-import { sendResetPasswordWithFirebase } from '../../services/firebase'
+import { sendResetPasswordWithFirebase } from '../../services/authServices'
 
 const Form = styled.form`
   display: flex;

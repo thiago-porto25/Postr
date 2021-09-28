@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { BigButton, SpecialInput } from '../atoms'
-import { loginWithFirebase } from '../../services/firebase'
+import { loginWithFirebase } from '../../services/authServices'
 
 const Form = styled.form`
   display: flex;
