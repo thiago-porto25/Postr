@@ -44,6 +44,8 @@ export default function ResetPasswordForm({ setMessage }) {
         <SpecialInput
           type="email"
           placeholder="E-mail"
+          maxlength="40"
+          minlength="8"
           inputValue={email}
           setInputValue={setEmail}
         />

@@ -61,6 +61,8 @@ export default function SignupForm({ setMessage }) {
         <SpecialInput
           type="text"
           placeholder="Name"
+          maxlength="30"
+          minlength="3"
           inputValue={name}
           setInputValue={setName}
         />
@@ -70,6 +72,8 @@ export default function SignupForm({ setMessage }) {
         <SpecialInput
           type="text"
           placeholder="Username"
+          maxlength="20"
+          minlength="3"
           inputValue={username}
           setInputValue={setUsername}
         />
@@ -79,6 +83,8 @@ export default function SignupForm({ setMessage }) {
         <SpecialInput
           type="email"
           placeholder="E-mail"
+          maxlength="40"
+          minlength="8"
           inputValue={email}
           setInputValue={setEmail}
         />
@@ -88,6 +94,8 @@ export default function SignupForm({ setMessage }) {
         <SpecialInput
           type="password"
           placeholder="Password"
+          maxlength="15"
+          minlength="6"
           inputValue={password}
           setInputValue={setPassword}
         />
@@ -97,6 +105,8 @@ export default function SignupForm({ setMessage }) {
         <SpecialInput
           type="password"
           placeholder="Confirm password"
+          maxlength="15"
+          minlength="6"
           inputValue={passwordConfirmation}
           setInputValue={setPasswordConfirmation}
         />

@@ -47,6 +47,8 @@ export default function LoginForm({ setMessage }) {
         <SpecialInput
           type="email"
           placeholder="E-mail"
+          maxlength="40"
+          minlength="8"
           inputValue={email}
           setInputValue={setEmail}
         />
@@ -55,6 +57,8 @@ export default function LoginForm({ setMessage }) {
         <SpecialInput
           type="password"
           placeholder="Password"
+          maxlength="15"
+          minlength="6"
           inputValue={password}
           setInputValue={setPassword}
         />
