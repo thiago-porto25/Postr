@@ -31,7 +31,8 @@ export default function SignupForm({ setMessage }) {
     password.length > 5 &&
     name.length > 2 &&
     username.length > 2 &&
-    passwordConfirmation === password
+    passwordConfirmation === password &&
+    !loading
       ? false
       : true
 

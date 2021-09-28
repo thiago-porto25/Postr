@@ -23,7 +23,8 @@ export default function LoginForm({ setMessage }) {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const isDisabled = email.length > 7 && password.length > 5 ? false : true
+  const isDisabled =
+    email.length > 7 && password.length > 5 && !loading ? false : true
 
   const handleSubmit = async (e) => {
     e.preventDefault()

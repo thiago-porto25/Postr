@@ -22,7 +22,7 @@ export default function ResetPasswordForm({ setMessage }) {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState('')
 
-  const isDisabled = email.length > 7 ? false : true
+  const isDisabled = email.length > 7 && !loading ? false : true
 
   const handleSubmit = async (e) => {
     e.preventDefault()
