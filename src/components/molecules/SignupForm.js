@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { BigButton, SpecialInput } from '../atoms'
+import { signupWithFirebase } from '../../services/firebase'
 
 const Form = styled.form`
   display: flex;
@@ -23,6 +24,7 @@ export default function SignupForm({ setMessage }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const isDisabled =
     email.length > 7 &&
@@ -33,13 +35,23 @@ export default function SignupForm({ setMessage }) {
       ? false
       : true
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setMessage('Testing testing my friend. ')
-    setUsername('')
-    setEmail('')
-    setPassword('')
-    setPasswordConfirmation('')
+
+    setLoading(true)
+
+    await signupWithFirebase({
+      name,
+      username,
+      email,
+      password,
+      setMessage,
+      setLoading,
+      setEmail,
+      setPassword,
+      setPasswordConfirmation,
+      setUsername,
+    })
   }
 
   return (
@@ -89,7 +101,12 @@ export default function SignupForm({ setMessage }) {
         />
       </div>
 
-      <BigButton disabled={isDisabled} type="submit" color="blue">
+      <BigButton
+        isLoading={loading}
+        disabled={isDisabled}
+        type="submit"
+        color="blue"
+      >
         Sign up
       </BigButton>
     </Form>
