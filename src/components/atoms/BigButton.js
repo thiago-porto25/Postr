@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Spinner } from './'
 
 const Button = styled.button`
   font-family: 'Roboto', sans-serif;
@@ -45,12 +46,22 @@ const Button = styled.button`
       background-color: var(--xLightGrey);
     }
   }
+
+  .spinner-container {
+    height: 80%;
+  }
 `
 
-export default function BigButton({ children, color, ...rest }) {
+export default function BigButton({ children, color, isLoading, ...rest }) {
   return (
     <Button {...rest} className={`btn-${color}`}>
-      {children}
+      {isLoading ? (
+        <div className="spinner-container">
+          <Spinner />
+        </div>
+      ) : (
+        children
+      )}
     </Button>
   )
 }
