@@ -13,6 +13,7 @@ import {
   IoSettingsSharp,
 } from 'react-icons/io5'
 import { FaEnvelope, FaRegEnvelope } from 'react-icons/fa'
+import { useState } from 'react'
 
 const Container = styled.section`
   display: flex;
@@ -49,22 +50,32 @@ const Container = styled.section`
     }
   }
 
-  .leftbar-user-card-container {
-    display: flex;
-    width: 105%;
-    align-items: center;
-    padding: 10px 10px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 150ms ease;
+  .leftbar-drop-user-card-container {
+    position: relative;
 
-    &:hover {
-      background-color: var(--xLightGrey);
+    .leftbar-user-card-container {
+      display: flex;
+      width: 105%;
+      align-items: center;
+      padding: 10px 10px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 150ms ease;
+
+      &:hover {
+        background-color: var(--xLightGrey);
+      }
+
+      svg {
+        margin-left: -20px;
+        font-size: 15px;
+      }
     }
 
-    svg {
-      margin-left: -20px;
-      font-size: 15px;
+    .leftbar-drop-up-container {
+      .user-drop-up {
+        cursor: default;
+      }
     }
   }
 `
@@ -88,7 +99,8 @@ const List = styled.ul`
 `
 
 export default function LeftBar() {
-  const user = { username: 'thiagoporto' }
+  const [logoutDrop, setLogoutDrop] = useState(false)
+  const user = { username: 'thiagoporto', name: 'Thiago Porto' }
 
   return (
     <Container>
@@ -141,13 +153,20 @@ export default function LeftBar() {
         <BigButton color="blue">Post</BigButton>
       </div>
 
-      <div className="leftbar-user-card-container">
-        <UserInfo />
-        <BsThreeDots />
-      </div>
+      <div className="leftbar-drop-user-card-container">
+        <div
+          onClick={() => setLogoutDrop((prev) => !prev)}
+          className="leftbar-user-card-container"
+        >
+          <UserInfo userNeeded={user} />
+          <BsThreeDots />
+        </div>
 
-      <div className="leftbar-drop-up-container">
-        <LogoutDropUp />
+        {logoutDrop && (
+          <div className="leftbar-drop-up-container">
+            <LogoutDropUp setLogoutDrop={setLogoutDrop} userNeeded={user} />
+          </div>
+        )}
       </div>
     </Container>
   )

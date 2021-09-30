@@ -6,8 +6,8 @@ const Card = styled.section`
   display: flex;
 
   .user-info-image {
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     object-fit: cover;
     border-radius: 50%;
   }
