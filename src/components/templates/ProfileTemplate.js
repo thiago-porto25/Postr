@@ -1,5 +1,5 @@
-import React from 'react'
+import { LoggedInLayout } from '../layouts'
 
 export default function ProfileTemplate() {
-  return <div></div>
+  return <LoggedInLayout></LoggedInLayout>
 }

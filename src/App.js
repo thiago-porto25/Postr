@@ -15,7 +15,6 @@ const ResetPassword = lazy(() => import('./pages/reset-password'))
 const Home = lazy(() => import('./pages/home'))
 const Search = lazy(() => import('./pages/search'))
 const Profile = lazy(() => import('./pages/profile'))
-const ProfileLikes = lazy(() => import('./pages/profile-likes'))
 const Post = lazy(() => import('./pages/post'))
 
 const Messages = lazy(() => import('./pages/messages'))
@@ -90,10 +89,6 @@ function App() {
 
           <Route path={ROUTES.PROFILE}>
             <Profile />
-          </Route>
-
-          <Route path={ROUTES.PROFILE_LIKES}>
-            <ProfileLikes />
           </Route>
 
           <Route path={ROUTES.POST}>

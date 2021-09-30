@@ -1,5 +1,5 @@
-import React from 'react'
+import { LoggedInLayout } from '../layouts'
 
 export default function ConversationTemplate() {
-  return <div></div>
+  return <LoggedInLayout></LoggedInLayout>
 }

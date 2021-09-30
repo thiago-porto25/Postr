@@ -8,8 +8,6 @@ export const MESSAGES = '/messages'
 
 export const POST = '/post/:postId'
 
-export const PROFILE_LIKES = '/p/:username/likes'
-
 export const PROFILE = '/p/:username'
 
 export const RESET_PASSWORD = '/reset-password'
