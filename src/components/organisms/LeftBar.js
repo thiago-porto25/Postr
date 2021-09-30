@@ -98,9 +98,8 @@ const List = styled.ul`
   }
 `
 
-export default function LeftBar() {
+export default function LeftBar({ user }) {
   const [logoutDrop, setLogoutDrop] = useState(false)
-  const user = { username: 'thiagoporto', name: 'Thiago Porto' }
 
   return (
     <Container>
@@ -135,7 +134,7 @@ export default function LeftBar() {
         </LeftBarListItem>
 
         <LeftBarListItem
-          to={`/p/${user.username}`}
+          to={`/p/${user?.username}`}
           icons={{ outline: BsPerson(), fill: BsFillPersonFill() }}
         >
           Profile

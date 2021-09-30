@@ -22,13 +22,9 @@ import {
 } from '../firebase/config'
 
 export async function getUserByUserId(userId) {
-  const usersRef = collection(db, 'users')
+  const docSnap = await getDoc(doc(db, 'users', userId))
 
-  const q = query(usersRef, where('userId', '==', userId))
-
-  const querySnapshot = await getDocs(q)
-
-  const user = querySnapshot.docs.map((item) => ({ ...item.data() }))[0]
+  const user = docSnap.data()
 
   return user
 }

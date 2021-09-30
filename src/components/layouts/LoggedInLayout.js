@@ -25,13 +25,13 @@ export default function LoggedInLayout({
   showSearchBar,
   showSuggestion,
   showFilter,
-
+  user,
   children,
 }) {
   return (
     <Container>
       <div className="layout-left-sidebar-container">
-        <LeftBar />
+        <LeftBar user={user} />
       </div>
 
       <div className="layout-main-section-container">{children}</div>

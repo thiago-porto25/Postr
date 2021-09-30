@@ -54,7 +54,7 @@ export default function LogoutDropUp({ userNeeded, setLogoutDrop }) {
   return (
     <Container className="user-drop-up">
       <UserInfo userNeeded={userNeeded} />
-      <p onClick={handleLogout}>Log out of @{userNeeded.username}</p>
+      <p onClick={handleLogout}>Log out of @{userNeeded?.username}</p>
     </Container>
   )
 }

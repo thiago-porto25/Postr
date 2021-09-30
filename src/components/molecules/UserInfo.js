@@ -50,8 +50,8 @@ export default function UserInfo({ userNeeded }) {
         alt={userNeeded?.name}
       />
       <div className="user-info-naming">
-        <h2>{userNeeded?.name || 'Testeasdmaksdmkasasdasdasdasdasd'}</h2>
-        <sub>{`@${userNeeded?.username}` || '@test'}</sub>
+        <h2>{userNeeded && userNeeded.name}</h2>
+        <sub>@{userNeeded && userNeeded.username}</sub>
       </div>
     </Card>
   )
