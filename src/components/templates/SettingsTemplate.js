@@ -1,7 +1,14 @@
 import { LoggedInLayout } from '../layouts'
+import { useContext } from 'react'
+import UserContext from '../../context/userContext'
 
 export default function SettingsTemplate() {
+  const { user } = useContext(UserContext)
   return (
-    <LoggedInLayout showSearchBar={true} showSuggestion={true}></LoggedInLayout>
+    <LoggedInLayout
+      user={user}
+      showSearchBar={true}
+      showSuggestion={true}
+    ></LoggedInLayout>
   )
 }
