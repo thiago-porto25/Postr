@@ -25,6 +25,8 @@ const Card = styled.section`
       font-size: 16px;
       margin: 0;
       overflow-x: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     sub {
