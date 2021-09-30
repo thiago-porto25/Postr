@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Suggested } from '../molecules'
+import { Suggested, SearchFilters } from '../molecules'
 import { SearchBar } from '.'
 
 const Container = styled.section`
@@ -10,10 +10,9 @@ const Container = styled.section`
   align-items: center;
   margin: 1rem 0;
 
-  .rightbar-search-container {
-    width: 80%;
-  }
-  .rightbar-suggested-container {
+  .rightbar-search-container,
+  .rightbar-suggested-container,
+  .rightbar-filter-container {
     width: 80%;
   }
 `
@@ -28,6 +27,12 @@ export default function RightBar({
       {showSearchBar && (
         <div className="rightbar-search-container">
           <SearchBar />
+        </div>
+      )}
+
+      {showFilter && (
+        <div className="rightbar-filter-container">
+          <SearchFilters />
         </div>
       )}
 
