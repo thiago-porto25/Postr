@@ -4,7 +4,7 @@ import { Spinner } from './'
 const Button = styled.button`
   font-family: 'Roboto', sans-serif;
   padding: 10px 25px;
-  border-radius: 20px;
+  border-radius: 40px;
   width: 100%;
   border: 1px solid var(--primary);
   font-weight: bold;

@@ -6,7 +6,19 @@ const Container = styled.main`
   width: 100%;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-columns: 24fr 45fr 33fr;
+
+  .layout-left-sidebar-container {
+    border-right: 1px solid var(--xLightGrey);
+    box-shadow: 1px 1px 1px #aaaaaa11;
+    padding: 2rem 3rem;
+  }
+  .layout-main-section-container {
+  }
+  .layout-right-sidebar-container {
+    border-left: 1px solid var(--xLightGrey);
+    box-shadow: 1px 1px 1px #aaaaaa11;
+  }
 `
 
 export default function LoggedInLayout({ children }) {
