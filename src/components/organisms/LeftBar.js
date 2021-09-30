@@ -21,14 +21,15 @@ const Container = styled.section`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: 150ms ease;
+
+    &:hover {
+      background-color: var(--xLightGrey);
+    }
 
     .leftbar-logo {
       width: 30px;
       height: 30px;
-    }
-
-    &:hover {
-      background-color: var(--xLightGrey);
     }
   }
 
@@ -46,6 +47,7 @@ const Container = styled.section`
     padding: 10px 10px;
     border-radius: 30px;
     cursor: pointer;
+    transition: 150ms ease;
 
     &:hover {
       background-color: var(--xLightGrey);
