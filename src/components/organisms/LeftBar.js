@@ -33,6 +33,14 @@ const Container = styled.section`
     cursor: pointer;
     transition: 150ms ease;
 
+    a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     &:hover {
       background-color: var(--xLightGrey);
     }
@@ -103,13 +111,13 @@ export default function LeftBar({ user }) {
 
   return (
     <Container>
-      <Link to={ROUTES.HOME}>
-        <div className="leftbar-logo-container">
+      <div className="leftbar-logo-container">
+        <Link to={ROUTES.HOME}>
           <div className="leftbar-logo">
             <Logo noLink={true} />
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
 
       <List>
         <LeftBarListItem
