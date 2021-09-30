@@ -4,6 +4,15 @@ import { Logo, BigButton, LeftBarListItem } from '../atoms'
 import { UserInfo, LogoutDropUp } from '../molecules'
 import * as ROUTES from '../../constants/routes'
 import { BsThreeDots } from 'react-icons/bs'
+import { AiFillHome, AiOutlineHome } from 'react-icons/ai'
+import { BsPerson, BsFillPersonFill } from 'react-icons/bs'
+import {
+  IoSearchOutline,
+  IoSearchSharp,
+  IoSettingsOutline,
+  IoSettingsSharp,
+} from 'react-icons/io5'
+import { FaEnvelope, FaRegEnvelope } from 'react-icons/fa'
 
 const Container = styled.section`
   display: flex;
@@ -64,9 +73,23 @@ const List = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+
+  * {
+    width: 100%;
+    transition: 150ms ease;
+    color: var(--black);
+    text-decoration: none;
+    border-radius: 30px;
+
+    &:hover {
+      background-color: var(--xLightGrey);
+    }
+  }
 `
 
 export default function LeftBar() {
+  const user = { username: 'thiagoporto' }
+
   return (
     <Container>
       <Link to={ROUTES.HOME}>
@@ -77,7 +100,42 @@ export default function LeftBar() {
         </div>
       </Link>
 
-      <List></List>
+      <List>
+        <LeftBarListItem
+          to={ROUTES.HOME}
+          icons={{ outline: AiOutlineHome(), fill: AiFillHome() }}
+        >
+          Homepage
+        </LeftBarListItem>
+
+        <LeftBarListItem
+          to={ROUTES.SEARCH}
+          icons={{ outline: IoSearchOutline(), fill: IoSearchSharp() }}
+        >
+          Search
+        </LeftBarListItem>
+
+        <LeftBarListItem
+          to={ROUTES.MESSAGES}
+          icons={{ outline: FaRegEnvelope(), fill: FaEnvelope() }}
+        >
+          Messages
+        </LeftBarListItem>
+
+        <LeftBarListItem
+          to={`/p/${user.username}`}
+          icons={{ outline: BsPerson(), fill: BsFillPersonFill() }}
+        >
+          Profile
+        </LeftBarListItem>
+
+        <LeftBarListItem
+          to={ROUTES.SETTINGS}
+          icons={{ outline: IoSettingsOutline(), fill: IoSettingsSharp() }}
+        >
+          Settings
+        </LeftBarListItem>
+      </List>
 
       <div className="leftbar-big-button-container">
         <BigButton color="blue">Post</BigButton>
@@ -86,6 +144,10 @@ export default function LeftBar() {
       <div className="leftbar-user-card-container">
         <UserInfo />
         <BsThreeDots />
+      </div>
+
+      <div className="leftbar-drop-up-container">
+        <LogoutDropUp />
       </div>
     </Container>
   )

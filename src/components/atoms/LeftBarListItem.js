@@ -1,3 +1,48 @@
-export default function LeftBarListItem() {
-  return <div></div>
+import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import { useRef, useState, useEffect } from 'react'
+
+const Item = styled.li`
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-left: 1rem;
+
+  font-family: 'Ubuntu', sans-serif;
+
+  p {
+    font-size: 20px;
+  }
+
+  svg {
+    width: fit-content;
+    font-size: 27px;
+  }
+`
+
+export default function LeftBarListItem({ icons, children, to }) {
+  const [active, setActive] = useState(false)
+  let navLinkRef = useRef(null)
+
+  useEffect(() => {
+    if (navLinkRef.current && navLinkRef.current.className === 'active')
+      setActive(true)
+  }, [navLinkRef])
+
+  return (
+    <NavLink
+      ref={(el) => {
+        navLinkRef.current = el
+      }}
+      exact
+      to={to}
+      activeStyle={{ fontWeight: 'bold' }}
+    >
+      <Item>
+        {active ? icons.fill : icons.outline}
+        <p>{children}</p>
+      </Item>
+    </NavLink>
+  )
 }

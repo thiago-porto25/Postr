@@ -11,7 +11,7 @@ const Container = styled.main`
   .layout-left-sidebar-container {
     border-right: 1px solid var(--xLightGrey);
     box-shadow: 1px 1px 1px #aaaaaa11;
-    padding: 2rem 3rem;
+    padding: 0.5rem 3rem;
   }
   .layout-main-section-container {
   }
