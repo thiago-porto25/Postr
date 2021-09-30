@@ -1,5 +1,7 @@
 import { LoggedInLayout } from '../layouts'
 
 export default function ProfileTemplate() {
-  return <LoggedInLayout></LoggedInLayout>
+  return (
+    <LoggedInLayout showSearchBar={true} showSuggestion={true}></LoggedInLayout>
+  )
 }

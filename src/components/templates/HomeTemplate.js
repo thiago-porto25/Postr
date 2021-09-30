@@ -3,7 +3,7 @@ import { Timeline } from '../organisms'
 
 export default function HomeTemplate() {
   return (
-    <LoggedInLayout>
+    <LoggedInLayout showSearchBar={true} showSuggestion={true}>
       <Timeline />
     </LoggedInLayout>
   )

@@ -10,21 +10,32 @@ const Container = styled.section`
   align-items: center;
   margin: 1rem 0;
 
+  .rightbar-search-container {
+    width: 80%;
+  }
   .rightbar-suggested-container {
     width: 80%;
   }
 `
 
-export default function RightBar() {
+export default function RightBar({
+  showSearchBar,
+  showSuggestion,
+  showFilter,
+}) {
   return (
     <Container>
-      <div className="rightbar-search-container">
-        <SearchBar />
-      </div>
+      {showSearchBar && (
+        <div className="rightbar-search-container">
+          <SearchBar />
+        </div>
+      )}
 
-      <div className="rightbar-suggested-container">
-        <Suggested />
-      </div>
+      {showSuggestion && (
+        <div className="rightbar-suggested-container">
+          <Suggested />
+        </div>
+      )}
     </Container>
   )
 }

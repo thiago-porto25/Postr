@@ -21,15 +21,27 @@ const Container = styled.main`
   }
 `
 
-export default function LoggedInLayout({ children }) {
+export default function LoggedInLayout({
+  showSearchBar,
+  showSuggestion,
+  showFilter,
+
+  children,
+}) {
   return (
     <Container>
       <div className="layout-left-sidebar-container">
         <LeftBar />
       </div>
+
       <div className="layout-main-section-container">{children}</div>
+
       <div className="layout-right-sidebar-container">
-        <RightBar />
+        <RightBar
+          showFilter={showFilter}
+          showSearchBar={showSearchBar}
+          showSuggestion={showSuggestion}
+        />
       </div>
     </Container>
   )

@@ -1,5 +1,7 @@
 import { LoggedInLayout } from '../layouts'
 
 export default function SearchTemplate() {
-  return <LoggedInLayout></LoggedInLayout>
+  return (
+    <LoggedInLayout showFilter={true} showSuggestion={true}></LoggedInLayout>
+  )
 }
