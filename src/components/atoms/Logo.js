@@ -7,10 +7,10 @@ const Image = styled.img`
   height: 100%;
 `
 
-export default function Logo() {
-  return (
-    <Link to={ROUTES.HOME}>
-      <Image src="/images/logo.png" alt="Postr Logo" />
-    </Link>
-  )
+export default function Logo({ noLink }) {
+  const ImageComp = <Image src="/images/logo.png" alt="Postr Logo" />
+
+  if (noLink) return ImageComp
+
+  return <Link to={ROUTES.HOME}>{ImageComp}</Link>
 }
