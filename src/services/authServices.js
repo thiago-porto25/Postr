@@ -57,8 +57,10 @@ export const signupWithFirebase = async ({
   setUsername,
 }) => {
   try {
+    const lowerUsername = username.toLowerCase()
+
     const usersRef = collection(db, 'users')
-    const q = query(usersRef, where('username', '==', username))
+    const q = query(usersRef, where('username', '==', lowerUsername))
     const querySnapshot = await getDocs(q)
     const usernameResponse = querySnapshot.docs.map((item) => item.data())[0]
 
@@ -75,7 +77,7 @@ export const signupWithFirebase = async ({
         id: user.uid,
         email,
         name,
-        username,
+        username: lowerUsername,
         createdAt: serverTimestamp(),
         birthday: null,
         avatarPhotoUrl: null,
