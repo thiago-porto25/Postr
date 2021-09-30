@@ -45,7 +45,7 @@ export default function UserInfo({ userNeeded }) {
         src={
           userNeeded?.avatarPhotoUrl
             ? `/images/avatars/${userNeeded.avatarPhotoUrl}.jpg`
-            : 'images/avatars/default-avatar.png'
+            : '/images/avatars/default-avatar.png'
         }
         alt={userNeeded?.name}
       />
