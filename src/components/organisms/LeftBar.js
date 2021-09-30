@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Logo, BigButton, LeftBarListItem } from '../atoms'
-import { LoggedInUserCard, LogoutDropUp } from '../molecules'
+import { UserInfo, LogoutDropUp } from '../molecules'
 import * as ROUTES from '../../constants/routes'
+import { BsThreeDots } from 'react-icons/bs'
 
 const Container = styled.section`
   display: flex;
@@ -10,6 +11,7 @@ const Container = styled.section`
   gap: 1rem;
   width: 100%;
   height: 100%;
+  position: relative;
 
   .leftbar-logo-container {
     width: 60px;
@@ -29,10 +31,29 @@ const Container = styled.section`
       background-color: var(--xLightGrey);
     }
   }
+
   .leftbar-big-button-container {
     button {
       height: 3.5rem;
       font-size: 19px;
+    }
+  }
+
+  .leftbar-user-card-container {
+    display: flex;
+    width: 105%;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--xLightGrey);
+    }
+
+    svg {
+      margin-left: -20px;
+      font-size: 15px;
     }
   }
 `
@@ -49,13 +70,20 @@ export default function LeftBar() {
       <Link to={ROUTES.HOME}>
         <div className="leftbar-logo-container">
           <div className="leftbar-logo">
-            <Logo />
+            <Logo noLink={true} />
           </div>
         </div>
       </Link>
+
       <List></List>
+
       <div className="leftbar-big-button-container">
         <BigButton color="blue">Post</BigButton>
+      </div>
+
+      <div className="leftbar-user-card-container">
+        <UserInfo />
+        <BsThreeDots />
       </div>
     </Container>
   )
