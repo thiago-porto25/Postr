@@ -30,7 +30,7 @@ export default function SignupForm({ setMessage }) {
     email.length > 7 &&
     password.length > 5 &&
     name.length > 2 &&
-    username.length > 2 &&
+    username.length > 1 &&
     passwordConfirmation === password &&
     !loading
       ? false
@@ -72,8 +72,8 @@ export default function SignupForm({ setMessage }) {
         <SpecialInput
           type="text"
           placeholder="Username"
-          maxLength="20"
-          minLength="3"
+          maxLength="18"
+          minLength="2"
           inputValue={username}
           setInputValue={setUsername}
         />
@@ -98,6 +98,8 @@ export default function SignupForm({ setMessage }) {
           minLength="6"
           inputValue={password}
           setInputValue={setPassword}
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
         />
       </div>
 

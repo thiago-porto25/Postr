@@ -57,6 +57,7 @@ export default function SpecialInput({
         value={inputValue}
         onChange={({ target }) => setInputValue(target.value)}
         required
+        onPaste={(e) => e.preventDefault()}
       />
       <span>{placeholder}</span>
     </Container>
