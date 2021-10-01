@@ -12,6 +12,11 @@ const Card = styled.section`
     border-radius: 50%;
   }
 
+  .image-large {
+    height: 120px;
+    width: 120px;
+  }
+
   .user-info-naming {
     width: 100%;
     margin-left: 5%;
@@ -35,13 +40,30 @@ const Card = styled.section`
       color: var(--darkGrey);
     }
   }
+
+  .naming-large {
+    width: max-content;
+    padding-right: 1rem;
+
+    h2 {
+      font-size: 25px;
+      width: max-content;
+      max-width: none;
+      text-overflow: unset;
+    }
+
+    sub {
+      width: fit-content;
+      font-size: 20px;
+    }
+  }
 `
 
-export default function UserInfo({ userNeeded }) {
+export default function UserInfo({ userNeeded, large }) {
   return (
     <Card>
       <img
-        className="user-info-image"
+        className={large ? 'user-info-image image-large' : 'user-info-image'}
         src={
           userNeeded?.avatarPhotoUrl
             ? `/images/avatars/${userNeeded.avatarPhotoUrl}.jpg`
@@ -49,7 +71,9 @@ export default function UserInfo({ userNeeded }) {
         }
         alt={userNeeded?.name}
       />
-      <div className="user-info-naming">
+      <div
+        className={large ? 'user-info-naming naming-large' : 'user-info-naming'}
+      >
         <h2>{userNeeded && userNeeded.name}</h2>
         <sub>@{userNeeded && userNeeded.username}</sub>
       </div>

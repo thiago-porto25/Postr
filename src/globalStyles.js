@@ -22,6 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     --xDarkGrey: #252525;
     --black: #13171a;
     --error: #ff0033;
+    --errorLight:#ffcccbaa;
     --success: #4bb543;
   }
 `
