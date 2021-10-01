@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { LoggedUserAvatar, RegularButton } from '../atoms'
+import { GrEmoji } from 'react-icons/gr'
 
 const Container = styled.div`
   display: grid;
@@ -29,6 +30,23 @@ const Container = styled.div`
       align-items: center;
       justify-content: space-between;
       height: 4rem;
+
+      .box-emoji-container {
+        color: var(--primary);
+        border-radius: 50%;
+        padding: 10px 12px;
+        cursor: pointer;
+        transition: 150ms ease;
+
+        &:hover {
+          background-color: var(--xLightGrey);
+        }
+
+        svg {
+          width: 23px;
+          height: 23px;
+        }
+      }
 
       .box-post-button-container {
         width: 5.5rem;
@@ -90,7 +108,9 @@ export default function PostBox({ user }) {
         </div>
 
         <div className="box-options-container">
-          <div className="box-emoji-container"></div>
+          <div className="box-emoji-container">
+            <GrEmoji className="box-emoji" />
+          </div>
 
           <div className="box-counter-container"></div>
 
