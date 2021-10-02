@@ -5,37 +5,33 @@ import {
   SettingsResetPassword,
   DeleteAccount,
 } from '../organisms'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import UserContext from '../../context/userContext'
+import { Switch, Route } from 'react-router'
+import * as ROUTES from '../../constants/routes'
 
 export default function SettingsTemplate() {
   const { user } = useContext(UserContext)
-  const [editInfoSection, setEditInfoSection] = useState(false)
-  const [resetSection, setResetSection] = useState(false)
-  const [deleteSection, setDeleteSection] = useState(false)
 
   return (
     <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
-      {!deleteSection && !editInfoSection && !resetSection ? (
-        <SettingsOrg
-          setEditInfoSection={setEditInfoSection}
-          setResetSection={setResetSection}
-          setDeleteSection={setDeleteSection}
-          user={user}
-        />
-      ) : null}
+      <Switch>
+        <Route exact path={ROUTES.SETTINGS}>
+          <SettingsOrg user={user} />
+        </Route>
 
-      {editInfoSection && (
-        <EditInfo user={user} setEditInfoSection={setEditInfoSection} />
-      )}
+        <Route path={ROUTES.SETTINGS_EDIT}>
+          <EditInfo user={user} />
+        </Route>
 
-      {resetSection && (
-        <SettingsResetPassword user={user} setResetSection={setResetSection} />
-      )}
+        <Route path={ROUTES.SETTINGS_RESET}>
+          <SettingsResetPassword user={user} />
+        </Route>
 
-      {deleteSection && (
-        <DeleteAccount user={user} setDeleteSection={setDeleteSection} />
-      )}
+        <Route path={ROUTES.SETTINGS_DELETE}>
+          <DeleteAccount user={user} />
+        </Route>
+      </Switch>
     </LoggedInLayout>
   )
 }

@@ -6,6 +6,8 @@ import {
   logoutWithFirebase,
   sendResetPasswordWithFirebase,
 } from '../../services/authServices'
+import * as ROUTES from '../../constants/routes'
+import { Link, useHistory } from 'react-router-dom'
 
 const Container = styled.div`
   min-height: 100vh;
@@ -13,6 +15,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  a {
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+  }
 
   .settings-delete-container,
   .settings-reset-container,
@@ -42,16 +50,12 @@ const Container = styled.div`
   }
 `
 
-export default function SettingsOrg({
-  user,
-  setEditInfoSection,
-  setResetSection,
-  setDeleteSection,
-}) {
+export default function SettingsOrg({ user }) {
   const [message, setMessage] = useState({
     type: '',
     text: '',
   })
+  const history = useHistory()
 
   const handleLogout = () => {
     logoutWithFirebase({ setMessage })
@@ -59,8 +63,7 @@ export default function SettingsOrg({
 
   const handleReset = async () => {
     await sendResetPasswordWithFirebase({ email: user.email, setMessage })
-
-    setResetSection(true)
+    history.push(ROUTES.SETTINGS_RESET)
   }
 
   return (
@@ -71,12 +74,11 @@ export default function SettingsOrg({
         <UserInfo userNeeded={user} large={true} />
       </div>
 
-      <div
-        onClick={() => setEditInfoSection(true)}
-        className="settings-info-container"
-      >
-        <SettingsButton>Change my information</SettingsButton>
-      </div>
+      <Link to={ROUTES.SETTINGS_EDIT}>
+        <div className="settings-info-container">
+          <SettingsButton>Change my information</SettingsButton>
+        </div>
+      </Link>
 
       <div onClick={handleReset} className="settings-reset-container">
         <SettingsButton>Reset my password</SettingsButton>
@@ -86,12 +88,11 @@ export default function SettingsOrg({
         <SettingsButton isDelete={true}>Logout of account</SettingsButton>
       </div>
 
-      <div
-        onClick={() => setDeleteSection(true)}
-        className="settings-delete-container"
-      >
-        <SettingsButton isDelete={true}>Delete account</SettingsButton>
-      </div>
+      <Link to={ROUTES.SETTINGS_DELETE}>
+        <div className="settings-delete-container">
+          <SettingsButton isDelete={true}>Delete account</SettingsButton>
+        </div>
+      </Link>
 
       {message && (
         <div className="settings-error">

@@ -19,3 +19,9 @@ export const SETTINGS = '/settings'
 export const SIGNUP = '/signup'
 
 export const START = '/'
+
+export const SETTINGS_RESET = '/settings/reset'
+
+export const SETTINGS_DELETE = '/settings/delete'
+
+export const SETTINGS_EDIT = '/settings/edit'

@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import { BsArrowLeftShort } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 const Container = styled.header`
   border-bottom: 1px solid var(--xLightGrey);
   width: 100%;
   box-sizing: border-box;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
+  height: 3.3rem;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -23,6 +25,7 @@ const Container = styled.header`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: var(--black);
 
     svg {
       height: 30px;
@@ -44,9 +47,9 @@ export default function SimpleHeader({
   return (
     <Container>
       {withArrow && (
-        <div className="header-arrow-container">
+        <Link to={arrowLink} className="header-arrow-container">
           <BsArrowLeftShort />
-        </div>
+        </Link>
       )}
       <h1>{children}</h1>
     </Container>
