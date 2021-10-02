@@ -28,9 +28,14 @@ const Container = styled.div`
     border: 1px solid var(--darkGrey);
   }
 
+  input[type='date'] {
+    cursor: text;
+  }
+
   input:focus + span,
   input:not(:focus):valid + span,
-  input:not([value='']) + span {
+  input:not([value='']) + span,
+  input[type='date'] + span {
     top: 6px;
     bottom: 10px;
     left: 8px;

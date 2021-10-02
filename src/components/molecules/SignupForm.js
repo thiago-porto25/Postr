@@ -76,7 +76,7 @@ export default function SignupForm({ setMessage }) {
           minLength="2"
           inputValue={username}
           setInputValue={setUsername}
-          pattern="[A-Za-zÀ-ž0-9_]"
+          pattern="[A-Za-z0-9_]+"
           title="Username must only contain letters, numbers and the underscore character ( _ )"
         />
       </div>

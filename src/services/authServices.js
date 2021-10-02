@@ -57,12 +57,7 @@ export const signupWithFirebase = async ({
   setUsername,
 }) => {
   try {
-    const lowerUsername = username.toLowerCase()
-
-    const usersRef = collection(db, 'users')
-    const q = query(usersRef, where('username', '==', lowerUsername))
-    const querySnapshot = await getDocs(q)
-    const usernameResponse = querySnapshot.docs.map((item) => item.data())[0]
+    const usernameResponse = await findUserByUsername(username)
 
     if (!usernameResponse) {
       const { user } = await createUserWithEmailAndPassword(
@@ -75,11 +70,11 @@ export const signupWithFirebase = async ({
 
       await setDoc(doc(db, 'users', user.uid), {
         id: user.uid,
-        email,
-        name,
-        username: lowerUsername,
+        email: email.trim(),
+        name: name.trim(),
+        username: username.toLowerCase().trim(),
         createdAt: serverTimestamp(),
-        birthday: null,
+        birthday: '',
         avatarPhotoUrl: null,
         backgroundPhotoUrl: null,
         followers: [],
@@ -113,5 +108,55 @@ export const sendResetPasswordWithFirebase = async ({
   } catch (error) {
     setMessage({ type: 'error', text: error.message })
     if (setEmail) setEmail('')
+  }
+}
+
+/////////////////// Find user by username
+export const findUserByUsername = async (username) => {
+  const lowerUsername = username.toLowerCase().trim()
+
+  const usersRef = collection(db, 'users')
+  const q = query(usersRef, where('username', '==', lowerUsername))
+  const querySnapshot = await getDocs(q)
+
+  const usernameResponse = querySnapshot.docs.map((item) => item.data())[0]
+
+  return usernameResponse
+}
+
+/////////////////// Find user by username
+export const saveChangesToUser = async ({
+  name,
+  username,
+  birthday,
+  user,
+  setMessage,
+  setName,
+  setUsername,
+  setBirthday,
+}) => {
+  try {
+    if (username === user.username) {
+      const userRef = doc(db, 'users', user.id)
+
+      await setDoc(userRef, { name, birthday }, { merge: true })
+
+      return
+    }
+
+    const usernameResponse = await findUserByUsername(username)
+
+    if (usernameResponse) {
+      throw new Error("Username already taken, changes weren't saved!")
+    }
+
+    const userRef = doc(db, 'users', user.id)
+
+    await setDoc(userRef, { name, username, birthday }, { merge: true })
+  } catch (error) {
+    setMessage({ type: 'error', text: error.message })
+    setName(user.name)
+    setUsername(user.username)
+    setBirthday(user.birthday)
   }
 }
