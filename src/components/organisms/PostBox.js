@@ -1,9 +1,14 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { LoggedUserAvatar, RegularButton } from '../atoms'
+
 import { CircularProgressbar } from 'react-circular-progressbar'
-import { GrEmoji } from 'react-icons/gr'
 import 'react-circular-progressbar/dist/styles.css'
+
+import { Picker } from 'emoji-mart'
+import 'emoji-mart/css/emoji-mart.css'
+
+import { GrEmoji } from 'react-icons/gr'
 
 const Container = styled.div`
   display: grid;
@@ -13,6 +18,7 @@ const Container = styled.div`
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   border-bottom: 1px solid var(--xLightGrey);
+  position: relative;
 
   .box-avatar-container {
     height: 100%;
@@ -91,6 +97,7 @@ const Textarea = styled.textarea`
 
 export default function PostBox({ user }) {
   const [postValue, setPostValue] = useState('')
+  const [emojiOpen, setEmojiOpen] = useState(false)
   const textareaRef = useRef(null)
 
   const isDisabled =
@@ -100,6 +107,20 @@ export default function PostBox({ user }) {
     textareaRef.current.style.height = '32px'
     textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px'
   }
+
+  const handleEmoji = (e) => {
+    setPostValue((prev) => prev + e.native)
+  }
+
+  useEffect(() => {
+    function close() {
+      if (emojiOpen) setEmojiOpen(false)
+    }
+
+    window.addEventListener('click', close)
+
+    return () => window.removeEventListener('click', close)
+  }, [emojiOpen])
 
   return (
     <Container>
@@ -124,7 +145,10 @@ export default function PostBox({ user }) {
         </div>
 
         <div className="box-options-container">
-          <div className="box-emoji-container">
+          <div
+            onClick={() => setEmojiOpen((prev) => !prev)}
+            className="box-emoji-container"
+          >
             <GrEmoji className="box-emoji" />
           </div>
 
@@ -139,6 +163,14 @@ export default function PostBox({ user }) {
           </div>
         </div>
       </div>
+      {emojiOpen && (
+        <div onClick={(e) => e.stopPropagation()}>
+          <Picker
+            onSelect={handleEmoji}
+            style={{ position: 'absolute', bottom: '-280%', zIndex: '10' }}
+          />
+        </div>
+      )}
     </Container>
   )
 }
