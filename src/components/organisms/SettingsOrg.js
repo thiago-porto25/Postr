@@ -1,79 +1,96 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { AuthMessage } from '../atoms'
-import { UserInfo } from '../molecules'
+import { AuthMessage, SettingsButton } from '../atoms'
+import { UserInfo, SimpleHeader } from '../molecules'
+import {
+  logoutWithFirebase,
+  sendResetPasswordWithFirebase,
+} from '../../services/authServices'
 
 const Container = styled.div`
+  min-height: 100vh;
   width: 100%;
   display: flex;
-  gap: 3rem;
   flex-direction: column;
   align-items: center;
 
   .settings-delete-container,
-  .settings-reset-container {
-    width: 95%;
+  .settings-reset-container,
+  .settings-info-container,
+  .settings-logout-container {
+    width: 100%;
     display: flex;
+    height: 4rem;
+
     justify-content: center;
   }
 
   .settings-user-info-container {
-    margin-top: 2rem;
+    background-color: var(--xxLightGrey);
     width: 100%;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
 
-    &:first-child {
-      width: fit-content;
+    section {
+      display: flex;
+      justify-content: center;
     }
   }
 
-  .settings-reset-container,
-  .settings-delete-container {
-    button {
-      border: none;
-      background-color: var(--xxLightGrey);
-      width: 100%;
-      height: 4rem;
-      cursor: pointer;
-      transition: 150ms ease;
-    }
-  }
-
-  .settings-reset-container {
-    button {
-      color: var(--primary);
-
-      &:hover {
-        background-color: var(--xLightGrey);
-      }
-    }
-  }
-
-  .settings-delete-container {
-    button {
-      color: var(--error);
-
-      &:hover {
-        background-color: var(--errorLight);
-      }
-    }
+  .settings-error {
+    margin-top: 2rem;
   }
 `
 
-export default function SettingsOrg({ user }) {
-  const [message, setMessage] = useState({ type: '', text: '' })
+export default function SettingsOrg({
+  user,
+  setEditInfoSection,
+  setResetSection,
+  setDeleteSection,
+}) {
+  const [message, setMessage] = useState({
+    type: '',
+    text: '',
+  })
+
+  const handleLogout = () => {
+    logoutWithFirebase({ setMessage })
+  }
+
+  const handleReset = async () => {
+    await sendResetPasswordWithFirebase({ email: user.email, setMessage })
+
+    setResetSection(true)
+  }
 
   return (
     <Container>
+      <SimpleHeader>Settings</SimpleHeader>
+
       <div className="settings-user-info-container">
         <UserInfo userNeeded={user} large={true} />
       </div>
 
-      <div className="settings-reset-container">
-        <button>Reset my password</button>
+      <div
+        onClick={() => setEditInfoSection(true)}
+        className="settings-info-container"
+      >
+        <SettingsButton>Change my information</SettingsButton>
       </div>
 
-      <div className="settings-delete-container">
-        <button>Delete account</button>
+      <div onClick={handleReset} className="settings-reset-container">
+        <SettingsButton>Reset my password</SettingsButton>
+      </div>
+
+      <div onClick={handleLogout} className="settings-logout-container">
+        <SettingsButton isDelete={true}>Logout of account</SettingsButton>
+      </div>
+
+      <div
+        onClick={() => setDeleteSection(true)}
+        className="settings-delete-container"
+      >
+        <SettingsButton isDelete={true}>Delete account</SettingsButton>
       </div>
 
       {message && (

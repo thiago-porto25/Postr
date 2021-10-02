@@ -35,11 +35,11 @@ export const loginWithFirebase = async ({
 }
 
 /////////////////// Logout
-export const logoutWithFirebase = async () => {
+export const logoutWithFirebase = async ({ setMessage }) => {
   try {
     await signOut(auth)
   } catch (error) {
-    //setNotification({ type: 'error', text: error.message })
+    setMessage({ type: 'error', text: error.message })
   }
 }
 
@@ -112,6 +112,6 @@ export const sendResetPasswordWithFirebase = async ({
     })
   } catch (error) {
     setMessage({ type: 'error', text: error.message })
-    setEmail('')
+    if (setEmail) setEmail('')
   }
 }
