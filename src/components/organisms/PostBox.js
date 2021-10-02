@@ -10,14 +10,18 @@ const Container = styled.div`
   min-height: 9rem;
   padding: 0.5rem 1rem;
   box-sizing: border-box;
+  border-bottom: 1px solid var(--xLightGrey);
 
   .box-avatar-container {
     height: 100%;
     padding-left: 5px;
+    padding-top: 5px;
     box-sizing: border-box;
   }
 
   .box-post-container {
+    padding-top: 0.5rem;
+    box-sizing: border-box;
     height: 100%;
 
     .box-input-container {
@@ -29,7 +33,8 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 4rem;
+      height: 3rem;
+      margin-top: 1rem;
 
       .box-emoji-container {
         color: var(--primary);
@@ -65,7 +70,6 @@ const Textarea = styled.textarea`
   outline: none;
   resize: none;
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   min-height: 32px;
   max-height: 400px;
 
@@ -90,7 +94,7 @@ export default function PostBox({ user }) {
   return (
     <Container>
       <div className="box-avatar-container">
-        <LoggedUserAvatar size="large" user={user} />
+        <LoggedUserAvatar size="larger" user={user} />
       </div>
 
       <div className="box-post-container">

@@ -13,6 +13,11 @@ const Image = styled.img`
     height: 45px;
     width: 45px;
   }
+
+  &.larger {
+    height: 50px;
+    width: 50px;
+  }
 `
 
 export default function LoggedUserAvatar({ size, user }) {
@@ -20,7 +25,7 @@ export default function LoggedUserAvatar({ size, user }) {
     <Image
       className={size}
       src={
-        user
+        user.avatarPhotoUrl
           ? `/images/avatars/${user.avatarPhotoUrl}.jpg`
           : '/images/avatars/default-avatar.png'
       }
