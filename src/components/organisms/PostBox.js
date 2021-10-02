@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { LoggedUserAvatar, RegularButton } from '../atoms'
+import { CircularProgressbar } from 'react-circular-progressbar'
 import { GrEmoji } from 'react-icons/gr'
+import 'react-circular-progressbar/dist/styles.css'
 
 const Container = styled.div`
   display: grid;
@@ -53,6 +55,11 @@ const Container = styled.div`
         }
       }
 
+      .box-counter-container {
+        width: 30px;
+        height: 30px;
+      }
+
       .box-post-button-container {
         width: 5.5rem;
 
@@ -86,6 +93,9 @@ export default function PostBox({ user }) {
   const [postValue, setPostValue] = useState('')
   const textareaRef = useRef(null)
 
+  const isDisabled =
+    postValue.length >= 1 && postValue.length <= 180 ? false : true
+
   const autoSize = () => {
     textareaRef.current.style.height = '32px'
     textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px'
@@ -103,6 +113,8 @@ export default function PostBox({ user }) {
             ref={textareaRef}
             rows="1"
             placeholder="What's happening?"
+            minLength="1"
+            maxLength="180"
             value={postValue}
             onChange={({ target }) => {
               setPostValue(target.value)
@@ -116,10 +128,14 @@ export default function PostBox({ user }) {
             <GrEmoji className="box-emoji" />
           </div>
 
-          <div className="box-counter-container"></div>
+          <div className="box-counter-container">
+            <CircularProgressbar maxValue={180} value={postValue.length} />
+          </div>
 
           <div className="box-post-button-container">
-            <RegularButton color="blue">Post</RegularButton>
+            <RegularButton disabled={isDisabled} color="blue">
+              Post
+            </RegularButton>
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ export default function LoggedUserAvatar({ size, user }) {
     <Image
       className={size}
       src={
-        user.avatarPhotoUrl
+        user?.avatarPhotoUrl
           ? `/images/avatars/${user.avatarPhotoUrl}.jpg`
           : '/images/avatars/default-avatar.png'
       }
