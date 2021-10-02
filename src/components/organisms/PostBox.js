@@ -9,6 +9,7 @@ import { Picker } from 'emoji-mart'
 import 'emoji-mart/css/emoji-mart.css'
 
 import { GrEmoji } from 'react-icons/gr'
+import { createPost } from '../../services/postServices'
 
 const Container = styled.div`
   display: grid;
@@ -98,10 +99,14 @@ const Textarea = styled.textarea`
 export default function PostBox({ user }) {
   const [postValue, setPostValue] = useState('')
   const [emojiOpen, setEmojiOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
   const textareaRef = useRef(null)
 
-  const isDisabled =
-    postValue.length >= 1 && postValue.length <= 180 ? false : true
+  const handlePost = async () => {
+    setLoading(true)
+    await createPost({ user, postValue, setPostValue, setLoading })
+    setLoading(false)
+  }
 
   const autoSize = () => {
     textareaRef.current.style.height = '32px'
@@ -121,6 +126,9 @@ export default function PostBox({ user }) {
 
     return () => window.removeEventListener('click', close)
   }, [emojiOpen])
+
+  const isDisabled =
+    postValue.length >= 1 && postValue.length <= 180 && !loading ? false : true
 
   return (
     <Container>
@@ -157,7 +165,12 @@ export default function PostBox({ user }) {
           </div>
 
           <div className="box-post-button-container">
-            <RegularButton disabled={isDisabled} color="blue">
+            <RegularButton
+              isLoading={loading}
+              onClick={handlePost}
+              disabled={isDisabled}
+              color="blue"
+            >
               Post
             </RegularButton>
           </div>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Spinner } from './'
 
 const Button = styled.button`
   font-family: 'Roboto', sans-serif;
@@ -45,12 +46,25 @@ const Button = styled.button`
       background-color: var(--xLightGrey);
     }
   }
+
+  .spinner-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `
 
-export default function RegularButton({ children, color, ...rest }) {
+export default function RegularButton({ children, color, isLoading, ...rest }) {
   return (
     <Button {...rest} className={`regular-${color}`}>
-      {children}
+      {isLoading ? (
+        <div className="spinner-container">
+          <Spinner />
+        </div>
+      ) : (
+        children
+      )}
     </Button>
   )
 }
