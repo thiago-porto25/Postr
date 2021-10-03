@@ -1,5 +1,8 @@
+import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FollowUserCard } from '.'
+import UserContext from '../../context/userContext'
+import { getSuggestedFollows } from '../../services/authServices'
 
 const Container = styled.article`
   width: 100%;
@@ -17,17 +20,33 @@ const Container = styled.article`
 `
 
 export default function Suggested() {
-  const user = {
-    username: 'testeraffd',
-    name: 'thiago protofsfdsfdsdf',
-  }
+  const [suggestedUsers, setSuggestedUsers] = useState()
+  const { user } = useContext(UserContext)
+
+  useEffect(() => {
+    const getSuggested = async () => {
+      const follows = await getSuggestedFollows({ user })
+      setSuggestedUsers(follows)
+    }
+
+    if (user) getSuggested()
+  }, [user])
 
   return (
     <Container>
       <h1 className="suggested-title">Suggested follows</h1>
-      <FollowUserCard suggestedUser={user} />
-      <FollowUserCard suggestedUser={user} />
-      <FollowUserCard suggestedUser={user} />
+      {suggestedUsers
+        ? suggestedUsers.map((suggestedUser, i) => {
+            if (i <= 2)
+              return (
+                <FollowUserCard
+                  suggestedUser={suggestedUser}
+                  key={suggestedUser.id}
+                />
+              )
+            else return null
+          })
+        : null}
     </Container>
   )
 }

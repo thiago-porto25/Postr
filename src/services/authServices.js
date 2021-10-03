@@ -13,6 +13,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   sendPasswordResetEmail,
+  limit,
 } from '../firebase/config'
 
 /////////////////// Login
@@ -124,7 +125,7 @@ export const findUserByUsername = async (username) => {
   return usernameResponse
 }
 
-/////////////////// Find user by username
+/////////////////// Save changes to user
 export const saveChangesToUser = async ({
   name,
   username,
@@ -158,5 +159,24 @@ export const saveChangesToUser = async ({
     setName(user.name)
     setUsername(user.username)
     setBirthday(user.birthday)
+  }
+}
+
+/////////////////// getSuggestedFollows
+export const getSuggestedFollows = async ({ user }) => {
+  try {
+    const usersRef = collection(db, 'users')
+
+    const q = query(usersRef, where('id', '!=', user.id), limit(10))
+
+    const response = await getDocs(q)
+
+    const usersList = response.docs
+      .map((user) => user.data())
+      .filter((profile) => !user.following.includes(profile.id))
+
+    return usersList
+  } catch (error) {
+    console.log(error.message)
   }
 }
