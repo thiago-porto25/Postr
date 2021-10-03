@@ -96,7 +96,7 @@ const Textarea = styled.textarea`
   }
 `
 
-export default function PostBox({ user }) {
+export default function PostBox({ user, setOpenModal, ...rest }) {
   const [postValue, setPostValue] = useState('')
   const [emojiOpen, setEmojiOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -106,6 +106,8 @@ export default function PostBox({ user }) {
     setLoading(true)
     await createPost({ user, postValue, setPostValue, setLoading })
     setLoading(false)
+
+    if (setOpenModal) setOpenModal(false)
   }
 
   const autoSize = () => {
@@ -131,7 +133,7 @@ export default function PostBox({ user }) {
     postValue.length >= 1 && postValue.length <= 180 && !loading ? false : true
 
   return (
-    <Container>
+    <Container {...rest}>
       <div className="box-avatar-container">
         <LoggedUserAvatar size="larger" user={user} />
       </div>

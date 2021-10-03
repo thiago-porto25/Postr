@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { LeftBar, RightBar } from '../organisms'
+import { LeftBar, RightBar, PostBoxModal } from '../organisms'
 import { useState } from 'react'
 
 const Container = styled.main`
@@ -49,20 +49,7 @@ export default function LoggedInLayout({
         </div>
       </Container>
 
-      {openModal && (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: '#00000044',
-            position: 'fixed',
-            top: '0',
-            left: '0',
-          }}
-        >
-          testasdasds
-        </div>
-      )}
+      {openModal && <PostBoxModal user={user} setOpenModal={setOpenModal} />}
     </>
   )
 }
