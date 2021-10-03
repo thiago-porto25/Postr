@@ -40,7 +40,7 @@ export const logoutWithFirebase = async ({ setMessage }) => {
   try {
     await signOut(auth)
   } catch (error) {
-    setMessage({ type: 'error', text: error.message })
+    if (setMessage) setMessage({ type: 'error', text: error.message })
   }
 }
 

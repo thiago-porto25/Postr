@@ -36,7 +36,7 @@ const Container = styled.div`
 
 export default function LogoutDropUp({ userNeeded, setLogoutDrop }) {
   const handleLogout = async () => {
-    await logoutWithFirebase()
+    await logoutWithFirebase({ setMessage: null })
   }
 
   useEffect(() => {
