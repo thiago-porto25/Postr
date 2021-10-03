@@ -167,7 +167,7 @@ export const getSuggestedFollows = async ({ user }) => {
   try {
     const usersRef = collection(db, 'users')
 
-    const q = query(usersRef, where('id', '!=', user.id), limit(10))
+    const q = query(usersRef, where('id', '!=', user.id), limit(30))
 
     const response = await getDocs(q)
 
