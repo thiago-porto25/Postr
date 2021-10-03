@@ -106,7 +106,7 @@ const List = styled.ul`
   }
 `
 
-export default function LeftBar({ user }) {
+export default function LeftBar({ user, setOpenModal }) {
   const [logoutDrop, setLogoutDrop] = useState(false)
 
   return (
@@ -157,7 +157,9 @@ export default function LeftBar({ user }) {
       </List>
 
       <div className="leftbar-big-button-container">
-        <BigButton color="blue">Post</BigButton>
+        <BigButton onClick={() => setOpenModal(true)} color="blue">
+          Post
+        </BigButton>
       </div>
 
       <div className="leftbar-drop-user-card-container">

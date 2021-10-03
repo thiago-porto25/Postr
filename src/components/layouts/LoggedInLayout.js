@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { LeftBar, RightBar } from '../organisms'
+import { useState } from 'react'
 
 const Container = styled.main`
   height: 100vh;
@@ -28,21 +29,40 @@ export default function LoggedInLayout({
   user,
   children,
 }) {
+  const [openModal, setOpenModal] = useState(false)
+
   return (
-    <Container>
-      <div className="layout-left-sidebar-container">
-        <LeftBar user={user} />
-      </div>
+    <>
+      <Container>
+        <div className="layout-left-sidebar-container">
+          <LeftBar setOpenModal={setOpenModal} user={user} />
+        </div>
 
-      <div className="layout-main-section-container">{children}</div>
+        <div className="layout-main-section-container">{children}</div>
 
-      <div className="layout-right-sidebar-container">
-        <RightBar
-          showFilter={showFilter}
-          showSearchBar={showSearchBar}
-          showSuggestion={showSuggestion}
-        />
-      </div>
-    </Container>
+        <div className="layout-right-sidebar-container">
+          <RightBar
+            showFilter={showFilter}
+            showSearchBar={showSearchBar}
+            showSuggestion={showSuggestion}
+          />
+        </div>
+      </Container>
+
+      {openModal && (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#00000044',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+          }}
+        >
+          testasdasds
+        </div>
+      )}
+    </>
   )
 }
