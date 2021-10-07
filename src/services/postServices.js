@@ -5,6 +5,7 @@ import {
   getDocs,
   setDoc,
   addDoc,
+  limit,
   serverTimestamp,
   doc,
   onSnapshot,
@@ -26,10 +27,15 @@ export const getProfilePosts = async (userId) => {
   try {
     const postsRef = collection(db, 'posts')
 
-    const postsQuery = query(postsRef, where('creatorId', '==', userId))
+    const postsQuery = query(
+      postsRef,
+      where('creatorId', '==', userId),
+      limit(100)
+    )
     const rePostsQuery = query(
       postsRef,
-      where('rePosts', 'array-contains', userId)
+      where('rePosts', 'array-contains', userId),
+      limit(50)
     )
 
     const query1Snapshot = await getDocs(postsQuery)
