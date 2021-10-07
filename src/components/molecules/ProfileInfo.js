@@ -80,17 +80,17 @@ export default function ProfileInfo({ user }) {
         <h4 className="profile-username">@{user?.username}</h4>
       </div>
 
-      <p className="bio">
-        {user?.bio} kasdlasdklamsdlkmaskldm klamsdklams adklams ams damskaldm
-        aklsm dklams dklasm dklasm dklams dklam sdkla smdkla
-      </p>
+      <p className="bio">{user?.bio}</p>
 
       <div className="dates-container">
+        {user?.birthday && (
+          <p>
+            <RiCakeFill /> Born in {parseBirthday(user?.birthday)}
+          </p>
+        )}
         <p>
-          <RiCakeFill /> Born in {parseBirthday(user?.birthday)}
-        </p>
-        <p>
-          <RiCalendar2Line /> Joined Postr in {parseTimestamp(user?.createdAt)}
+          <RiCalendar2Line /> Joined Postr in{' '}
+          {user ? parseTimestamp(user?.createdAt) : null}
         </p>
       </div>
 

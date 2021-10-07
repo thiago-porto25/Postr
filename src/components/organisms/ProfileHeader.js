@@ -21,10 +21,6 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
-    * {
-      cursor: pointer;
-    }
   }
 
   .profile-info-container {
@@ -33,8 +29,6 @@ const Container = styled.div`
     padding: 0 1.5rem;
   }
 `
-
-// create modal for avatar photo and bg photo be displayed when clicked
 
 export default function ProfileHeader({
   profileUser,
