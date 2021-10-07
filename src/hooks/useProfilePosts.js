@@ -8,7 +8,7 @@ export default function useProfilePosts(userId) {
     const getPosts = async () => {
       const response = await getProfilePosts(userId)
 
-      setPosts(response)
+      setPosts([...response])
     }
 
     if (userId) getPosts()
