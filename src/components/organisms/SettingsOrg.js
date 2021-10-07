@@ -15,6 +15,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--xxLightGrey);
 
   a {
     text-decoration: none;
@@ -34,7 +35,6 @@ const Container = styled.div`
   }
 
   .settings-user-info-container {
-    background-color: var(--xxLightGrey);
     width: 100%;
     padding: 2rem 1rem;
     box-sizing: border-box;

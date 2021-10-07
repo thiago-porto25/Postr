@@ -3,6 +3,7 @@ import { BsArrowLeftShort } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
 const Container = styled.header`
+  background-color: var(--white);
   border-bottom: 1px solid var(--xLightGrey);
   width: 100%;
   box-sizing: border-box;
