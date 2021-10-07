@@ -13,9 +13,20 @@ const Container = styled.header`
   align-items: center;
   gap: 1rem;
 
-  h1 {
-    margin: 0;
-    font-size: 20px;
+  .header-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    sub {
+      color: var(--darkGrey);
+      margin-bottom: 10px;
+    }
   }
 
   .header-arrow-container {
@@ -43,6 +54,7 @@ export default function SimpleHeader({
   withArrow,
   arrowLink,
   withPosts,
+  postsNumber,
   children,
 }) {
   return (
@@ -52,7 +64,13 @@ export default function SimpleHeader({
           <BsArrowLeftShort />
         </Link>
       )}
-      <h1>{children}</h1>
+      <div className="header-text-container">
+        <h1>{children}</h1>
+
+        {withPosts && (
+          <sub>{`${postsNumber} ${postsNumber !== 1 ? 'Posts' : 'Post'}`}</sub>
+        )}
+      </div>
     </Container>
   )
 }
