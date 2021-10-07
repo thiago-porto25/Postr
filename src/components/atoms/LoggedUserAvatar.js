@@ -18,6 +18,11 @@ const Image = styled.img`
     height: 50px;
     width: 50px;
   }
+
+  &.extra-larger {
+    height: 133px;
+    width: 133px;
+  }
 `
 
 export default function LoggedUserAvatar({ size, user }) {
