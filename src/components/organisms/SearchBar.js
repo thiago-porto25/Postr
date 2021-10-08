@@ -15,6 +15,7 @@ const Container = styled.div`
   border-radius: 30px;
   transition: 100ms ease;
   box-sizing: border-box;
+  cursor: text;
 
   &:focus-within {
     background-color: transparent;

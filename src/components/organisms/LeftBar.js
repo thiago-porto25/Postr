@@ -21,7 +21,6 @@ const Container = styled.section`
   gap: 0.8rem;
   width: 100%;
   height: 100%;
-  position: relative;
 
   .leftbar-logo-container {
     width: 60px;

@@ -5,20 +5,34 @@ import { useState } from 'react'
 const Container = styled.main`
   height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   display: grid;
   grid-template-columns: 24fr 45fr 33fr;
 
   .layout-left-sidebar-container {
     border-right: 1px solid var(--xLightGrey);
     box-shadow: 1px 1px 1px #aaaaaa11;
-    padding: 0.5rem 3rem;
+
+    .inner-left-bar {
+      position: fixed;
+      top: 0.5rem;
+      left: 3rem;
+      width: 15%;
+    }
   }
   .layout-main-section-container {
   }
   .layout-right-sidebar-container {
     border-left: 1px solid var(--xLightGrey);
     box-shadow: 1px 1px 1px #aaaaaa11;
+
+    .inner-right-bar {
+      position: fixed;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 32%;
+    }
   }
 `
 
@@ -35,17 +49,21 @@ export default function LoggedInLayout({
     <>
       <Container>
         <div className="layout-left-sidebar-container">
-          <LeftBar setOpenModal={setOpenModal} user={user} />
+          <div className="inner-left-bar">
+            <LeftBar setOpenModal={setOpenModal} user={user} />
+          </div>
         </div>
 
         <div className="layout-main-section-container">{children}</div>
 
         <div className="layout-right-sidebar-container">
-          <RightBar
-            showFilter={showFilter}
-            showSearchBar={showSearchBar}
-            showSuggestion={showSuggestion}
-          />
+          <div className="inner-right-bar">
+            <RightBar
+              showFilter={showFilter}
+              showSearchBar={showSearchBar}
+              showSuggestion={showSuggestion}
+            />
+          </div>
         </div>
       </Container>
 
