@@ -9,6 +9,7 @@ const ModalBackground = styled.div`
   left: 0;
   display: flex;
   justify-content: center;
+  z-index: 99;
 
   .modal-post-box-container {
     margin-top: 2rem;
