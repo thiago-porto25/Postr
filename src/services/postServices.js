@@ -23,6 +23,31 @@ import {
 } from '../firebase/config'
 import { v4 as uuid } from 'uuid'
 
+export const getFollowedPosts = async (userObj) => {
+  try {
+    const postsRef = collection(db, 'posts')
+    console.log(userObj.following)
+    const q = query(
+      postsRef,
+      where('creatorId', 'in', userObj.following),
+      orderBy('createdAt', 'desc'),
+      limit(100)
+    )
+
+    /// if a user has many followed do these requests in batches of 10
+
+    const querySnapshot = await getDocs(q)
+
+    const timelinePosts = querySnapshot.docs.map((doc) => doc.data())
+
+    console.log(timelinePosts)
+
+    return timelinePosts
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 export const getProfilePosts = async (userId) => {
   try {
     const postsRef = collection(db, 'posts')
