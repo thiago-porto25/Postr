@@ -99,6 +99,7 @@ export const createPost = async ({
       content: postValue.trim(),
       createdAt: serverTimestamp(),
       likes: [],
+      rePosts: [],
     })
 
     setPostValue('')
