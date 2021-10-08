@@ -47,6 +47,25 @@ const Button = styled.button`
     }
   }
 
+  &.regular-white-grey {
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--lightGrey);
+
+    &:hover {
+      background-color: var(--xLightGrey);
+    }
+  }
+
+  &.unfollow {
+    min-width: 6rem;
+
+    &:hover {
+      color: var(--error);
+      background-color: var(--errorLight);
+    }
+  }
+
   .spinner-container {
     width: 100%;
     height: 100%;
@@ -55,9 +74,18 @@ const Button = styled.button`
   }
 `
 
-export default function RegularButton({ children, color, isLoading, ...rest }) {
+export default function RegularButton({
+  children,
+  color,
+  isLoading,
+  isUnfollow,
+  ...rest
+}) {
   return (
-    <Button {...rest} className={`regular-${color}`}>
+    <Button
+      {...rest}
+      className={`regular-${color} ${isUnfollow && 'unfollow'}`}
+    >
       {isLoading ? (
         <div className="spinner-container">
           <Spinner />
