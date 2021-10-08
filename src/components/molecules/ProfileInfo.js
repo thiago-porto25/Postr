@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { RiCakeFill, RiCalendar2Line } from 'react-icons/ri'
+import { parseTimestamp } from '../../utils/parseTimestamp'
 
 const Container = styled.div`
   .name-and-username-container {
@@ -67,10 +68,6 @@ export default function ProfileInfo({ user }) {
     return new Date(rawDate).toLocaleDateString('en-US', {
       timeZone: 'UTC',
     })
-  }
-
-  const parseTimestamp = (timestamp) => {
-    return timestamp.toDate().toLocaleDateString('en-US', { timeZone: 'UTC' })
   }
 
   return (
