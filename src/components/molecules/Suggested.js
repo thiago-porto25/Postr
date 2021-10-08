@@ -11,6 +11,14 @@ const Container = styled.article`
   border-radius: 10px;
   padding: 1rem 0;
 
+  &.white {
+    background-color: var(--white);
+  }
+
+  &.border-grey {
+    border-bottom: 1px solid var(--xLightGrey);
+  }
+
   .suggested-title {
     font-size: 19px;
     font-family: 'Ubuntu', sans-serif;
@@ -19,7 +27,7 @@ const Container = styled.article`
   }
 `
 
-export default function Suggested() {
+export default function Suggested({ bg, bottomBorder }) {
   const [suggestedUsers, setSuggestedUsers] = useState()
   const { user } = useContext(UserContext)
 
@@ -33,7 +41,7 @@ export default function Suggested() {
   }, [user])
 
   return (
-    <Container>
+    <Container className={`${bg} ${bottomBorder}`}>
       <h1 className="suggested-title">Suggested follows</h1>
       {suggestedUsers
         ? suggestedUsers.map((suggestedUser, i) => {
