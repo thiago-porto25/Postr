@@ -40,8 +40,6 @@ export default function EditInfo({ user }) {
   const [birthday, setBirthday] = useState('')
   const [message, setMessage] = useState({ type: '', text: '' })
 
-  console.log(birthday === user.birthday)
-
   const isDisabled =
     name === user.name &&
     username === user.username &&
