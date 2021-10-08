@@ -93,6 +93,9 @@ export const createPost = async ({
     await setDoc(postsRef, {
       id: newPostId,
       creatorId: user.id,
+      creatorName: user.name,
+      creatorUsername: user.username,
+      creatorAvatar: user.avatarPhotoUrl,
       content: postValue.trim(),
       createdAt: serverTimestamp(),
       likes: [],
