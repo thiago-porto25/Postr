@@ -17,6 +17,7 @@ const Container = styled.article`
 
   &.border-grey {
     border-bottom: 1px solid var(--xLightGrey);
+    border-radius: 0;
   }
 
   .suggested-title {
