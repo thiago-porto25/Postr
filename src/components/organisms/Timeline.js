@@ -3,7 +3,7 @@ import { PostCard } from '../molecules'
 
 const Container = styled.section`
   width: 100%;
-  min-height: 100vh;
+  padding-bottom: 4rem;
 `
 
 export default function Timeline({ posts, isOnProfile }) {

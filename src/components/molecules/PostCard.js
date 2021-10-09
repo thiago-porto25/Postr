@@ -101,6 +101,7 @@ const Container = styled.article`
           font-size: 15px;
           text-align: justify;
           margin: 0.5rem 0;
+          color: var(--black);
         }
       }
 
@@ -192,11 +193,13 @@ export default function PostCard({ post, isOnProfile }) {
 
   const { user } = useContext(userContext)
 
-  const handleLikeToggle = async () => {
+  const handleLikeToggle = async (e) => {
+    e.preventDefault()
     await ToggleInteraction(post.docId, 'likes', isLiked, setIsLiked, user.id)
   }
 
-  const handleRePostToggle = async () => {
+  const handleRePostToggle = async (e) => {
+    e.preventDefault()
     await ToggleInteraction(
       post.docId,
       'rePosts',
@@ -229,79 +232,83 @@ export default function PostCard({ post, isOnProfile }) {
   }, [isRePosted])
 
   return (
-    <Container>
-      {isOnProfile && user.id !== post.creatorId ? (
-        <div className="post-re-posted">
-          <FaRetweet />
-          reposted
-        </div>
-      ) : null}
+    <Link to={`/post/${post.id}`} style={{ textDecoration: 'none' }}>
+      <Container>
+        {isOnProfile && user.id !== post.creatorId ? (
+          <div className="post-re-posted">
+            <FaRetweet />
+            reposted
+          </div>
+        ) : null}
 
-      <div className="post-container">
-        <div className="post-img-container">
-          <Link to={`/p/${post.creatorUsername}`}>
-            <img
-              src={`/images/avatars/${
-                post.creatorAvatar + '.jpg' || 'default-avatar.png'
-              }`}
-              alt={post.creatorName}
-            />
-          </Link>
-        </div>
-
-        <div className="post-rest-container">
-          <div className="post-top-info">
+        <div className="post-container">
+          <div className="post-img-container">
             <Link to={`/p/${post.creatorUsername}`}>
-              <div className="post-creator-info">
-                <h1>{post.creatorName}</h1>
-
-                <span>@{post.creatorUsername}</span>
-              </div>
+              <img
+                src={`/images/avatars/${
+                  post.creatorAvatar + '.jpg' || 'default-avatar.png'
+                }`}
+                alt={post.creatorName}
+              />
             </Link>
-
-            <Dot />
-
-            <p>{formatDistance(post.createdAt.toDate(), new Date())}</p>
           </div>
 
-          <div className="post-content-container">
-            <p>{post.content}</p>
-          </div>
+          <div className="post-rest-container">
+            <div className="post-top-info">
+              <Link to={`/p/${post.creatorUsername}`}>
+                <div className="post-creator-info">
+                  <h1>{post.creatorName}</h1>
 
-          <div className="post-interactions-container">
-            <div className="interaction-container comment">
-              <div className="icon-container">
-                <FaRegComment />
-              </div>
+                  <span>@{post.creatorUsername}</span>
+                </div>
+              </Link>
 
-              <p></p>
+              <Dot />
+
+              <p>{formatDistance(post.createdAt.toDate(), new Date())}</p>
             </div>
 
-            <div
-              onClick={handleRePostToggle}
-              className={`interaction-container re-post ${
-                isRePosted ? 're-posted' : ''
-              }`}
-            >
-              <div className="icon-container">
-                <FaRetweet />
-              </div>
-
-              <p>{rePostCount > 0 && rePostCount}</p>
+            <div className="post-content-container">
+              <p>{post.content}</p>
             </div>
 
-            <div
-              onClick={handleLikeToggle}
-              className={`interaction-container like ${isLiked ? 'liked' : ''}`}
-            >
-              <div className="icon-container">
-                {isLiked ? <FaHeart /> : <FaRegHeart />}
+            <div className="post-interactions-container">
+              <div className="interaction-container comment">
+                <div className="icon-container">
+                  <FaRegComment />
+                </div>
+
+                <p></p>
               </div>
-              <p>{likeCount > 0 && likeCount}</p>
+
+              <div
+                onClick={handleRePostToggle}
+                className={`interaction-container re-post ${
+                  isRePosted ? 're-posted' : ''
+                }`}
+              >
+                <div className="icon-container">
+                  <FaRetweet />
+                </div>
+
+                <p>{rePostCount > 0 && rePostCount}</p>
+              </div>
+
+              <div
+                onClick={handleLikeToggle}
+                className={`interaction-container like ${
+                  isLiked ? 'liked' : ''
+                }`}
+              >
+                <div className="icon-container">
+                  {isLiked ? <FaHeart /> : <FaRegHeart />}
+                </div>
+                <p>{likeCount > 0 && likeCount}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </Link>
   )
 }
