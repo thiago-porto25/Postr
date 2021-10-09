@@ -10,6 +10,7 @@ import 'emoji-mart/css/emoji-mart.css'
 
 import { GrEmoji } from 'react-icons/gr'
 import { createPost } from '../../services/postServices'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
   display: grid;
@@ -26,6 +27,10 @@ const Container = styled.div`
     padding-left: 5px;
     padding-top: 5px;
     box-sizing: border-box;
+
+    * {
+      cursor: pointer;
+    }
   }
 
   .box-post-container {
@@ -135,7 +140,9 @@ export default function PostBox({ user, setOpenModal, ...rest }) {
   return (
     <Container {...rest}>
       <div className="box-avatar-container">
-        <LoggedUserAvatar size="larger" user={user} />
+        <Link to={`/p/${user.username}`}>
+          <LoggedUserAvatar size="larger" user={user} />
+        </Link>
       </div>
 
       <div className="box-post-container">
