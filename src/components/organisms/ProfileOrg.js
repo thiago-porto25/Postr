@@ -14,7 +14,11 @@ export default function ProfileOrg({ user, posts }) {
         setIsOnLikes={setIsOnLikes}
       />
 
-      {!isOnLikes ? <div>Timeline</div> : <div>Likes</div>}
+      {!isOnLikes ? (
+        <Timeline isOnProfile={true} posts={posts} />
+      ) : (
+        <div>Likes</div>
+      )}
     </Container>
   )
 }

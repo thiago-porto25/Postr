@@ -6,10 +6,13 @@ const Container = styled.section`
   min-height: 100vh;
 `
 
-export default function Timeline({ posts }) {
+export default function Timeline({ posts, isOnProfile }) {
   return (
     <Container>
-      {posts && posts.map((post) => <PostCard post={post} key={post.id} />)}
+      {posts &&
+        posts.map((post) => (
+          <PostCard isOnProfile={isOnProfile} post={post} key={post.id} />
+        ))}
     </Container>
   )
 }

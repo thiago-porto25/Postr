@@ -8,154 +8,178 @@ import userContext from '../../context/userContext'
 import { ToggleInteraction } from '../../services/postServices'
 
 const Container = styled.article`
-  display: grid;
-  grid-template-columns: 50px auto;
-  border-bottom: 1px solid var(--xLightGrey);
   box-sizing: border-box;
   padding: 1rem 0.5rem 0.2rem 0.5rem;
 
-  .post-img-container {
-    width: 50px;
-    height: 50px;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
+  .post-re-posted {
+    color: var(--darkGrey);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 14px;
+    margin-top: -1rem;
+    padding: 0.5rem 0;
+    padding-left: 3rem;
+
+    svg {
+      font-size: 16px;
     }
   }
 
-  .post-rest-container {
-    box-sizing: border-box;
-    padding: 0 1rem;
+  .post-container {
+    display: grid;
+    grid-template-columns: 50px auto;
+    border-bottom: 1px solid var(--xLightGrey);
 
-    .post-top-info {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
+    .post-img-container {
+      width: 50px;
+      height: 50px;
+      transition: 200ms ease-in-out;
 
-      a {
-        display: inherit;
-        gap: inherit;
-        align-items: inherit;
-        text-decoration: none;
+      &:hover {
+        filter: brightness(90%);
       }
 
-      .post-creator-info {
-        display: inherit;
-        gap: inherit;
-        align-items: inherit;
-        cursor: pointer;
-
-        &:hover > h1 {
-          text-decoration: underline;
-        }
-      }
-
-      h1 {
-        font-size: 17px;
-        color: var(--black);
-      }
-
-      span,
-      p {
-        font-size: 15px;
-        color: var(--darkGrey);
-      }
-
-      h1,
-      p {
-        margin: 0;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
       }
     }
 
-    .post-content-container {
-      p {
-        font-size: 15px;
-        text-align: justify;
-        margin: 0.5rem 0;
-      }
-    }
+    .post-rest-container {
+      box-sizing: border-box;
+      padding: 0 1rem;
 
-    .post-interactions-container {
-      display: flex;
-      gap: 8rem;
-      align-items: center;
-
-      .interaction-container {
+      .post-top-info {
         display: flex;
         align-items: center;
         gap: 0.3rem;
-        color: var(--darkGrey);
-        cursor: pointer;
 
-        .icon-container {
-          padding: 0.5rem 0.6rem;
-          border-radius: 50%;
-          box-sizing: border-box;
-          transition: 400ms ease;
+        a {
+          display: inherit;
+          gap: inherit;
+          align-items: inherit;
+          text-decoration: none;
         }
 
+        .post-creator-info {
+          display: inherit;
+          gap: inherit;
+          align-items: inherit;
+          cursor: pointer;
+
+          &:hover > h1 {
+            text-decoration: underline;
+          }
+        }
+
+        h1 {
+          font-size: 17px;
+          color: var(--black);
+        }
+
+        span,
+        p {
+          font-size: 15px;
+          color: var(--darkGrey);
+        }
+
+        h1,
         p {
           margin: 0;
-          font-size: 13.5px;
-          transition: 400ms ease;
-          min-width: 1rem;
         }
+      }
 
-        &.comment {
-          &:hover > .icon-container {
-            color: var(--primary);
-            background-color: var(--xLightGrey);
-          }
-
-          &:hover > p {
-            color: var(--primary);
-          }
+      .post-content-container {
+        p {
+          font-size: 15px;
+          text-align: justify;
+          margin: 0.5rem 0;
         }
+      }
 
-        &.re-post {
-          &:hover > .icon-container {
-            color: var(--success);
-            background-color: #c8f7c8;
-          }
+      .post-interactions-container {
+        display: flex;
+        gap: 8rem;
+        align-items: center;
 
-          &:hover > p {
-            color: var(--success);
-          }
-        }
+        .interaction-container {
+          display: flex;
+          align-items: center;
+          gap: 0.3rem;
+          color: var(--darkGrey);
+          cursor: pointer;
 
-        &.like {
           .icon-container {
-            padding: 0.4rem 0.6rem;
-          }
-          svg {
-            margin-top: 0.2rem;
+            padding: 0.5rem 0.6rem;
+            border-radius: 50%;
+            box-sizing: border-box;
+            transition: 400ms ease;
           }
 
-          &:hover > .icon-container {
+          p {
+            margin: 0;
+            font-size: 13.5px;
+            transition: 400ms ease;
+            min-width: 1rem;
+          }
+
+          &.comment {
+            &:hover > .icon-container {
+              color: var(--primary);
+              background-color: var(--xLightGrey);
+            }
+
+            &:hover > p {
+              color: var(--primary);
+            }
+          }
+
+          &.re-post {
+            &:hover > .icon-container {
+              color: var(--success);
+              background-color: #c8f7c8;
+            }
+
+            &:hover > p {
+              color: var(--success);
+            }
+          }
+
+          &.like {
+            .icon-container {
+              padding: 0.4rem 0.6rem;
+            }
+            svg {
+              margin-top: 0.2rem;
+            }
+
+            &:hover > .icon-container {
+              color: var(--error);
+              background-color: var(--errorLight);
+            }
+
+            &:hover > p {
+              color: var(--error);
+            }
+          }
+
+          &.re-posted {
+            color: var(--success);
+          }
+
+          &.liked {
             color: var(--error);
-            background-color: var(--errorLight);
           }
-
-          &:hover > p {
-            color: var(--error);
-          }
-        }
-
-        &.re-posted {
-          color: var(--success);
-        }
-
-        &.liked {
-          color: var(--error);
         }
       }
     }
   }
 `
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, isOnProfile }) {
   const [isLiked, setIsLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(0)
 
@@ -202,66 +226,75 @@ export default function PostCard({ post }) {
 
   return (
     <Container>
-      <div className="post-img-container">
-        <Link to={`/p/${post.creatorUsername}`}>
-          <img
-            src={`/images/avatars/${
-              post.creatorAvatar + '.jpg' || 'default-avatar.png'
-            }`}
-            alt={post.creatorName}
-          />
-        </Link>
-      </div>
+      {isOnProfile && user.id !== post.creatorId ? (
+        <div className="post-re-posted">
+          <FaRetweet />
+          reposted
+        </div>
+      ) : null}
 
-      <div className="post-rest-container">
-        <div className="post-top-info">
+      <div className="post-container">
+        <div className="post-img-container">
           <Link to={`/p/${post.creatorUsername}`}>
-            <div className="post-creator-info">
-              <h1>{post.creatorName}</h1>
-
-              <span>@{post.creatorUsername}</span>
-            </div>
+            <img
+              src={`/images/avatars/${
+                post.creatorAvatar + '.jpg' || 'default-avatar.png'
+              }`}
+              alt={post.creatorName}
+            />
           </Link>
-
-          <Dot />
-
-          <p>{parseTimestamp(post.createdAt)}</p>
         </div>
 
-        <div className="post-content-container">
-          <p>{post.content}</p>
-        </div>
+        <div className="post-rest-container">
+          <div className="post-top-info">
+            <Link to={`/p/${post.creatorUsername}`}>
+              <div className="post-creator-info">
+                <h1>{post.creatorName}</h1>
 
-        <div className="post-interactions-container">
-          <div className="interaction-container comment">
-            <div className="icon-container">
-              <FaRegComment />
-            </div>
+                <span>@{post.creatorUsername}</span>
+              </div>
+            </Link>
 
-            <p>1</p>
+            <Dot />
+
+            <p>{parseTimestamp(post.createdAt)}</p>
           </div>
 
-          <div
-            onClick={handleRePostToggle}
-            className={`interaction-container re-post ${
-              isRePosted ? 're-posted' : ''
-            }`}
-          >
-            <div className="icon-container">
-              <FaRetweet />
-            </div>
-
-            <p>{rePostCount > 0 && rePostCount}</p>
+          <div className="post-content-container">
+            <p>{post.content}</p>
           </div>
 
-          <div
-            onClick={handleLikeToggle}
-            className={`interaction-container like ${isLiked ? 'liked' : ''}`}
-          >
-            <div className="icon-container">
-              {isLiked ? <FaHeart /> : <FaRegHeart />}
+          <div className="post-interactions-container">
+            <div className="interaction-container comment">
+              <div className="icon-container">
+                <FaRegComment />
+              </div>
+
+              <p>1</p>
             </div>
-            <p>{likeCount > 0 && likeCount}</p>
+
+            <div
+              onClick={handleRePostToggle}
+              className={`interaction-container re-post ${
+                isRePosted ? 're-posted' : ''
+              }`}
+            >
+              <div className="icon-container">
+                <FaRetweet />
+              </div>
+
+              <p>{rePostCount > 0 && rePostCount}</p>
+            </div>
+
+            <div
+              onClick={handleLikeToggle}
+              className={`interaction-container like ${isLiked ? 'liked' : ''}`}
+            >
+              <div className="icon-container">
+                {isLiked ? <FaHeart /> : <FaRegHeart />}
+              </div>
+              <p>{likeCount > 0 && likeCount}</p>
+            </div>
           </div>
         </div>
       </div>
