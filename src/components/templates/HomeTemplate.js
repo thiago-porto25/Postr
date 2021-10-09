@@ -23,7 +23,7 @@ export default function HomeTemplate() {
           <Suggested bg="white" bottomBorder="border-grey" />
         </SuggestedContainer>
       )}
-      <Timeline user={user} posts={posts} />
+      <Timeline posts={posts} />
     </LoggedInLayout>
   )
 }
