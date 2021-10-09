@@ -1,10 +1,14 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { parseTimestamp } from '../../utils/parseTimestamp'
-import { Dot } from '../atoms'
+
+import { Link } from 'react-router-dom'
 import { FaRegComment, FaRegHeart, FaHeart, FaRetweet } from 'react-icons/fa'
+import { Dot } from '../atoms'
+
+import { formatDistance } from 'date-fns'
+
 import { useContext, useEffect, useState } from 'react'
 import userContext from '../../context/userContext'
+
 import { ToggleInteraction } from '../../services/postServices'
 
 const Container = styled.article`
@@ -257,7 +261,7 @@ export default function PostCard({ post, isOnProfile }) {
 
             <Dot />
 
-            <p>{parseTimestamp(post.createdAt)}</p>
+            <p>{formatDistance(post.createdAt.toDate(), new Date())}</p>
           </div>
 
           <div className="post-content-container">
@@ -270,7 +274,7 @@ export default function PostCard({ post, isOnProfile }) {
                 <FaRegComment />
               </div>
 
-              <p>1</p>
+              <p></p>
             </div>
 
             <div
