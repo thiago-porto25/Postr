@@ -5,6 +5,9 @@ import {
   getDocs,
   setDoc,
   addDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
   limit,
   serverTimestamp,
   doc,
@@ -23,10 +26,29 @@ import {
 } from '../firebase/config'
 import { v4 as uuid } from 'uuid'
 
+export const ToggleInteraction = async (
+  docId,
+  interaction,
+  hasInteracted,
+  setInteraction,
+  userId
+) => {
+  try {
+    const postRef = doc(db, 'posts', docId)
+
+    await updateDoc(postRef, {
+      [interaction]: hasInteracted ? arrayRemove(userId) : arrayUnion(userId),
+    })
+
+    setInteraction((prev) => !prev)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 export const getFollowedPosts = async (userObj) => {
   try {
     const postsRef = collection(db, 'posts')
-    console.log(userObj.following)
     const q = query(
       postsRef,
       where('creatorId', 'in', userObj.following),
@@ -38,9 +60,10 @@ export const getFollowedPosts = async (userObj) => {
 
     const querySnapshot = await getDocs(q)
 
-    const timelinePosts = querySnapshot.docs.map((doc) => doc.data())
-
-    console.log(timelinePosts)
+    const timelinePosts = querySnapshot.docs.map((doc) => ({
+      docId: doc.id,
+      ...doc.data(),
+    }))
 
     return timelinePosts
   } catch (error) {
@@ -66,8 +89,14 @@ export const getProfilePosts = async (userId) => {
     const query1Snapshot = await getDocs(postsQuery)
     const query2Snapshot = await getDocs(rePostsQuery)
 
-    const profilePosts = query1Snapshot.docs.map((doc) => doc.data())
-    const profileRePosts = query2Snapshot.docs.map((doc) => doc.data())
+    const profilePosts = query1Snapshot.docs.map((doc) => ({
+      docId: doc.id,
+      ...doc.data(),
+    }))
+    const profileRePosts = query2Snapshot.docs.map((doc) => ({
+      docId: doc.id,
+      ...doc.data(),
+    }))
 
     const returnedPosts = [...profilePosts, ...profileRePosts].sort(
       (a, b) => a.createdAt - b.createdAt
