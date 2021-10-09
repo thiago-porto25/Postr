@@ -99,7 +99,7 @@ export const getProfilePosts = async (userId) => {
     }))
 
     const returnedPosts = [...profilePosts, ...profileRePosts].sort(
-      (a, b) => a.createdAt - b.createdAt
+      (a, b) => b.createdAt - a.createdAt
     )
 
     return returnedPosts
@@ -121,7 +121,7 @@ export const getProfileLikedPosts = async (userId) => {
       ...doc.data(),
     }))
 
-    return likedPosts
+    return likedPosts.sort((a, b) => b.createdAt - a.createdAt)
   } catch (error) {
     console.log(error.message)
   }
