@@ -108,6 +108,25 @@ export const getProfilePosts = async (userId) => {
   }
 }
 
+export const getProfileLikedPosts = async (userId) => {
+  try {
+    const postsRef = collection(db, 'posts')
+
+    const q = query(postsRef, where('likes', 'array-contains', userId))
+
+    const querySnapshot = await getDocs(q)
+
+    const likedPosts = querySnapshot.docs.map((doc) => ({
+      docId: doc.id,
+      ...doc.data(),
+    }))
+
+    return likedPosts
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 export const createPost = async ({
   user,
   postValue,

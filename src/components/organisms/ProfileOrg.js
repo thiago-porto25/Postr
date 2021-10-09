@@ -4,8 +4,9 @@ import { useState } from 'react'
 
 const Container = styled.div``
 
-export default function ProfileOrg({ user, posts }) {
+export default function ProfileOrg({ user, profilePosts, likedPosts }) {
   const [isOnLikes, setIsOnLikes] = useState(false)
+
   return (
     <Container>
       <ProfileHeader
@@ -15,9 +16,9 @@ export default function ProfileOrg({ user, posts }) {
       />
 
       {!isOnLikes ? (
-        <Timeline isOnProfile={true} posts={posts} />
+        <Timeline isOnProfile={true} posts={profilePosts} />
       ) : (
-        <div>Likes</div>
+        <Timeline posts={likedPosts} />
       )}
     </Container>
   )
