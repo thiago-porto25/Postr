@@ -114,7 +114,6 @@ export default function LeftBar({
   const [logoutDrop, setLogoutDrop] = useState(false)
 
   const handleLinkClick = () => {
-    console.log(isOnFollows)
     if (isOnFollows) {
       setIsOnFollows(false)
     }

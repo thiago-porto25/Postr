@@ -34,8 +34,8 @@ export default function FollowsOrg({
       }
     }
 
-    if (profileUser.followers && profileUser.following) getFollows()
-  }, [profileUser])
+    if (isOnFollows) getFollows()
+  }, [profileUser, isOnFollows])
 
   return (
     <Container>

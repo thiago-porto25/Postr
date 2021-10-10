@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FollowButton } from '../atoms'
 import { UserInfo } from '.'
-import { followUser } from '../../services/followServices'
+import { followUser, unFollowUser } from '../../services/followServices'
 
 const Container = styled.div`
   width: calc(100% - 3rem);
@@ -31,15 +32,28 @@ const Container = styled.div`
 `
 
 export default function FollowUserCard({ suggestedUser, user, isOn, setIsOn }) {
+  const [hoverUnfollow, setHoverUnfollow] = useState(false)
+  const [isFollowing, setIsFollowing] = useState(false)
+
   const handleFollow = async (e) => {
     e.stopPropagation()
 
-    await followUser(user.id, suggestedUser.id)
+    await followUser(user.id, suggestedUser.id, setIsFollowing)
+  }
+
+  const handleUnFollow = async (e) => {
+    e.stopPropagation()
+
+    await unFollowUser(user.id, suggestedUser.id, setIsFollowing)
   }
 
   const handleLinkClick = () => {
     if (isOn) setIsOn(false)
   }
+
+  useEffect(() => {
+    if (user?.following.includes(suggestedUser?.id)) setIsFollowing(true)
+  }, [suggestedUser, user])
 
   return (
     <Container>
@@ -47,9 +61,21 @@ export default function FollowUserCard({ suggestedUser, user, isOn, setIsOn }) {
         <UserInfo userNeeded={suggestedUser} />
       </Link>
       <div className="suggested-follow-btn-container">
-        <FollowButton isFollowing={false} onClick={handleFollow}>
-          Follow
-        </FollowButton>
+        {!isFollowing ? (
+          <FollowButton isFollowing={false} onClick={handleFollow}>
+            Follow
+          </FollowButton>
+        ) : (
+          <FollowButton
+            onMouseEnter={() => setHoverUnfollow(true)}
+            onMouseLeave={() => setHoverUnfollow(false)}
+            isHoveringUnfollow={hoverUnfollow}
+            isFollowing={true}
+            onClick={handleUnFollow}
+          >
+            {hoverUnfollow ? 'Unfollow' : 'Following'}
+          </FollowButton>
+        )}
       </div>
     </Container>
   )
