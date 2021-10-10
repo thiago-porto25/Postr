@@ -4,7 +4,6 @@ import {
   getDoc,
   getDocs,
   setDoc,
-  addDoc,
   updateDoc,
   arrayUnion,
   arrayRemove,
@@ -16,13 +15,6 @@ import {
   where,
   deleteDoc,
   orderBy,
-  auth,
-  signInWithEmailAndPassword,
-  signOut,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  sendEmailVerification,
-  sendPasswordResetEmail,
 } from '../firebase/config'
 import { v4 as uuid } from 'uuid'
 

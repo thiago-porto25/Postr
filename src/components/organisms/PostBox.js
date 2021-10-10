@@ -140,7 +140,7 @@ export default function PostBox({ user, setOpenModal, ...rest }) {
   return (
     <Container {...rest}>
       <div className="box-avatar-container">
-        <Link to={`/p/${user.username}`}>
+        <Link to={`/p/${user?.username}`}>
           <LoggedUserAvatar size="larger" user={user} />
         </Link>
       </div>

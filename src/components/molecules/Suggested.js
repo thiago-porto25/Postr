@@ -41,7 +41,7 @@ export default function Suggested({ bg, bottomBorder }) {
     if (user) getSuggested()
   }, [user])
 
-  return (
+  return suggestedUsers && suggestedUsers.length > 0 ? (
     <Container className={`${bg} ${bottomBorder}`}>
       <h1 className="suggested-title">Suggested follows</h1>
       {suggestedUsers
@@ -49,6 +49,7 @@ export default function Suggested({ bg, bottomBorder }) {
             if (i <= 2)
               return (
                 <FollowUserCard
+                  user={user}
                   suggestedUser={suggestedUser}
                   key={suggestedUser.id}
                 />
@@ -57,5 +58,5 @@ export default function Suggested({ bg, bottomBorder }) {
           })
         : null}
     </Container>
-  )
+  ) : null
 }

@@ -57,15 +57,6 @@ const Button = styled.button`
     }
   }
 
-  &.unfollow {
-    min-width: 6rem;
-
-    &:hover {
-      color: var(--error);
-      background-color: var(--errorLight);
-    }
-  }
-
   .spinner-container {
     width: 100%;
     height: 100%;
@@ -74,18 +65,9 @@ const Button = styled.button`
   }
 `
 
-export default function RegularButton({
-  children,
-  color,
-  isLoading,
-  isUnfollow,
-  ...rest
-}) {
+export default function RegularButton({ children, color, isLoading, ...rest }) {
   return (
-    <Button
-      {...rest}
-      className={`regular-${color} ${isUnfollow && 'unfollow'}`}
-    >
+    <Button {...rest} className={`regular-${color} `}>
       {isLoading ? (
         <div className="spinner-container">
           <Spinner />

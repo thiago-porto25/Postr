@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import { RegularButton } from '../atoms'
-import { UserInfo } from '.'
 import { Link } from 'react-router-dom'
+import { FollowButton } from '../atoms'
+import { UserInfo } from '.'
+import { followUser } from '../../services/followServices'
 
 const Container = styled.div`
   width: calc(100% - 3rem);
@@ -29,9 +30,11 @@ const Container = styled.div`
   }
 `
 
-export default function FollowUserCard({ suggestedUser }) {
-  const handleFollowClick = (e) => {
+export default function FollowUserCard({ suggestedUser, user }) {
+  const handleFollow = async (e) => {
     e.stopPropagation()
+
+    await followUser(user.id, suggestedUser.id)
   }
 
   return (
@@ -40,9 +43,9 @@ export default function FollowUserCard({ suggestedUser }) {
         <UserInfo userNeeded={suggestedUser} />
       </Link>
       <div className="suggested-follow-btn-container">
-        <RegularButton onClick={handleFollowClick} color="black">
+        <FollowButton isFollowing={false} onClick={handleFollow}>
           Follow
-        </RegularButton>
+        </FollowButton>
       </div>
     </Container>
   )

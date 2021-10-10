@@ -1,9 +1,18 @@
-import { useContext, useState } from 'react'
-import styled from 'styled-components'
+import { useContext, useState, useEffect } from 'react'
 import UserContext from '../../context/userContext'
-import { LoggedUserAvatar, ProfileBg, RegularButton } from '../atoms'
-import { ProfileInfo, ProfileNav } from '../molecules'
+
+import styled from 'styled-components'
 import { BiEnvelope } from 'react-icons/bi'
+
+import { ProfileInfo, ProfileNav } from '../molecules'
+import {
+  LoggedUserAvatar,
+  ProfileBg,
+  FollowButton,
+  RegularButton,
+} from '../atoms'
+
+import { followUser, unFollowUser } from '../../services/followServices'
 
 const Container = styled.div`
   position: relative;
@@ -92,7 +101,21 @@ export default function ProfileHeader({
   isOnLikes,
 }) {
   const [hoverUnfollow, setHoverUnfollow] = useState(false)
+  const [isFollowing, setIsFollowing] = useState(false)
   const { user } = useContext(UserContext)
+
+  const handleFollow = async () => {
+    await followUser(user.id, profileUser.id, setIsFollowing)
+  }
+  const handleUnFollow = async () => {
+    await unFollowUser(user.id, profileUser.id, setIsFollowing)
+  }
+
+  useEffect(() => {
+    console.log(user?.following.includes(profileUser?.id))
+
+    if (user?.following.includes(profileUser?.id)) setIsFollowing(true)
+  }, [user, profileUser])
 
   return (
     <Container>
@@ -107,24 +130,27 @@ export default function ProfileHeader({
           </div>
         ) : (
           <div className="profile-follow-button">
-            {user?.following.includes(profileUser?.id) ? (
+            {isFollowing ? (
               <>
                 <div className="profile-message-button">
                   <BiEnvelope />
                 </div>
 
-                <RegularButton
+                <FollowButton
                   onMouseEnter={() => setHoverUnfollow(true)}
                   onMouseLeave={() => setHoverUnfollow(false)}
-                  isUnfollow={true}
-                  color="white-grey"
+                  isHoveringUnfollow={hoverUnfollow}
+                  isFollowing={true}
+                  onClick={handleUnFollow}
                 >
                   {hoverUnfollow ? 'Unfollow' : 'Following'}
-                </RegularButton>
+                </FollowButton>
               </>
             ) : (
               <div className="profile-follow">
-                <RegularButton color="black">Follow</RegularButton>
+                <FollowButton onClick={handleFollow} isFollowing={false}>
+                  Follow
+                </FollowButton>
               </div>
             )}
           </div>
