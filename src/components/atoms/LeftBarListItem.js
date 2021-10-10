@@ -21,7 +21,7 @@ const Item = styled.li`
   }
 `
 
-export default function LeftBarListItem({ icons, children, to }) {
+export default function LeftBarListItem({ icons, children, to, ...rest }) {
   const [active, setActive] = useState(false)
   let navLinkRef = useRef(null)
 
@@ -32,6 +32,7 @@ export default function LeftBarListItem({ icons, children, to }) {
 
   return (
     <NavLink
+      {...rest}
       ref={(el) => {
         navLinkRef.current = el
       }}

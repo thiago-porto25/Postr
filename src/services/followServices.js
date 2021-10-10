@@ -48,3 +48,35 @@ export const unFollowUser = async (followerId, followedId, setIsFollowing) => {
     console.log(error.message)
   }
 }
+
+export const getProfileFollowers = async (followers) => {
+  try {
+    const usersRef = collection(db, 'users')
+
+    const q = query(usersRef, where('id', 'in', followers))
+
+    const querySnapshot = await getDocs(q)
+
+    const followersResponse = querySnapshot.docs.map((doc) => doc.data())
+
+    return followersResponse
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+export const getProfileFollowing = async (following) => {
+  try {
+    const usersRef = collection(db, 'users')
+
+    const q = query(usersRef, where('id', 'in', following))
+
+    const querySnapshot = await getDocs(q)
+
+    const followingResponse = querySnapshot.docs.map((doc) => doc.data())
+
+    return followingResponse
+  } catch (error) {
+    console.log(error.message)
+  }
+}

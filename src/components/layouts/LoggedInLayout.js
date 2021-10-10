@@ -41,6 +41,8 @@ export default function LoggedInLayout({
   showSuggestion,
   showFilter,
   user,
+  isOnFollows,
+  setIsOnFollows,
   children,
 }) {
   const [openModal, setOpenModal] = useState(false)
@@ -50,7 +52,12 @@ export default function LoggedInLayout({
       <Container>
         <div className="layout-left-sidebar-container">
           <div className="inner-left-bar">
-            <LeftBar setOpenModal={setOpenModal} user={user} />
+            <LeftBar
+              isOnFollows={isOnFollows}
+              setIsOnFollows={setIsOnFollows}
+              setOpenModal={setOpenModal}
+              user={user}
+            />
           </div>
         </div>
 

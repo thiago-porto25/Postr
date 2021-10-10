@@ -31,7 +31,13 @@ export default function ProfileTemplate() {
   }, [username])
 
   return (
-    <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
+    <LoggedInLayout
+      setIsOnFollows={setIsOnFollows}
+      isOnFollows={isOnFollows}
+      user={user}
+      showSearchBar={true}
+      showSuggestion={true}
+    >
       {!isOnFollows ? (
         <>
           <SimpleHeader
@@ -54,14 +60,19 @@ export default function ProfileTemplate() {
         <>
           <SimpleHeader
             withArrow={true}
-            arrowLink={null}
+            arrowLink={`/p/${username}`}
             withOnClick={true}
             OnClick={setIsOnFollows}
           >
             Following/Followers
           </SimpleHeader>
 
-          <FollowsOrg user={profileUser} />
+          <FollowsOrg
+            user={user}
+            profileUser={profileUser}
+            setIsOnFollows={setIsOnFollows}
+            isOnFollows={isOnFollows}
+          />
         </>
       )}
     </LoggedInLayout>

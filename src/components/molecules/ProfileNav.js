@@ -41,16 +41,16 @@ const Container = styled.div`
   }
 `
 
-export default function ProfileNav({ setIsOnLikes, isOnLikes }) {
+export default function ProfileNav({ setIsOn, isOn, first, second }) {
   return (
     <Container>
-      <div onClick={() => setIsOnLikes(false)}>
-        <p className={!isOnLikes ? 'bold' : ''}>Posts</p>
-        {!isOnLikes && <hr />}
+      <div onClick={() => setIsOn(false)}>
+        <p className={!isOn ? 'bold' : ''}>{first}</p>
+        {!isOn && <hr />}
       </div>
-      <div onClick={() => setIsOnLikes(true)}>
-        <p className={isOnLikes ? 'bold' : ''}>Likes</p>
-        {isOnLikes && <hr />}
+      <div onClick={() => setIsOn(true)}>
+        <p className={isOn ? 'bold' : ''}>{second}</p>
+        {isOn && <hr />}
       </div>
     </Container>
   )

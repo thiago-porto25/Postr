@@ -105,8 +105,20 @@ const List = styled.ul`
   }
 `
 
-export default function LeftBar({ user, setOpenModal }) {
+export default function LeftBar({
+  user,
+  setOpenModal,
+  isOnFollows,
+  setIsOnFollows,
+}) {
   const [logoutDrop, setLogoutDrop] = useState(false)
+
+  const handleLinkClick = () => {
+    console.log(isOnFollows)
+    if (isOnFollows) {
+      setIsOnFollows(false)
+    }
+  }
 
   return (
     <Container>
@@ -141,6 +153,7 @@ export default function LeftBar({ user, setOpenModal }) {
         </LeftBarListItem>
 
         <LeftBarListItem
+          onClick={handleLinkClick}
           to={`/p/${user?.username}`}
           icons={{ outline: BsPerson(), fill: BsFillPersonFill() }}
         >

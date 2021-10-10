@@ -164,7 +164,12 @@ export default function ProfileHeader({
         <ProfileInfo setIsOnFollows={setIsOnFollows} user={profileUser} />
       </div>
 
-      <ProfileNav setIsOnLikes={setIsOnLikes} isOnLikes={isOnLikes} />
+      <ProfileNav
+        setIsOn={setIsOnLikes}
+        isOn={isOnLikes}
+        first="Posts"
+        second="Likes"
+      />
     </Container>
   )
 }

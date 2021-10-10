@@ -30,16 +30,20 @@ const Container = styled.div`
   }
 `
 
-export default function FollowUserCard({ suggestedUser, user }) {
+export default function FollowUserCard({ suggestedUser, user, isOn, setIsOn }) {
   const handleFollow = async (e) => {
     e.stopPropagation()
 
     await followUser(user.id, suggestedUser.id)
   }
 
+  const handleLinkClick = () => {
+    if (isOn) setIsOn(false)
+  }
+
   return (
     <Container>
-      <Link to={`/p/${suggestedUser.username}`}>
+      <Link onClick={handleLinkClick} to={`/p/${suggestedUser.username}`}>
         <UserInfo userNeeded={suggestedUser} />
       </Link>
       <div className="suggested-follow-btn-container">

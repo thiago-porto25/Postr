@@ -1,3 +1,70 @@
-export default function FollowsOrg() {
-  return <div></div>
+import styled from 'styled-components'
+import { ProfileNav, FollowUserCard } from '../molecules'
+import {
+  getProfileFollowers,
+  getProfileFollowing,
+} from '../../services/followServices'
+import { useEffect, useState } from 'react'
+
+const Container = styled.div``
+
+export default function FollowsOrg({
+  user,
+  profileUser,
+  setIsOnFollows,
+  isOnFollows,
+}) {
+  const [isOnFollowers, setIsOnFollowers] = useState(false)
+  const [following, setFollowing] = useState([])
+  const [followers, setFollowers] = useState([])
+
+  useEffect(() => {
+    const getFollows = async () => {
+      if (profileUser.followers[0]) {
+        const receivedFollowers = await getProfileFollowers(
+          profileUser.followers
+        )
+        setFollowers(receivedFollowers)
+      }
+      if (profileUser.following[0]) {
+        const receivedFollowing = await getProfileFollowing(
+          profileUser.following
+        )
+        setFollowing(receivedFollowing)
+      }
+    }
+
+    if (profileUser.followers && profileUser.following) getFollows()
+  }, [profileUser])
+
+  return (
+    <Container>
+      <ProfileNav
+        isOn={isOnFollowers}
+        setIsOn={setIsOnFollowers}
+        first="Following"
+        second="Followers"
+      />
+
+      {isOnFollowers
+        ? followers.map((item) => (
+            <FollowUserCard
+              key={item.id}
+              user={user}
+              suggestedUser={item}
+              setIsOn={setIsOnFollows}
+              isOn={isOnFollows}
+            />
+          ))
+        : following.map((item) => (
+            <FollowUserCard
+              key={item.id}
+              user={user}
+              suggestedUser={item}
+              setIsOn={setIsOnFollows}
+              isOn={isOnFollows}
+            />
+          ))}
+    </Container>
+  )
 }
