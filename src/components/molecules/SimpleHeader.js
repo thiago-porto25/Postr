@@ -53,14 +53,28 @@ const Container = styled.header`
 export default function SimpleHeader({
   withArrow,
   arrowLink,
+  withOnClick,
+  OnClick,
   withPosts,
   postsNumber,
   children,
 }) {
+  const handleClick = (e) => {
+    if (withOnClick) {
+      e.preventDefault()
+      OnClick(false)
+    }
+    return
+  }
+
   return (
     <Container>
       {withArrow && (
-        <Link to={arrowLink} className="header-arrow-container">
+        <Link
+          to={arrowLink}
+          onClick={handleClick}
+          className="header-arrow-container"
+        >
           <BsArrowLeftShort />
         </Link>
       )}

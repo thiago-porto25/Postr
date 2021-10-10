@@ -58,12 +58,13 @@ const Container = styled.div`
     }
 
     p {
+      cursor: pointer;
       color: var(--darkGrey);
     }
   }
 `
 
-export default function ProfileInfo({ user }) {
+export default function ProfileInfo({ user, setIsOnFollows }) {
   const parseBirthday = (rawDate) => {
     return new Date(rawDate).toLocaleDateString('en-US', {
       timeZone: 'UTC',
@@ -92,11 +93,11 @@ export default function ProfileInfo({ user }) {
       </div>
 
       <div className="follow-info-container">
-        <p>
-          <span>{user?.following.length}</span> Seguindo
+        <p onClick={() => setIsOnFollows(true)}>
+          <span>{user?.following.length}</span> Following
         </p>
-        <p>
-          <span>{user?.followers.length}</span> Seguidores
+        <p onClick={() => setIsOnFollows(true)}>
+          <span>{user?.followers.length}</span> Followers
         </p>
       </div>
     </Container>

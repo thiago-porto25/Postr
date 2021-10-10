@@ -1,14 +1,18 @@
 import { LoggedInLayout } from '../layouts'
-import { ProfileOrg } from '../organisms'
+import { ProfileOrg, FollowsOrg } from '../organisms'
 import { SimpleHeader } from '../molecules'
+
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../../context/userContext'
+
 import * as ROUTES from '../../constants/routes'
+
 import { useProfilePosts, useProfileLikedPosts } from '../../hooks'
 import { useParams } from 'react-router'
 import { findUserByUsername } from '../../services/authServices'
 
 export default function ProfileTemplate() {
+  const [isOnFollows, setIsOnFollows] = useState(false)
   const [profileUser, setProfileUser] = useState()
   const { username } = useParams()
 
@@ -28,20 +32,38 @@ export default function ProfileTemplate() {
 
   return (
     <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
-      <SimpleHeader
-        withPosts={true}
-        postsNumber={profilePosts.length}
-        withArrow={true}
-        arrowLink={ROUTES.HOME}
-      >
-        {profileUser?.name}
-      </SimpleHeader>
+      {!isOnFollows ? (
+        <>
+          <SimpleHeader
+            withPosts={true}
+            postsNumber={profilePosts.length}
+            withArrow={true}
+            arrowLink={ROUTES.HOME}
+          >
+            {profileUser?.name}
+          </SimpleHeader>
 
-      <ProfileOrg
-        user={profileUser}
-        likedPosts={likedPosts}
-        profilePosts={profilePosts}
-      />
+          <ProfileOrg
+            user={profileUser}
+            likedPosts={likedPosts}
+            profilePosts={profilePosts}
+            setIsOnFollows={setIsOnFollows}
+          />
+        </>
+      ) : (
+        <>
+          <SimpleHeader
+            withArrow={true}
+            arrowLink={null}
+            withOnClick={true}
+            OnClick={setIsOnFollows}
+          >
+            Following/Followers
+          </SimpleHeader>
+
+          <FollowsOrg user={profileUser} />
+        </>
+      )}
     </LoggedInLayout>
   )
 }

@@ -99,6 +99,7 @@ export default function ProfileHeader({
   profileUser,
   setIsOnLikes,
   isOnLikes,
+  setIsOnFollows,
 }) {
   const [hoverUnfollow, setHoverUnfollow] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
@@ -112,8 +113,6 @@ export default function ProfileHeader({
   }
 
   useEffect(() => {
-    console.log(user?.following.includes(profileUser?.id))
-
     if (user?.following.includes(profileUser?.id)) setIsFollowing(true)
   }, [user, profileUser])
 
@@ -162,7 +161,7 @@ export default function ProfileHeader({
       </div>
 
       <div className="profile-info-container">
-        <ProfileInfo user={profileUser} />
+        <ProfileInfo setIsOnFollows={setIsOnFollows} user={profileUser} />
       </div>
 
       <ProfileNav setIsOnLikes={setIsOnLikes} isOnLikes={isOnLikes} />
