@@ -15,7 +15,8 @@ const Container = styled.div`
     font-weight: bold;
   }
 
-  input {
+  input,
+  textarea {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -28,12 +29,19 @@ const Container = styled.div`
     border: 1px solid var(--darkGrey);
   }
 
+  textarea {
+    padding-top: 28px;
+    resize: none;
+  }
+
   input[type='date'] {
     cursor: text;
   }
 
   input:focus + span,
+  textarea:focus + span,
   input:not(:focus):valid + span,
+  textarea:not(:focus):valid + span,
   input:not([value='']) + span,
   input[type='date'] + span {
     top: 6px;
@@ -44,7 +52,8 @@ const Container = styled.div`
     color: var(--primary);
   }
 
-  input:focus {
+  input:focus,
+  textarea:focus {
     border: solid 2px var(--primary);
   }
 `
@@ -53,17 +62,28 @@ export default function SpecialInput({
   inputValue,
   setInputValue,
   placeholder,
+  isTextarea,
   ...rest
 }) {
   return (
     <Container>
-      <input
-        {...rest}
-        value={inputValue}
-        onChange={({ target }) => setInputValue(target.value)}
-        required
-        onPaste={(e) => e.preventDefault()}
-      />
+      {isTextarea ? (
+        <textarea
+          {...rest}
+          value={inputValue}
+          onChange={({ target }) => setInputValue(target.value)}
+          required
+          onPaste={(e) => e.preventDefault()}
+        />
+      ) : (
+        <input
+          {...rest}
+          value={inputValue}
+          onChange={({ target }) => setInputValue(target.value)}
+          required
+          onPaste={(e) => e.preventDefault()}
+        />
+      )}
       <span>{placeholder}</span>
     </Container>
   )
