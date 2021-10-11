@@ -13,6 +13,7 @@ const Item = styled.li`
 
   p {
     font-size: 20px;
+    margin: 1rem 0;
   }
 
   svg {
