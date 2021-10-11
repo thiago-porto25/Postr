@@ -100,6 +100,7 @@ export default function ProfileHeader({
   setIsOnLikes,
   isOnLikes,
   setIsOnFollows,
+  setIsEditingProfile,
 }) {
   const [hoverUnfollow, setHoverUnfollow] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
@@ -125,7 +126,12 @@ export default function ProfileHeader({
       <div className="profile-buttons-container">
         {user?.username === profileUser?.username ? (
           <div className="profile-edit-button">
-            <RegularButton color="white-grey">Edit Profile</RegularButton>
+            <RegularButton
+              onClick={() => setIsEditingProfile(true)}
+              color="white-grey"
+            >
+              Edit Profile
+            </RegularButton>
           </div>
         ) : (
           <div className="profile-follow-button">
