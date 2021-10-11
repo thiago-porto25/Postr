@@ -25,10 +25,10 @@ const Settings = lazy(() => import('./pages/settings'))
 const NotFound = lazy(() => import('./pages/not-found'))
 
 function App() {
-  const { authUser, user } = useAuthListener()
+  const { authUser, user, setUser } = useAuthListener()
 
   return (
-    <UserContext.Provider value={{ authUser, user }}>
+    <UserContext.Provider value={{ authUser, user, setUser }}>
       <Suspense fallback={<h1>loading...</h1>}>
         <Switch>
           {/*/////// Redirected Routes ////////*/}

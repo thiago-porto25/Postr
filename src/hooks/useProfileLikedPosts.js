@@ -14,5 +14,5 @@ export default function useProfileLikedPosts(userId) {
     if (userId) getPosts()
   }, [userId])
 
-  return { posts }
+  return { posts, setPosts }
 }

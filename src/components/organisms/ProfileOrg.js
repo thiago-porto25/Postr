@@ -7,7 +7,11 @@ const Container = styled.div``
 
 export default function ProfileOrg({
   user,
+  setUser,
+  setProfileUser,
   profilePosts,
+  setProfilePosts,
+  setLikedPosts,
   likedPosts,
   setIsOnFollows,
   authUser,
@@ -43,6 +47,11 @@ export default function ProfileOrg({
         <EditProfileModal
           setIsEditingProfile={setIsEditingProfile}
           authUser={authUser}
+          setCurrentProfileUser={user}
+          setUser={setUser}
+          setProfileUser={setProfileUser}
+          setProfilePosts={setProfilePosts}
+          setLikedPosts={setLikedPosts}
         />
       )}
     </>

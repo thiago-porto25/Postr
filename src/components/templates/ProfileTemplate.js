@@ -16,9 +16,13 @@ export default function ProfileTemplate() {
   const [profileUser, setProfileUser] = useState()
   const { username } = useParams()
 
-  const { user } = useContext(UserContext)
-  const { posts: profilePosts } = useProfilePosts(profileUser?.id)
-  const { posts: likedPosts } = useProfileLikedPosts(profileUser?.id)
+  const { user, setUser } = useContext(UserContext)
+  const { posts: profilePosts, setPosts: setProfilePosts } = useProfilePosts(
+    profileUser?.id
+  )
+  const { posts: likedPosts, setPosts: setLikedPosts } = useProfileLikedPosts(
+    profileUser?.id
+  )
 
   useEffect(() => {
     const getUser = async () => {
@@ -52,7 +56,11 @@ export default function ProfileTemplate() {
           {profileUser ? (
             <ProfileOrg
               user={profileUser}
+              setProfileUser={setProfileUser}
+              setUser={setUser}
               authUser={user}
+              setProfilePosts={setProfilePosts}
+              setLikedPosts={setLikedPosts}
               likedPosts={likedPosts}
               profilePosts={profilePosts}
               setIsOnFollows={setIsOnFollows}

@@ -14,5 +14,5 @@ export default function useProfilePosts(userId) {
     if (userId) getPosts()
   }, [userId])
 
-  return { posts }
+  return { posts, setPosts }
 }

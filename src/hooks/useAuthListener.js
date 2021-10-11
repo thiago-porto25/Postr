@@ -27,5 +27,5 @@ export default function useAuthListener() {
     }
   }, [])
 
-  return { authUser: user, user: userObj }
+  return { authUser: user, user: userObj, setUser: setUserObj }
 }

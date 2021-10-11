@@ -36,7 +36,14 @@ const Inner = styled.div`
   padding-top: 1.5rem;
 `
 
-export default function EditProfileModal({ setIsEditingProfile, authUser }) {
+export default function EditProfileModal({
+  setIsEditingProfile,
+  authUser,
+  setUser,
+  setProfileUser,
+  setProfilePosts,
+  setLikedPosts,
+}) {
   const [avatar, setAvatar] = useState('')
   const [background, setBackground] = useState('')
   const [name, setName] = useState('')
@@ -56,6 +63,48 @@ export default function EditProfileModal({ setIsEditingProfile, authUser }) {
     setIsLoading(true)
 
     await saveProfileChanges(authUser, { avatar, background, name, bio })
+
+    setUser((prev) => ({
+      ...prev,
+      avatarPhotoUrl: avatar,
+      backgroundPhotoUrl: background,
+      name: name,
+      bio: bio,
+    }))
+
+    setProfileUser((prev) => ({
+      ...prev,
+      avatarPhotoUrl: avatar,
+      backgroundPhotoUrl: background,
+      name: name,
+      bio: bio,
+    }))
+
+    setProfilePosts((prev) => {
+      const withoutUserPosts = prev.filter(
+        (post) => post.creatorId !== authUser.id
+      )
+      const userPosts = prev
+        .filter((post) => post.creatorId === authUser.id)
+        .map((post) => ({ ...post, creatorAvatar: avatar, creatorName: name }))
+
+      const shuffledPosts = [...withoutUserPosts, ...userPosts]
+
+      return shuffledPosts.sort((a, b) => b.createdAt - a.createdAt)
+    })
+
+    setLikedPosts((prev) => {
+      const withoutUserPosts = prev.filter(
+        (post) => post.creatorId !== authUser.id
+      )
+      const userPosts = prev
+        .filter((post) => post.creatorId === authUser.id)
+        .map((post) => ({ ...post, creatorAvatar: avatar, creatorName: name }))
+
+      const shuffledPosts = [...withoutUserPosts, ...userPosts]
+
+      return shuffledPosts.sort((a, b) => b.createdAt - a.createdAt)
+    })
 
     setIsLoading(false)
 

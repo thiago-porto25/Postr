@@ -88,16 +88,16 @@ export default function ProfileInfo({ user, setIsOnFollows }) {
         )}
         <p>
           <RiCalendar2Line /> Joined Postr in{' '}
-          {user ? parseTimestamp(user?.createdAt) : null}
+          {user && user.createdAt ? parseTimestamp(user?.createdAt) : null}
         </p>
       </div>
 
       <div className="follow-info-container">
         <p onClick={() => setIsOnFollows(true)}>
-          <span>{user?.following.length}</span> Following
+          <span>{user?.following?.length}</span> Following
         </p>
         <p onClick={() => setIsOnFollows(true)}>
-          <span>{user?.followers.length}</span> Followers
+          <span>{user?.followers?.length}</span> Followers
         </p>
       </div>
     </Container>
