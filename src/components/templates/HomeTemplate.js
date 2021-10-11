@@ -2,13 +2,8 @@ import { useContext } from 'react'
 import UserContext from '../../context/userContext'
 import { LoggedInLayout } from '../layouts'
 import { Timeline, PostBox } from '../organisms'
-import { SimpleHeader, Suggested } from '../molecules'
-import styled from 'styled-components'
+import { NoPosts, SimpleHeader } from '../molecules'
 import { useFollowedPosts } from '../../hooks'
-
-const SuggestedContainer = styled.div`
-  width: 100%;
-`
 
 export default function HomeTemplate() {
   const { user } = useContext(UserContext)
@@ -18,12 +13,11 @@ export default function HomeTemplate() {
     <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
       <SimpleHeader>Homepage</SimpleHeader>
       <PostBox user={user} />
-      {user && (
-        <SuggestedContainer>
-          <Suggested bg="white" bottomBorder="border-grey" />
-        </SuggestedContainer>
+      {posts.length > 1 ? (
+        <Timeline posts={posts} />
+      ) : (
+        <NoPosts>Follow someone to see their Posts!</NoPosts>
       )}
-      <Timeline posts={posts} />
     </LoggedInLayout>
   )
 }
