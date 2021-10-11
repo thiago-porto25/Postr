@@ -1,6 +1,6 @@
 import { LoggedInLayout } from '../layouts'
 import { ProfileOrg, FollowsOrg } from '../organisms'
-import { SimpleHeader } from '../molecules'
+import { SimpleHeader, LoadingPage } from '../molecules'
 
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../../context/userContext'
@@ -49,12 +49,16 @@ export default function ProfileTemplate() {
             {profileUser?.name}
           </SimpleHeader>
 
-          <ProfileOrg
-            user={profileUser}
-            likedPosts={likedPosts}
-            profilePosts={profilePosts}
-            setIsOnFollows={setIsOnFollows}
-          />
+          {profileUser ? (
+            <ProfileOrg
+              user={profileUser}
+              likedPosts={likedPosts}
+              profilePosts={profilePosts}
+              setIsOnFollows={setIsOnFollows}
+            />
+          ) : (
+            <LoadingPage />
+          )}
         </>
       ) : (
         <>
