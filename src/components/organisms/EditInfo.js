@@ -38,6 +38,7 @@ export default function EditInfo({ user }) {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [birthday, setBirthday] = useState('')
+  const [isLoading, setIsLoading] = useState('')
   const [message, setMessage] = useState({ type: '', text: '' })
 
   const isDisabled =
@@ -50,6 +51,7 @@ export default function EditInfo({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    setIsLoading(true)
     setMessage({ type: '', text: '' })
 
     await saveChangesToUser({
@@ -62,6 +64,8 @@ export default function EditInfo({ user }) {
       setUsername,
       setBirthday,
     })
+
+    setIsLoading(true)
   }
 
   useEffect(() => {
@@ -106,7 +110,11 @@ export default function EditInfo({ user }) {
           />
 
           <ButtonContainer>
-            <RegularButton disabled={isDisabled} color="blue">
+            <RegularButton
+              isLoading={isLoading}
+              disabled={isDisabled}
+              color="blue"
+            >
               Save
             </RegularButton>
           </ButtonContainer>

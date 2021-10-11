@@ -85,10 +85,14 @@ export const getProfilePosts = async (userId) => {
       docId: doc.id,
       ...doc.data(),
     }))
-    const profileRePosts = query2Snapshot.docs.map((doc) => ({
+    const profileRePostsBeforeFilter = query2Snapshot.docs.map((doc) => ({
       docId: doc.id,
       ...doc.data(),
     }))
+
+    const profileRePosts = profileRePostsBeforeFilter.filter(
+      (post) => post.creatorId !== userId
+    )
 
     const returnedPosts = [...profilePosts, ...profileRePosts].sort(
       (a, b) => b.createdAt - a.createdAt
