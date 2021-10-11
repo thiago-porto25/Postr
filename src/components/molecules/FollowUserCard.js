@@ -62,9 +62,11 @@ export default function FollowUserCard({ suggestedUser, user, isOn, setIsOn }) {
       </Link>
       <div className="suggested-follow-btn-container">
         {!isFollowing ? (
-          <FollowButton isFollowing={false} onClick={handleFollow}>
-            Follow
-          </FollowButton>
+          user.id !== suggestedUser.id && (
+            <FollowButton isFollowing={false} onClick={handleFollow}>
+              Follow
+            </FollowButton>
+          )
         ) : (
           <FollowButton
             onMouseEnter={() => setHoverUnfollow(true)}
