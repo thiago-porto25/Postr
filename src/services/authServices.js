@@ -14,6 +14,7 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   limit,
+  writeBatch,
 } from '../firebase/config'
 
 /////////////////// Login
@@ -126,6 +127,38 @@ export const findUserByUsername = async (username) => {
   return usernameResponse
 }
 
+/////////////////// Save changes to user Posts
+export const saveChangesToUserPosts = async (user, data) => {
+  try {
+    let currentBatch = writeBatch(db)
+    let currentBatchSize = 0
+    const batches = [currentBatch]
+
+    const postsRef = collection(db, 'posts')
+
+    const q = query(postsRef, where('creatorId', '==', user.id))
+
+    const querySnapshot = await getDocs(q)
+
+    querySnapshot.docs.forEach((doc) => {
+      if (++currentBatchSize >= 500) {
+        currentBatch = writeBatch(db)
+        batches.push(currentBatch)
+        currentBatchSize = 1
+      }
+
+      currentBatch.update(doc.ref, {
+        creatorName: data.name,
+        creatorUsername: data.username,
+      })
+    })
+
+    await Promise.all(batches.map((batch) => batch.commit()))
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 /////////////////// Save changes to user
 export const saveChangesToUser = async ({
   name,
@@ -155,6 +188,7 @@ export const saveChangesToUser = async ({
     const userRef = doc(db, 'users', user.id)
 
     await setDoc(userRef, { name, username, birthday }, { merge: true })
+    await saveChangesToUserPosts(user, { name, username })
   } catch (error) {
     setMessage({ type: 'error', text: error.message })
     setName(user.name)
