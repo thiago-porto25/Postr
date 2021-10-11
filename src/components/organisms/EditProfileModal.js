@@ -6,6 +6,8 @@ import { Picker, ProfileTextChanger } from '../molecules'
 import { RegularButton } from '../atoms'
 import { Modal } from '../bosons'
 
+import { saveProfileChanges } from '../../services/firebase'
+
 import avatarData from '../../utils/avatars'
 import backgroundsData from '../../utils/backgrounds'
 
@@ -39,10 +41,26 @@ export default function EditProfileModal({ setIsEditingProfile, authUser }) {
   const [background, setBackground] = useState('')
   const [name, setName] = useState('')
   const [bio, setBio] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  console.log(name)
+  const handleSave = async () => {
+    if (
+      avatar === authUser.avatarPhotoUrl &&
+      background === authUser.backgroundPhotoUrl &&
+      name === authUser.name &&
+      bio === authUser.bio
+    ) {
+      return
+    }
 
-  const isDisabled = name.length <= 2
+    setIsLoading(true)
+
+    await saveProfileChanges(authUser, { avatar, background, name, bio })
+
+    setIsLoading(false)
+
+    setIsEditingProfile(false)
+  }
 
   useEffect(() => {
     if (authUser) {
@@ -52,6 +70,8 @@ export default function EditProfileModal({ setIsEditingProfile, authUser }) {
       setBio(authUser.bio)
     }
   }, [authUser])
+
+  const isDisabled = name.length <= 2
 
   return (
     <Modal onClick={() => setIsEditingProfile(false)}>
@@ -68,7 +88,12 @@ export default function EditProfileModal({ setIsEditingProfile, authUser }) {
           </div>
 
           <div className="button-container">
-            <RegularButton disabled={isDisabled} color="black">
+            <RegularButton
+              onClick={handleSave}
+              disabled={isDisabled}
+              color="black"
+              isLoading={isLoading}
+            >
               Save
             </RegularButton>
           </div>
