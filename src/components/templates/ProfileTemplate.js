@@ -52,6 +52,7 @@ export default function ProfileTemplate() {
           {profileUser ? (
             <ProfileOrg
               user={profileUser}
+              authUser={user}
               likedPosts={likedPosts}
               profilePosts={profilePosts}
               setIsOnFollows={setIsOnFollows}
