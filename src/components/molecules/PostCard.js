@@ -10,8 +10,10 @@ import { useContext, useEffect, useState } from 'react'
 import userContext from '../../context/userContext'
 
 import { ToggleInteraction } from '../../services/postServices'
+import PostOptions from './PostOptions'
 
 const Container = styled.article`
+  position: relative;
   box-sizing: border-box;
   padding: 1rem 0.5rem 0.2rem 0.5rem;
   transition: background 200ms ease;
@@ -242,6 +244,10 @@ export default function PostCard({ post, isOnProfile }) {
 
   return (
     <Container onClick={() => history.push(`/post/${post.id}`)}>
+      {isOnProfile && user.id === post.creatorId ? (
+        <PostOptions post={post} />
+      ) : null}
+
       {isOnProfile && user.id !== post.creatorId ? (
         <div className="post-re-posted">
           <FaRetweet />
