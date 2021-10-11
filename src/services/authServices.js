@@ -76,6 +76,7 @@ export const signupWithFirebase = async ({
         username: username.toLowerCase().trim(),
         createdAt: serverTimestamp(),
         birthday: '',
+        bio: '',
         avatarPhotoUrl: null,
         backgroundPhotoUrl: null,
         followers: [],
