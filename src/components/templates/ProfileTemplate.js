@@ -41,6 +41,8 @@ export default function ProfileTemplate() {
       user={user}
       showSearchBar={true}
       showSuggestion={true}
+      profileUser={profileUser}
+      setProfileUser={setProfileUser}
     >
       {!isOnFollows ? (
         <>
@@ -83,6 +85,7 @@ export default function ProfileTemplate() {
           <FollowsOrg
             user={user}
             profileUser={profileUser}
+            setProfileUser={setProfileUser}
             setIsOnFollows={setIsOnFollows}
             isOnFollows={isOnFollows}
           />

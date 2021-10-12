@@ -31,18 +31,50 @@ const Container = styled.div`
   }
 `
 
-export default function FollowUserCard({ suggestedUser, user, isOn, setIsOn }) {
+export default function FollowUserCard({
+  suggestedUser,
+  setProfileUser,
+  profileUser,
+  user,
+  isOn,
+  setIsOn,
+}) {
   const [hoverUnfollow, setHoverUnfollow] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
 
   const handleFollow = async (e) => {
     e.stopPropagation()
 
+    if (setProfileUser) {
+      setProfileUser((prev) => {
+        if (profileUser.id === user.id) {
+          return { ...prev, following: [...prev.following, suggestedUser.id] }
+        }
+
+        return prev
+      })
+    }
+
     await followUser(user.id, suggestedUser.id, setIsFollowing)
   }
 
   const handleUnFollow = async (e) => {
     e.stopPropagation()
+
+    if (setProfileUser) {
+      setProfileUser((prev) => {
+        if (profileUser.id === user.id) {
+          return {
+            ...prev,
+            following: prev.following.filter(
+              (item) => item !== suggestedUser.id
+            ),
+          }
+        }
+
+        return prev
+      })
+    }
 
     await unFollowUser(user.id, suggestedUser.id, setIsFollowing)
   }

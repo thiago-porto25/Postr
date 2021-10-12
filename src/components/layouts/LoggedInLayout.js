@@ -43,6 +43,8 @@ export default function LoggedInLayout({
   user,
   isOnFollows,
   setIsOnFollows,
+  setProfileUser,
+  profileUser,
   children,
 }) {
   const [openModal, setOpenModal] = useState(false)
@@ -69,6 +71,8 @@ export default function LoggedInLayout({
               showFilter={showFilter}
               showSearchBar={showSearchBar}
               showSuggestion={showSuggestion}
+              setProfileUser={setProfileUser}
+              profileUser={profileUser}
             />
           </div>
         </div>

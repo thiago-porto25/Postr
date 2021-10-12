@@ -24,6 +24,7 @@ export default function ProfileOrg({
       <Container>
         <ProfileHeader
           profileUser={user}
+          setProfileUser={setProfileUser}
           isOnLikes={isOnLikes}
           setIsOnLikes={setIsOnLikes}
           setIsOnFollows={setIsOnFollows}

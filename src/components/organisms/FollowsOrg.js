@@ -11,6 +11,7 @@ const Container = styled.div``
 export default function FollowsOrg({
   user,
   profileUser,
+  setProfileUser,
   setIsOnFollows,
   isOnFollows,
 }) {
@@ -51,6 +52,8 @@ export default function FollowsOrg({
             <FollowUserCard
               key={item.id}
               user={user}
+              profileUser={profileUser}
+              setProfileUser={setProfileUser}
               suggestedUser={item}
               setIsOn={setIsOnFollows}
               isOn={isOnFollows}
@@ -60,6 +63,8 @@ export default function FollowsOrg({
             <FollowUserCard
               key={item.id}
               user={user}
+              profileUser={profileUser}
+              setProfileUser={setProfileUser}
               suggestedUser={item}
               setIsOn={setIsOnFollows}
               isOn={isOnFollows}

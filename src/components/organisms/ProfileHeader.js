@@ -97,6 +97,7 @@ const Container = styled.div`
 
 export default function ProfileHeader({
   profileUser,
+  setProfileUser,
   setIsOnLikes,
   isOnLikes,
   setIsOnFollows,
@@ -104,13 +105,39 @@ export default function ProfileHeader({
 }) {
   const [hoverUnfollow, setHoverUnfollow] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
 
   const handleFollow = async () => {
     await followUser(user.id, profileUser.id, setIsFollowing)
+
+    if (setUser) {
+      setUser((prev) => ({
+        ...prev,
+        following: [...prev.following, profileUser.id],
+      }))
+    }
+    if (setProfileUser) {
+      setProfileUser((prev) => ({
+        ...prev,
+        followers: [...prev.followers, user.id],
+      }))
+    }
   }
   const handleUnFollow = async () => {
     await unFollowUser(user.id, profileUser.id, setIsFollowing)
+
+    if (setUser) {
+      setUser((prev) => ({
+        ...prev,
+        following: prev.following.filter((item) => item !== profileUser.id),
+      }))
+    }
+    if (setProfileUser) {
+      setProfileUser((prev) => ({
+        ...prev,
+        followers: prev.followers.filter((item) => item !== user.id),
+      }))
+    }
   }
 
   useEffect(() => {

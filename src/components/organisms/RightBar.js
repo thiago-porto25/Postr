@@ -21,6 +21,8 @@ export default function RightBar({
   showSearchBar,
   showSuggestion,
   showFilter,
+  setProfileUser,
+  profileUser,
 }) {
   return (
     <Container>
@@ -38,7 +40,10 @@ export default function RightBar({
 
       {showSuggestion && (
         <div className="rightbar-suggested-container">
-          <Suggested />
+          <Suggested
+            setProfileUser={setProfileUser}
+            profileUser={profileUser}
+          />
         </div>
       )}
     </Container>

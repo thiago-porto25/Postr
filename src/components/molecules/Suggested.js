@@ -28,7 +28,12 @@ const Container = styled.article`
   }
 `
 
-export default function Suggested({ bg, bottomBorder }) {
+export default function Suggested({
+  bg,
+  bottomBorder,
+  setProfileUser,
+  profileUser,
+}) {
   const [suggestedUsers, setSuggestedUsers] = useState()
   const { user } = useContext(UserContext)
 
@@ -50,6 +55,8 @@ export default function Suggested({ bg, bottomBorder }) {
               return (
                 <FollowUserCard
                   user={user}
+                  setProfileUser={setProfileUser}
+                  profileUser={profileUser}
                   suggestedUser={suggestedUser}
                   key={suggestedUser.id}
                 />
