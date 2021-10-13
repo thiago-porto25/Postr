@@ -18,6 +18,18 @@ import {
 } from '../firebase/config'
 import { v4 as uuid } from 'uuid'
 
+export const getPostById = async (postId) => {
+  try {
+    const postRef = doc(db, 'posts', postId)
+
+    const post = await getDoc(postRef)
+
+    return post.data()
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 export const ToggleInteraction = async (
   docId,
   interaction,
