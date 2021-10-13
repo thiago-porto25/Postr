@@ -224,13 +224,13 @@ export default function PostCard({ post, isOnProfile }) {
     if (post.likes.includes(user.id)) {
       setIsLiked(true)
     }
-  }, [post.likes, user.id])
+  }, [post.likes, user])
 
   useEffect(() => {
     if (post.rePosts.includes(user.id)) {
       setIsRePosted(true)
     }
-  }, [post.rePosts, user.id])
+  }, [post.rePosts, user])
 
   useEffect(() => {
     setLikeCount((prev) => (isLiked ? prev + 1 : prev !== 0 ? prev - 1 : 0))
