@@ -6,6 +6,18 @@ const Container = styled.div`
   align-items: center;
   border-bottom: 1px solid var(--xLightGrey);
 
+  &.no-grid {
+    grid-template-columns: 1fr;
+
+    div {
+      cursor: default;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
   div {
     height: 3rem;
     transition: 200ms ease;
@@ -41,17 +53,23 @@ const Container = styled.div`
   }
 `
 
-export default function ProfileNav({ setIsOn, isOn, first, second }) {
+export default function ProfileNav({ setIsOn, isOn, first, second, isSingle }) {
   return (
-    <Container>
-      <div onClick={() => setIsOn(false)}>
+    <Container className={isSingle ? 'no-grid' : ''}>
+      <div
+        onClick={() => {
+          if (!isSingle) setIsOn(false)
+        }}
+      >
         <p className={!isOn ? 'bold' : ''}>{first}</p>
         {!isOn && <hr />}
       </div>
-      <div onClick={() => setIsOn(true)}>
-        <p className={isOn ? 'bold' : ''}>{second}</p>
-        {isOn && <hr />}
-      </div>
+      {!isSingle && (
+        <div onClick={() => setIsOn(true)}>
+          <p className={isOn ? 'bold' : ''}>{second}</p>
+          {isOn && <hr />}
+        </div>
+      )}
     </Container>
   )
 }
