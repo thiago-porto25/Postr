@@ -1,6 +1,9 @@
+import { useContext } from 'react'
+import SearchContext from '../../context/searchContext'
 import styled from 'styled-components'
-import { Suggested, SearchFilters } from '../molecules'
+
 import { SearchBar } from '.'
+import { Suggested } from '../molecules'
 
 const Container = styled.section`
   display: flex;
@@ -20,21 +23,16 @@ const Container = styled.section`
 export default function RightBar({
   showSearchBar,
   showSuggestion,
-  showFilter,
   setProfileUser,
   profileUser,
 }) {
+  const { searchTerm, setSearchTerm } = useContext(SearchContext)
+
   return (
     <Container>
       {showSearchBar && (
         <div className="rightbar-search-container">
-          <SearchBar />
-        </div>
-      )}
-
-      {showFilter && (
-        <div className="rightbar-filter-container">
-          <SearchFilters />
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
       )}
 

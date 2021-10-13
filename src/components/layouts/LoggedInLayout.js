@@ -39,7 +39,6 @@ const Container = styled.main`
 export default function LoggedInLayout({
   showSearchBar,
   showSuggestion,
-  showFilter,
   user,
   isOnFollows,
   setIsOnFollows,
@@ -68,7 +67,6 @@ export default function LoggedInLayout({
         <div className="layout-right-sidebar-container">
           <div className="inner-right-bar">
             <RightBar
-              showFilter={showFilter}
               showSearchBar={showSearchBar}
               showSuggestion={showSuggestion}
               setProfileUser={setProfileUser}
