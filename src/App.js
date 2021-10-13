@@ -1,7 +1,8 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import UserContext from './context/userContext'
+import SearchContext from './context/searchContext'
 import { useAuthListener } from './hooks'
 
 import * as ROUTES from './constants/routes'
@@ -26,80 +27,83 @@ const NotFound = lazy(() => import('./pages/not-found'))
 
 function App() {
   const { authUser, user, setUser } = useAuthListener()
+  const [searchTerm, setSearchTerm] = useState()
 
   return (
     <UserContext.Provider value={{ authUser, user, setUser }}>
-      <Suspense fallback={<h1>loading...</h1>}>
-        <Switch>
-          {/*/////// Redirected Routes ////////*/}
-          <IsUserRedirect
-            user={authUser}
-            loggedInPath={ROUTES.HOME}
-            exact
-            path={ROUTES.START}
-          >
-            <Start />
-          </IsUserRedirect>
+      <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+        <Suspense fallback={<h1>loading...</h1>}>
+          <Switch>
+            {/*/////// Redirected Routes ////////*/}
+            <IsUserRedirect
+              user={authUser}
+              loggedInPath={ROUTES.HOME}
+              exact
+              path={ROUTES.START}
+            >
+              <Start />
+            </IsUserRedirect>
 
-          <IsUserRedirect
-            user={authUser}
-            loggedInPath={ROUTES.HOME}
-            path={ROUTES.LOGIN}
-          >
-            <Login />
-          </IsUserRedirect>
+            <IsUserRedirect
+              user={authUser}
+              loggedInPath={ROUTES.HOME}
+              path={ROUTES.LOGIN}
+            >
+              <Login />
+            </IsUserRedirect>
 
-          <IsUserRedirect
-            user={authUser}
-            loggedInPath={ROUTES.HOME}
-            path={ROUTES.SIGNUP}
-          >
-            <SignUp />
-          </IsUserRedirect>
+            <IsUserRedirect
+              user={authUser}
+              loggedInPath={ROUTES.HOME}
+              path={ROUTES.SIGNUP}
+            >
+              <SignUp />
+            </IsUserRedirect>
 
-          <Route
-            user={authUser}
-            loggedInPath={ROUTES.HOME}
-            path={ROUTES.RESET_PASSWORD}
-          >
-            <ResetPassword />
-          </Route>
+            <Route
+              user={authUser}
+              loggedInPath={ROUTES.HOME}
+              path={ROUTES.RESET_PASSWORD}
+            >
+              <ResetPassword />
+            </Route>
 
-          {/*/////// Protected Routes ////////*/}
-          <ProtectedRoute user={authUser} path={ROUTES.HOME}>
-            <Home />
-          </ProtectedRoute>
+            {/*/////// Protected Routes ////////*/}
+            <ProtectedRoute user={authUser} path={ROUTES.HOME}>
+              <Home />
+            </ProtectedRoute>
 
-          <ProtectedRoute user={authUser} exact path={ROUTES.MESSAGES}>
-            <Messages />
-          </ProtectedRoute>
+            <ProtectedRoute user={authUser} exact path={ROUTES.MESSAGES}>
+              <Messages />
+            </ProtectedRoute>
 
-          <ProtectedRoute user={authUser} path={ROUTES.CONVERSATION}>
-            <Conversation />
-          </ProtectedRoute>
+            <ProtectedRoute user={authUser} path={ROUTES.CONVERSATION}>
+              <Conversation />
+            </ProtectedRoute>
 
-          <ProtectedRoute user={authUser} path={ROUTES.SETTINGS}>
-            <Settings />
-          </ProtectedRoute>
+            <ProtectedRoute user={authUser} path={ROUTES.SETTINGS}>
+              <Settings />
+            </ProtectedRoute>
 
-          {/*/////// Unprotected Routes ////////*/}
-          <Route path={ROUTES.SEARCH}>
-            <Search />
-          </Route>
+            {/*/////// Unprotected Routes ////////*/}
+            <Route path={ROUTES.SEARCH}>
+              <Search />
+            </Route>
 
-          <Route path={ROUTES.PROFILE}>
-            <Profile />
-          </Route>
+            <Route path={ROUTES.PROFILE}>
+              <Profile />
+            </Route>
 
-          <Route path={ROUTES.POST}>
-            <Post />
-          </Route>
+            <Route path={ROUTES.POST}>
+              <Post />
+            </Route>
 
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </Suspense>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </Suspense>
+      </SearchContext.Provider>
     </UserContext.Provider>
   )
 }
