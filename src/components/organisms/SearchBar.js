@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { IoSearchOutline } from 'react-icons/io5'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router'
 import * as ROUTES from '../../constants/routes'
 
@@ -46,15 +46,19 @@ const Input = styled.input`
   }
 `
 
-export default function SearchBar() {
-  const [searchValue, setSearchValue] = useState()
+export default function SearchBar({ searchTerm, setSearchTerm, noRedirect }) {
+  const [searchValue, setSearchValue] = useState('')
   const inputRef = useRef(null)
   const history = useHistory()
 
   const handleSearch = () => {
-    //create search Context and set it here
-    history.push(ROUTES.SEARCH)
+    setSearchTerm(searchValue)
+    if (!noRedirect) history.push(ROUTES.SEARCH)
   }
+
+  useEffect(() => {
+    if (searchTerm) setSearchValue(searchTerm)
+  }, [searchTerm])
 
   return (
     <Container onClick={() => inputRef.current.focus()}>
@@ -65,7 +69,7 @@ export default function SearchBar() {
         maxLength="50"
         value={searchValue}
         onChange={({ target: { value } }) => setSearchValue(value)}
-        placeholder="Search Postr"
+        placeholder="Search an username"
         onKeyUp={({ code }) => {
           if (code === 'Enter' && searchValue) handleSearch()
         }}
