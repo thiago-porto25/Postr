@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { BsArrowLeftShort } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { ReturnArrow } from '../atoms'
 
 const Container = styled.header`
   background-color: var(--white);
@@ -70,13 +69,11 @@ export default function SimpleHeader({
   return (
     <Container>
       {withArrow && (
-        <Link
+        <ReturnArrow
           to={arrowLink}
           onClick={handleClick}
           className="header-arrow-container"
-        >
-          <BsArrowLeftShort />
-        </Link>
+        />
       )}
       <div className="header-text-container">
         <h1>{children}</h1>
