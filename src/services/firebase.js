@@ -14,6 +14,9 @@ import {
   writeBatch,
   deleteDoc,
   orderBy,
+  startAt,
+  endAt,
+  limit,
   auth,
   signInWithEmailAndPassword,
   signOut,
@@ -81,6 +84,28 @@ export async function saveProfileChangesInPosts(user, data) {
     })
 
     await Promise.all(batches.map((batch) => batch.commit()))
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+export async function getSearchResult(term) {
+  try {
+    const usersRef = collection(db, 'users')
+
+    const q = query(
+      usersRef,
+      orderBy('username'),
+      startAt(term),
+      endAt(term + '~'),
+      limit(100)
+    )
+
+    const querySnapshot = await getDocs(q)
+
+    return querySnapshot.docs
+      .map((doc) => doc.data())
+      .sort((a, b) => b.followers.length - a.followers.length)
   } catch (error) {
     console.log(error.message)
   }
