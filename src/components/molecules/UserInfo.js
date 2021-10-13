@@ -7,6 +7,7 @@ const Card = styled.section`
 
   .user-info-image {
     height: 45px;
+    min-width: 45px !important;
     width: 45px;
     object-fit: cover;
     border-radius: 50%;
