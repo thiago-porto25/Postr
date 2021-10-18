@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router'
 import { usePagePost } from '../../hooks'
 
+import { Comments } from '.'
 import { BigPostCard } from '../molecules'
 
 const Container = styled.div``
@@ -12,7 +13,12 @@ export default function PostOrg({ user }) {
 
   return (
     <Container>
-      {post && post.id && user ? <BigPostCard post={post} user={user} /> : null}
+      {post && post.id && user ? (
+        <>
+          <BigPostCard post={post} user={user} />
+          <Comments post={post} user={user} />
+        </>
+      ) : null}
     </Container>
   )
 }
