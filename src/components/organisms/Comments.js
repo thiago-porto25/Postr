@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { CommentBox, CreateCommentBox } from '../molecules'
+import { CommentCard, CreateCommentBox } from '../molecules'
 
 const Container = styled.div``
 
@@ -19,7 +19,7 @@ export default function Comments({ post, user }) {
         handleClick={handleComment}
         user={user}
       />
-      <CommentBox />
+      <CommentCard />
     </Container>
   )
 }
