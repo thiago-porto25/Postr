@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { FaRegHeart, FaHeart, FaRetweet } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 import { ToggleInteraction } from '../../services/postServices'
 
@@ -13,6 +14,16 @@ const Container = styled.article`
   border-bottom: 1px solid var(--xLightGrey);
 
   .header {
+    text-decoration: none;
+
+    section {
+      &:hover {
+        h2 {
+          text-decoration: underline;
+        }
+      }
+    }
+
     img {
       min-width: 50px !important;
       height: 50px;
@@ -175,9 +186,9 @@ export default function BigPostCard({ post, user, commentsNumber }) {
 
   return (
     <Container>
-      <div className="header">
+      <Link to={`/p/${postUser.username}`} className="header">
         <UserInfo userNeeded={postUser} />
-      </div>
+      </Link>
 
       <div className="content">
         <p>{post.content}</p>
