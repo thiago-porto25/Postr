@@ -1,7 +1,5 @@
-export { default as ConversationTemplate } from './ConversationTemplate'
 export { default as HomeTemplate } from './HomeTemplate'
 export { default as LoginTemplate } from './LoginTemplate'
-export { default as MessagesTemplate } from './MessagesTemplate'
 export { default as NotFoundTemplate } from './NotFoundTemplate'
 export { default as PostTemplate } from './PostTemplate'
 export { default as ProfileTemplate } from './ProfileTemplate'
