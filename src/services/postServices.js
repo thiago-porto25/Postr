@@ -10,10 +10,8 @@ import {
   limit,
   serverTimestamp,
   doc,
-  onSnapshot,
   query,
   where,
-  deleteDoc,
   orderBy,
 } from '../firebase/config'
 import { v4 as uuid } from 'uuid'
