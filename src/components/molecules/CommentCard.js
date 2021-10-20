@@ -1,14 +1,17 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Options } from '.'
 import { LoggedUserAvatar, Dot } from '../atoms'
 
 import { formatDistance } from 'date-fns'
+import { deleteComment } from '../../services/commentServices'
 
 const Container = styled.div`
   display: flex;
   box-sizing: border-box;
   padding: 1rem 0.8rem;
   border-bottom: 1px solid var(--xLightGrey);
+  position: relative;
 
   .comment-avatar-container {
     width: 4rem;
@@ -62,31 +65,35 @@ const Container = styled.div`
   }
 `
 
-export default function CommentCard() {
-  const comment = { content: 'testings 123', createdAt: new Date() }
-  const commentUser = {
-    name: 'teste',
-    username: 'teste123',
-    avatarPhotoUrl: 'avatar6',
+export default function CommentCard({ post, authUser, comment, setComments }) {
+  const handleDelete = async () => {
+    await deleteComment(post.id, comment.id, setComments)
   }
 
   return (
     <Container>
+      {comment.creatorId === authUser.id || authUser.id === post.creatorId ? (
+        <Options destroy={handleDelete} />
+      ) : null}
       <div className="comment-avatar-container">
-        <LoggedUserAvatar user={commentUser} size="larger" />
+        <LoggedUserAvatar user={comment.user} size="larger" />
       </div>
 
       <div className="comment-rest-container">
         <div className="commenter-info">
-          <Link to={`/p/${commentUser.username}`}>
-            <h1>{commentUser.name}</h1>
+          <Link to={`/p/${comment.user.username}`}>
+            <h1>{comment.user.name}</h1>
 
-            <span>@{commentUser.username}</span>
+            <span>@{comment.user.username}</span>
           </Link>
 
           <Dot />
 
-          <p>{formatDistance(comment.createdAt, new Date())}</p>
+          <p>
+            {comment.createdAt.toDate
+              ? formatDistance(comment.createdAt.toDate(), new Date())
+              : formatDistance(comment.createdAt, new Date())}
+          </p>
         </div>
 
         <div className="content">

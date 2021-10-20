@@ -9,8 +9,9 @@ const Container = styled.div`
   position: absolute;
   top: 5px;
   right: 10px;
+  cursor: pointer;
 
-  .post-options-icon-container {
+  .options-icon-container {
     box-sizing: border-box;
     padding: 0.5rem;
     border-radius: 50%;
@@ -24,7 +25,7 @@ const Container = styled.div`
     }
   }
 
-  .post-options-drop-down {
+  .options-drop-down {
     background-color: var(--white);
     position: absolute;
     left: -400%;
@@ -51,10 +52,11 @@ const Container = styled.div`
   }
 `
 
-export default function PostOptions({ post }) {
+export default function Options({ destroy }) {
   const [dropDownOpen, setDropDownOpen] = useState(false)
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
+    await destroy()
     setDropDownOpen(false)
   }
 
@@ -72,12 +74,12 @@ export default function PostOptions({ post }) {
     <Container onClick={(e) => e.stopPropagation()}>
       <div
         onClick={() => setDropDownOpen((prev) => !prev)}
-        className="post-options-icon-container"
+        className="options-icon-container"
       >
         <BsThreeDots />
       </div>
       {dropDownOpen && (
-        <div onClick={handleDelete} className="post-options-drop-down">
+        <div onClick={handleDelete} className="options-drop-down">
           <SettingsButton isDelete={true}>
             <BiTrash /> Delete
           </SettingsButton>

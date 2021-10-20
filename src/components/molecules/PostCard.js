@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
 import { FaRegComment, FaRegHeart, FaHeart, FaRetweet } from 'react-icons/fa'
 import { Dot } from '../atoms'
+import { Options } from '.'
 
 import { formatDistance } from 'date-fns'
 
@@ -10,7 +11,6 @@ import { useContext, useEffect, useState } from 'react'
 import userContext from '../../context/userContext'
 
 import { ToggleInteraction } from '../../services/postServices'
-import PostOptions from './PostOptions'
 
 const Container = styled.article`
   position: relative;
@@ -220,6 +220,10 @@ export default function PostCard({ post, isOnProfile }) {
     )
   }
 
+  const handleDelete = async () => {
+    // TODO: add logic to delete the Post
+  }
+
   useEffect(() => {
     if (post.likes.includes(user.id)) {
       setIsLiked(true)
@@ -245,7 +249,7 @@ export default function PostCard({ post, isOnProfile }) {
   return (
     <Container onClick={() => history.push(`/post/${post.id}`)}>
       {isOnProfile && user.id === post.creatorId ? (
-        <PostOptions post={post} />
+        <Options destroy={handleDelete} />
       ) : null}
 
       {isOnProfile && user.id !== post.creatorId ? (

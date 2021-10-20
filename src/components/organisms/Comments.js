@@ -5,13 +5,13 @@ import { createComment } from '../../services/commentServices'
 
 const Container = styled.div``
 
-export default function Comments({ post, user }) {
+export default function Comments({ post, user, comments, setComments }) {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const handleComment = async () => {
     setIsLoading(true)
-    await createComment(post.id, user.id, inputValue)
+    await createComment(post.id, user, inputValue, setComments)
     setIsLoading(false)
     setInputValue('')
   }
@@ -25,7 +25,16 @@ export default function Comments({ post, user }) {
         handleClick={handleComment}
         user={user}
       />
-      <CommentCard />
+      {comments &&
+        comments.map((comment, idx) => (
+          <CommentCard
+            key={idx}
+            post={post}
+            authUser={user}
+            comment={comment}
+            setComments={setComments}
+          />
+        ))}
     </Container>
   )
 }
