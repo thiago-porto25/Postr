@@ -32,7 +32,7 @@ export default function CreateCommentBox({
   handleClick,
   isLoading,
 }) {
-  const isDisabled = value.length < 1 || value.length > 80
+  const isDisabled = value.length < 1 || value.length > 80 || isLoading
 
   return (
     <Container>
