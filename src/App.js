@@ -18,9 +18,6 @@ const Search = lazy(() => import('./pages/search'))
 const Profile = lazy(() => import('./pages/profile'))
 const Post = lazy(() => import('./pages/post'))
 
-const Messages = lazy(() => import('./pages/messages'))
-const Conversation = lazy(() => import('./pages/conversation'))
-
 const Settings = lazy(() => import('./pages/settings'))
 
 const NotFound = lazy(() => import('./pages/not-found'))
@@ -73,30 +70,23 @@ function App() {
               <Home />
             </ProtectedRoute>
 
-            <ProtectedRoute user={authUser} exact path={ROUTES.MESSAGES}>
-              <Messages />
-            </ProtectedRoute>
-
-            <ProtectedRoute user={authUser} path={ROUTES.CONVERSATION}>
-              <Conversation />
-            </ProtectedRoute>
-
             <ProtectedRoute user={authUser} path={ROUTES.SETTINGS}>
               <Settings />
             </ProtectedRoute>
 
-            {/*/////// Unprotected Routes ////////*/}
-            <Route path={ROUTES.SEARCH}>
+            <ProtectedRoute user={authUser} path={ROUTES.SEARCH}>
               <Search />
-            </Route>
+            </ProtectedRoute>
 
-            <Route path={ROUTES.PROFILE}>
+            <ProtectedRoute user={authUser} path={ROUTES.PROFILE}>
               <Profile />
-            </Route>
+            </ProtectedRoute>
 
-            <Route path={ROUTES.POST}>
+            <ProtectedRoute user={authUser} path={ROUTES.POST}>
               <Post />
-            </Route>
+            </ProtectedRoute>
+
+            {/*/////// Unprotected Routes ////////*/}
 
             <Route>
               <NotFound />
