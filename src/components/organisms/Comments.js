@@ -39,6 +39,7 @@ export default function Comments({
             authUser={user}
             comment={comment}
             setComments={setComments}
+            setPost={setPost}
           />
         ))}
     </Container>

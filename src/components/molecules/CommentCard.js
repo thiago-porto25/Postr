@@ -65,9 +65,15 @@ const Container = styled.div`
   }
 `
 
-export default function CommentCard({ post, authUser, comment, setComments }) {
+export default function CommentCard({
+  post,
+  authUser,
+  comment,
+  setComments,
+  setPost,
+}) {
   const handleDelete = async () => {
-    await deleteComment(post.id, comment.id, setComments)
+    await deleteComment(post.id, comment.id, setComments, setPost)
   }
 
   return (

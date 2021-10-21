@@ -82,7 +82,12 @@ export const createComment = async (
   }
 }
 
-export const deleteComment = async (postId, commentId, setComments) => {
+export const deleteComment = async (
+  postId,
+  commentId,
+  setComments,
+  setPost
+) => {
   try {
     const commentRef = doc(db, 'posts', postId, 'comments', commentId)
     const postRef = doc(db, 'posts', postId)
@@ -92,6 +97,8 @@ export const deleteComment = async (postId, commentId, setComments) => {
     await updateDoc(postRef, { commentsNumber: increment(-1) })
 
     setComments((prev) => prev.filter((comment) => comment.id !== commentId))
+
+    setPost((prev) => ({ ...prev, commentsNumber: prev.commentsNumber - 1 }))
   } catch (error) {
     console.error(error.message)
   }
