@@ -52,11 +52,10 @@ export default function DeleteAccount({ user }) {
           <ul>
             <li>All your posts will be gone.</li>
             <li>All your comments will be gone.</li>
-            <li>All your messages will be gone.</li>
-            <li>All your likes will be gone.</li>
+            <li>All your likes and reposts will be gone.</li>
           </ul>
 
-          <h4>There's no way back</h4>
+          <h4>There's no way back!</h4>
         </div>
 
         <div onClick={handleDelete} className="final-delete-button-container">

@@ -12,7 +12,6 @@ import {
   IoSettingsOutline,
   IoSettingsSharp,
 } from 'react-icons/io5'
-import { FaEnvelope, FaRegEnvelope } from 'react-icons/fa'
 import { useState } from 'react'
 
 const Container = styled.section`
@@ -142,13 +141,6 @@ export default function LeftBar({
           icons={{ outline: IoSearchOutline(), fill: IoSearchSharp() }}
         >
           Search
-        </LeftBarListItem>
-
-        <LeftBarListItem
-          to={ROUTES.MESSAGES}
-          icons={{ outline: FaRegEnvelope(), fill: FaEnvelope() }}
-        >
-          Messages
         </LeftBarListItem>
 
         <LeftBarListItem

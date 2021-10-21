@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from 'react'
 import UserContext from '../../context/userContext'
 
 import styled from 'styled-components'
-import { BiEnvelope } from 'react-icons/bi'
 
 import { ProfileInfo, ProfileNav } from '../molecules'
 import {
@@ -49,26 +48,6 @@ const Container = styled.div`
 
     button {
       padding: 0.5rem 0.5rem;
-    }
-
-    .profile-message-button {
-      border-radius: 50%;
-      height: 2rem;
-      width: 3.2rem;
-      border: 1px solid var(--lightGrey);
-      background-color: var(--white);
-      color: var(--black);
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      cursor: pointer;
-      transition: 150ms ease;
-
-      &:hover {
-        background-color: var(--xxLightGrey);
-      }
     }
 
     .profile-follow {
@@ -163,21 +142,15 @@ export default function ProfileHeader({
         ) : (
           <div className="profile-follow-button">
             {isFollowing ? (
-              <>
-                <div className="profile-message-button">
-                  <BiEnvelope />
-                </div>
-
-                <FollowButton
-                  onMouseEnter={() => setHoverUnfollow(true)}
-                  onMouseLeave={() => setHoverUnfollow(false)}
-                  isHoveringUnfollow={hoverUnfollow}
-                  isFollowing={true}
-                  onClick={handleUnFollow}
-                >
-                  {hoverUnfollow ? 'Unfollow' : 'Following'}
-                </FollowButton>
-              </>
+              <FollowButton
+                onMouseEnter={() => setHoverUnfollow(true)}
+                onMouseLeave={() => setHoverUnfollow(false)}
+                isHoveringUnfollow={hoverUnfollow}
+                isFollowing={true}
+                onClick={handleUnFollow}
+              >
+                {hoverUnfollow ? 'Unfollow' : 'Following'}
+              </FollowButton>
             ) : (
               <div className="profile-follow">
                 <FollowButton onClick={handleFollow} isFollowing={false}>
