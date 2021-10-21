@@ -9,7 +9,7 @@ const Container = styled.div``
 
 export default function PostOrg({ user }) {
   const { postId } = useParams()
-  const { post } = usePagePost(postId)
+  const { post, setPost } = usePagePost(postId)
   const { comments, setComments } = usePostComments(postId)
 
   return (
@@ -22,6 +22,7 @@ export default function PostOrg({ user }) {
             user={user}
             comments={comments}
             setComments={setComments}
+            setPost={setPost}
           />
         </>
       ) : null}

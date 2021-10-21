@@ -302,7 +302,7 @@ export default function PostCard({ post, isOnProfile }) {
                 <FaRegComment />
               </div>
 
-              <p></p>
+              <p>{post && post.commentsNumber > 0 && post.commentsNumber}</p>
             </div>
 
             <div

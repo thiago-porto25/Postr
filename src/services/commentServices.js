@@ -3,9 +3,11 @@ import {
   collection,
   getDocs,
   setDoc,
+  updateDoc,
   deleteDoc,
   serverTimestamp,
   doc,
+  increment,
 } from '../firebase/config'
 import { getUserByUserId } from './firebase'
 import { v4 as uuid } from 'uuid'
@@ -42,10 +44,17 @@ export const getPostComments = async (postId) => {
   }
 }
 
-export const createComment = async (postId, creator, content, setComments) => {
+export const createComment = async (
+  postId,
+  creator,
+  content,
+  setComments,
+  setPost
+) => {
   try {
     const commentId = uuid()
     const commentsRef = doc(db, 'posts', postId, 'comments', commentId)
+    const postRef = doc(db, 'posts', postId)
 
     await setDoc(commentsRef, {
       creatorId: creator.id,
@@ -54,8 +63,9 @@ export const createComment = async (postId, creator, content, setComments) => {
       createdAt: serverTimestamp(),
     })
 
+    await updateDoc(postRef, { commentsNumber: increment(1) })
+
     setComments((prev) => [
-      ...prev,
       {
         creatorId: creator.id,
         content,
@@ -63,7 +73,10 @@ export const createComment = async (postId, creator, content, setComments) => {
         id: commentId,
         user: creator,
       },
+      ...prev,
     ])
+
+    setPost((prev) => ({ ...prev, commentsNumber: prev.commentsNumber + 1 }))
   } catch (error) {
     console.error(error.message)
   }
@@ -72,8 +85,11 @@ export const createComment = async (postId, creator, content, setComments) => {
 export const deleteComment = async (postId, commentId, setComments) => {
   try {
     const commentRef = doc(db, 'posts', postId, 'comments', commentId)
+    const postRef = doc(db, 'posts', postId)
 
     await deleteDoc(commentRef)
+
+    await updateDoc(postRef, { commentsNumber: increment(-1) })
 
     setComments((prev) => prev.filter((comment) => comment.id !== commentId))
   } catch (error) {

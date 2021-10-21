@@ -14,5 +14,5 @@ export default function useFollowedPosts(postId) {
     if (postId) getPosts()
   }, [postId])
 
-  return { post }
+  return { post, setPost }
 }

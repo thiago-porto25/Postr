@@ -5,13 +5,19 @@ import { createComment } from '../../services/commentServices'
 
 const Container = styled.div``
 
-export default function Comments({ post, user, comments, setComments }) {
+export default function Comments({
+  post,
+  user,
+  comments,
+  setComments,
+  setPost,
+}) {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const handleComment = async () => {
     setIsLoading(true)
-    await createComment(post.id, user, inputValue, setComments)
+    await createComment(post.id, user, inputValue, setComments, setPost)
     setIsLoading(false)
     setInputValue('')
   }

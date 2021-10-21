@@ -154,6 +154,7 @@ export const createPost = async ({
       createdAt: serverTimestamp(),
       likes: [],
       rePosts: [],
+      commentsNumber: 0,
     })
 
     setPostValue('')

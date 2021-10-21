@@ -110,7 +110,7 @@ const Container = styled.article`
   }
 `
 
-export default function BigPostCard({ post, user, commentsNumber }) {
+export default function BigPostCard({ post, user }) {
   const [isLiked, setIsLiked] = useState()
   const [likeCount, setLikeCount] = useState(0)
 
@@ -205,7 +205,7 @@ export default function BigPostCard({ post, user, commentsNumber }) {
         </div>
 
         <div className="info-item">
-          <span>0</span>
+          <span>{post.commentsNumber}</span>
           <p>Comments</p>
         </div>
 
