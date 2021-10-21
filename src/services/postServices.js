@@ -5,6 +5,7 @@ import {
   getDocs,
   setDoc,
   updateDoc,
+  deleteDoc,
   arrayUnion,
   arrayRemove,
   limit,
@@ -161,5 +162,19 @@ export const createPost = async ({
   } catch (error) {
     setPostValue('')
     setLoading(false)
+  }
+}
+
+export const deletePost = async (postId, setPosts, redirect) => {
+  try {
+    const postRef = doc(db, 'posts', postId)
+
+    await deleteDoc(postRef)
+
+    if (setPosts) setPosts((prev) => prev.filter((post) => post.id !== postId))
+
+    if (redirect) redirect()
+  } catch (error) {
+    console.error(error.message)
   }
 }

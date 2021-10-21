@@ -10,7 +10,7 @@ import { formatDistance } from 'date-fns'
 import { useContext, useEffect, useState } from 'react'
 import userContext from '../../context/userContext'
 
-import { ToggleInteraction } from '../../services/postServices'
+import { deletePost, ToggleInteraction } from '../../services/postServices'
 
 const Container = styled.article`
   position: relative;
@@ -192,7 +192,7 @@ const Container = styled.article`
   }
 `
 
-export default function PostCard({ post, isOnProfile }) {
+export default function PostCard({ post, isOnProfile, setPosts }) {
   const [isLiked, setIsLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(0)
 
@@ -222,6 +222,7 @@ export default function PostCard({ post, isOnProfile }) {
 
   const handleDelete = async () => {
     // TODO: add logic to delete the Post
+    await deletePost(post.id, setPosts)
   }
 
   useEffect(() => {

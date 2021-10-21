@@ -1,20 +1,31 @@
 import { useState, useEffect } from 'react'
+
 import styled from 'styled-components'
 import { FaRegHeart, FaHeart, FaRetweet } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import * as ROUTES from '../../constants/routes'
 
-import { ToggleInteraction } from '../../services/postServices'
+import { deletePost, ToggleInteraction } from '../../services/postServices'
 
-import { UserInfo } from '.'
+import { UserInfo, Options } from '.'
 import { Dot } from '../atoms'
 
 const Container = styled.article`
   box-sizing: border-box;
   padding: 1rem 1rem 0 1rem;
   border-bottom: 1px solid var(--xLightGrey);
+  position: relative;
 
   .header {
     text-decoration: none;
+    display: block;
+    width: fit-content;
+
+    .user-info-naming {
+      min-width: 10rem !important;
+      width: fit-content;
+      margin-left: 1.5rem;
+    }
 
     section {
       &:hover {
@@ -117,6 +128,8 @@ export default function BigPostCard({ post, user }) {
   const [isRePosted, setIsRePosted] = useState()
   const [rePostCount, setRePostCount] = useState(0)
 
+  const history = useHistory()
+
   const handleLikeToggle = async (e) => {
     e.stopPropagation()
 
@@ -133,6 +146,14 @@ export default function BigPostCard({ post, user }) {
       setIsRePosted,
       user.id
     )
+  }
+
+  const handleDelete = async () => {
+    await deletePost(post.id, undefined, redirect)
+  }
+
+  const redirect = () => {
+    history.push(ROUTES.HOME)
   }
 
   useEffect(() => {
@@ -186,6 +207,8 @@ export default function BigPostCard({ post, user }) {
 
   return (
     <Container>
+      {user.id === post.creatorId && <Options destroy={handleDelete} />}
+
       <Link to={`/p/${postUser.username}`} className="header">
         <UserInfo userNeeded={postUser} />
       </Link>
