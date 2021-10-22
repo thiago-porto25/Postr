@@ -268,7 +268,9 @@ export default function PostCard({ post, isOnProfile, setPosts }) {
           >
             <img
               src={`/images/avatars/${
-                post.creatorAvatar + '.jpg' || 'default-avatar.png'
+                post && post.creatorAvatar
+                  ? post.creatorAvatar + '.jpg'
+                  : 'default-avatar.png'
               }`}
               alt={post.creatorName}
             />
