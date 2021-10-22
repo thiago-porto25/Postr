@@ -1,6 +1,7 @@
 import {
   db,
   collection,
+  collectionGroup,
   getDocs,
   setDoc,
   serverTimestamp,
@@ -8,6 +9,7 @@ import {
   query,
   where,
   auth,
+  deleteUser,
   signInWithEmailAndPassword,
   signOut,
   createUserWithEmailAndPassword,
@@ -15,6 +17,7 @@ import {
   sendPasswordResetEmail,
   limit,
   writeBatch,
+  arrayRemove,
 } from '../firebase/config'
 
 /////////////////// Login
@@ -93,6 +96,125 @@ export const signupWithFirebase = async ({
     setPassword('')
     setPasswordConfirmation('')
     setUsername('')
+  }
+}
+
+/////////////////// Delete User
+export const deleteUserFromDb = async (user) => {
+  try {
+    await deleteUserFromFollow(user.uid, 'followers')
+    await deleteUserFromFollow(user.uid, 'following')
+    await deleteUserInteractions(user.uid, 'likes')
+    await deleteUserInteractions(user.uid, 'rePosts')
+    await deleteUserPosts(user.uid)
+    await deleteUserComments(user.uid)
+    await deleteUser(user)
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+const deleteUserFromFollow = async (userId, follow) => {
+  try {
+    let currentBatch = writeBatch(db)
+    let currentBatchSize = 0
+    const batches = [currentBatch]
+
+    const usersRef = collection(db, 'users')
+    const q = query(usersRef, where(follow, 'array-contains', userId))
+    const querySnapshot = await getDocs(q)
+
+    querySnapshot.docs.forEach((doc) => {
+      if (++currentBatchSize >= 500) {
+        currentBatch = writeBatch(db)
+        batches.push(currentBatch)
+        currentBatchSize = 1
+      }
+
+      currentBatch.update(doc.ref, { [follow]: arrayRemove(userId) })
+    })
+
+    await Promise.all(batches.map((batch) => batch.commit()))
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+const deleteUserPosts = async (userId) => {
+  try {
+    let currentBatch = writeBatch(db)
+    let currentBatchSize = 0
+    const batches = [currentBatch]
+
+    const postsRef = collection(db, 'posts')
+    const q = query(postsRef, where('creatorId', '==', userId))
+    const querySnapshot = await getDocs(q)
+
+    querySnapshot.docs.forEach((doc) => {
+      if (++currentBatchSize >= 500) {
+        currentBatch = writeBatch(db)
+        batches.push(currentBatch)
+        currentBatchSize = 1
+      }
+
+      currentBatch.delete(doc.ref)
+    })
+
+    await Promise.all(batches.map((batch) => batch.commit()))
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+const deleteUserInteractions = async (userId, interaction) => {
+  try {
+    let currentBatch = writeBatch(db)
+    let currentBatchSize = 0
+    const batches = [currentBatch]
+
+    const postsRef = collection(db, 'posts')
+    const q = query(postsRef, where(interaction, 'array-contains', userId))
+    const querySnapshot = await getDocs(q)
+
+    querySnapshot.docs.forEach((doc) => {
+      if (++currentBatchSize >= 500) {
+        currentBatch = writeBatch(db)
+        batches.push(currentBatch)
+        currentBatchSize = 1
+      }
+
+      currentBatch.update(doc.ref, { [interaction]: arrayRemove(userId) })
+    })
+
+    await Promise.all(batches.map((batch) => batch.commit()))
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+const deleteUserComments = async (userId) => {
+  try {
+    let currentBatch = writeBatch(db)
+    let currentBatchSize = 0
+    const batches = [currentBatch]
+
+    const commentsRef = collectionGroup(db, 'comments')
+    const q = query(commentsRef, where('creatorId', '==', userId))
+    const querySnapshot = await getDocs(q)
+
+    querySnapshot.docs.forEach((doc) => {
+      if (++currentBatchSize >= 500) {
+        currentBatch = writeBatch(db)
+        batches.push(currentBatch)
+        currentBatchSize = 1
+      }
+
+      currentBatch.delete(doc.ref)
+    })
+
+    await Promise.all(batches.map((batch) => batch.commit()))
+  } catch (error) {
+    console.error(error.message)
   }
 }
 

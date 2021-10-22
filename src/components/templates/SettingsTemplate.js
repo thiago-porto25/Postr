@@ -11,7 +11,7 @@ import { Switch, Route } from 'react-router'
 import * as ROUTES from '../../constants/routes'
 
 export default function SettingsTemplate() {
-  const { user } = useContext(UserContext)
+  const { user, authUser } = useContext(UserContext)
 
   return (
     <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
@@ -29,7 +29,7 @@ export default function SettingsTemplate() {
         </Route>
 
         <Route path={ROUTES.SETTINGS_DELETE}>
-          <DeleteAccount user={user} />
+          <DeleteAccount user={authUser} />
         </Route>
       </Switch>
     </LoggedInLayout>

@@ -2,6 +2,7 @@ import { SettingsButton } from '../atoms'
 import { SimpleHeader } from '../molecules'
 import * as ROUTES from '../../constants/routes'
 import styled from 'styled-components'
+import { deleteUserFromDb } from '../../services/authServices'
 
 const Inner = styled.div`
   .delete-texts-container {
@@ -36,7 +37,9 @@ const Inner = styled.div`
 `
 
 export default function DeleteAccount({ user }) {
-  const handleDelete = () => {}
+  const handleDelete = () => {
+    deleteUserFromDb(user)
+  }
 
   return (
     <div>
