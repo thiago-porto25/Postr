@@ -59,8 +59,6 @@ export const getFollowedPosts = async (userObj) => {
       limit(100)
     )
 
-    /// if a user has many followed do these requests in batches of 10
-
     const querySnapshot = await getDocs(q)
 
     const timelinePosts = querySnapshot.docs.map((doc) => ({
