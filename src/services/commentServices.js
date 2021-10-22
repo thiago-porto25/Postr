@@ -8,6 +8,7 @@ import {
   serverTimestamp,
   doc,
   increment,
+  writeBatch,
 } from '../firebase/config'
 import { getUserByUserId } from './firebase'
 import { v4 as uuid } from 'uuid'
@@ -99,6 +100,31 @@ export const deleteComment = async (
     setComments((prev) => prev.filter((comment) => comment.id !== commentId))
 
     setPost((prev) => ({ ...prev, commentsNumber: prev.commentsNumber - 1 }))
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+export const deletePostComments = async (postId) => {
+  try {
+    let currentBatch = writeBatch(db)
+    let currentBatchSize = 0
+    const batches = [currentBatch]
+
+    const commentsRef = collection(db, 'posts', postId, 'comments')
+    const querySnapshot = await getDocs(commentsRef)
+
+    querySnapshot.docs.forEach((doc) => {
+      if (++currentBatchSize >= 500) {
+        currentBatch = writeBatch(db)
+        batches.push(currentBatch)
+        currentBatchSize = 1
+      }
+
+      currentBatch.delete(doc.ref)
+    })
+
+    await Promise.all(batches.map((batch) => batch.commit()))
   } catch (error) {
     console.error(error.message)
   }

@@ -16,6 +16,7 @@ import {
   orderBy,
 } from '../firebase/config'
 import { v4 as uuid } from 'uuid'
+import { deletePostComments } from './commentServices'
 
 export const getPostById = async (postId) => {
   try {
@@ -168,6 +169,7 @@ export const deletePost = async (postId, setPosts, redirect) => {
     const postRef = doc(db, 'posts', postId)
 
     await deleteDoc(postRef)
+    await deletePostComments(postId)
 
     if (setPosts) setPosts((prev) => prev.filter((post) => post.id !== postId))
 
