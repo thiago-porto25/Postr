@@ -4,6 +4,7 @@ import {
   collectionGroup,
   getDocs,
   setDoc,
+  deleteDoc,
   serverTimestamp,
   doc,
   query,
@@ -103,6 +104,7 @@ export const signupWithFirebase = async ({
 export const deleteUserFromDb = async (user) => {
   try {
     await deleteUser(user)
+    await deleteDoc(db, 'users', user.uid)
     await deleteUserFromFollow(user.uid, 'followers')
     await deleteUserFromFollow(user.uid, 'following')
     await deleteUserInteractions(user.uid, 'likes')
