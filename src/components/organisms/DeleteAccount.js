@@ -37,8 +37,12 @@ const Inner = styled.div`
 `
 
 export default function DeleteAccount({ user }) {
-  const handleDelete = () => {
-    deleteUserFromDb(user)
+  const handleDelete = async () => {
+    try {
+      await deleteUserFromDb(user)
+    } catch (error) {
+      console.error(error.message)
+    }
   }
 
   return (
