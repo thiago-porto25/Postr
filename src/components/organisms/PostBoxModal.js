@@ -2,7 +2,12 @@ import { PostBox } from '../organisms'
 import { Modal } from '../bosons'
 import { IoClose } from 'react-icons/io5'
 
-export default function PostBoxModal({ setOpenModal, user }) {
+export default function PostBoxModal({
+  setOpenModal,
+  user,
+  profileUser,
+  setProfilePosts,
+}) {
   return (
     <Modal onClick={() => setOpenModal(false)}>
       <div
@@ -21,6 +26,8 @@ export default function PostBoxModal({ setOpenModal, user }) {
           setOpenModal={setOpenModal}
           style={{ border: 'none' }}
           user={user}
+          profileUser={profileUser}
+          setProfilePosts={setProfilePosts}
         />
       </div>
     </Modal>

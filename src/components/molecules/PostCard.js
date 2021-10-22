@@ -292,7 +292,11 @@ export default function PostCard({ post, isOnProfile, setPosts }) {
 
             <Dot />
 
-            <p>{formatDistance(post.createdAt.toDate(), new Date())}</p>
+            <p>
+              {post.createdAt.toDate
+                ? formatDistance(post.createdAt.toDate(), new Date())
+                : formatDistance(post.createdAt, new Date())}
+            </p>
           </div>
 
           <div className="post-content-container">

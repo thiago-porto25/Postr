@@ -43,6 +43,7 @@ export default function ProfileTemplate() {
       showSuggestion={true}
       profileUser={profileUser}
       setProfileUser={setProfileUser}
+      setProfilePosts={setProfilePosts}
     >
       {!isOnFollows ? (
         <>

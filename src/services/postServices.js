@@ -138,6 +138,8 @@ export const createPost = async ({
   postValue,
   setPostValue,
   setLoading,
+  profileUser,
+  setProfilePosts,
 }) => {
   try {
     const newPostId = uuid()
@@ -158,6 +160,24 @@ export const createPost = async ({
     })
 
     setPostValue('')
+
+    if (profileUser && setProfilePosts && user.id === profileUser.id) {
+      setProfilePosts((prev) => [
+        {
+          id: newPostId,
+          creatorId: user.id,
+          creatorName: user.name,
+          creatorUsername: user.username,
+          creatorAvatar: user.avatarPhotoUrl,
+          content: postValue.trim(),
+          createdAt: new Date(),
+          likes: [],
+          rePosts: [],
+          commentsNumber: 0,
+        },
+        ...prev,
+      ])
+    }
   } catch (error) {
     setPostValue('')
     setLoading(false)

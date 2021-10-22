@@ -44,6 +44,7 @@ export default function LoggedInLayout({
   setIsOnFollows,
   setProfileUser,
   profileUser,
+  setProfilePosts,
   children,
 }) {
   const [openModal, setOpenModal] = useState(false)
@@ -76,7 +77,14 @@ export default function LoggedInLayout({
         </div>
       </Container>
 
-      {openModal && <PostBoxModal user={user} setOpenModal={setOpenModal} />}
+      {openModal && (
+        <PostBoxModal
+          user={user}
+          profileUser={profileUser}
+          setProfilePosts={setProfilePosts}
+          setOpenModal={setOpenModal}
+        />
+      )}
     </>
   )
 }

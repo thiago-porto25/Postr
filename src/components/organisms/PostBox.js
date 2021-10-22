@@ -101,7 +101,13 @@ const Textarea = styled.textarea`
   }
 `
 
-export default function PostBox({ user, setOpenModal, ...rest }) {
+export default function PostBox({
+  user,
+  setOpenModal,
+  profileUser,
+  setProfilePosts,
+  ...rest
+}) {
   const [postValue, setPostValue] = useState('')
   const [emojiOpen, setEmojiOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -109,7 +115,14 @@ export default function PostBox({ user, setOpenModal, ...rest }) {
 
   const handlePost = async () => {
     setLoading(true)
-    await createPost({ user, postValue, setPostValue, setLoading })
+    await createPost({
+      user,
+      postValue,
+      setPostValue,
+      setLoading,
+      profileUser,
+      setProfilePosts,
+    })
     setLoading(false)
 
     if (setOpenModal) setOpenModal(false)
