@@ -13,7 +13,7 @@ export default function HomeTemplate() {
     <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
       <SimpleHeader>Homepage</SimpleHeader>
       <PostBox user={user} />
-      {posts.length > 0 ? (
+      {posts && posts.length > 0 ? (
         <Timeline posts={posts} />
       ) : (
         <NoPosts>Follow someone to see their Posts!</NoPosts>
