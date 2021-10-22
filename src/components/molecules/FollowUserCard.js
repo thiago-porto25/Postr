@@ -94,6 +94,7 @@ export default function FollowUserCard({
       </Link>
       <div className="suggested-follow-btn-container">
         {!isFollowing ? (
+          user &&
           user.id !== suggestedUser.id && (
             <FollowButton isFollowing={false} onClick={handleFollow}>
               Follow
