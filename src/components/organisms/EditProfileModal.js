@@ -51,6 +51,7 @@ export default function EditProfileModal({
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSave = async () => {
+    if (isLoading) return
     if (
       avatar === authUser.avatarPhotoUrl &&
       background === authUser.backgroundPhotoUrl &&
@@ -120,7 +121,7 @@ export default function EditProfileModal({
     }
   }, [authUser])
 
-  const isDisabled = name.length <= 2
+  const isDisabled = name.length <= 2 || isLoading
 
   return (
     <Modal onClick={() => setIsEditingProfile(false)}>
