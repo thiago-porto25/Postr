@@ -14,6 +14,11 @@ const Button = styled.button`
     background-color: var(--xLightGrey);
   }
 
+  &:disabled {
+    background-color: var(--errorLight);
+    pointer-events: none;
+  }
+
   &.delete-account {
     color: var(--error);
 
@@ -41,7 +46,7 @@ const Button = styled.button`
 
 export default function SettingsButton({ isDelete, isLoading, children }) {
   return (
-    <Button className={isDelete && 'delete-account'}>
+    <Button disabled={isLoading} className={isDelete && 'delete-account'}>
       {isLoading ? (
         <div className="spinner-container">
           <Spinner />

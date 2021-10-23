@@ -41,10 +41,12 @@ const Inner = styled.div`
 `
 
 export default function DeleteAccount({ user }) {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
 
   const handleDelete = async () => {
+    if (isLoading) return
+
     try {
       setIsLoading(true)
       await deleteUserFromDb(user)
