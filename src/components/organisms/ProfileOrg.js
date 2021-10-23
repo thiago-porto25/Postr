@@ -34,6 +34,7 @@ export default function ProfileOrg({
         {!isOnLikes ? (
           profilePosts.length > 0 ? (
             <Timeline
+              profileUser={user}
               setPosts={setProfilePosts}
               isOnProfile={true}
               posts={profilePosts}
@@ -42,7 +43,11 @@ export default function ProfileOrg({
             <NoPosts>This user has no Posts!</NoPosts>
           )
         ) : likedPosts.length > 0 ? (
-          <Timeline setPosts={setProfilePosts} posts={likedPosts} />
+          <Timeline
+            profileUser={user}
+            setPosts={setProfilePosts}
+            posts={likedPosts}
+          />
         ) : (
           <NoPosts>This user has no liked Posts!</NoPosts>
         )}

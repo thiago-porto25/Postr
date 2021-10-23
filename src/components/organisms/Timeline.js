@@ -6,12 +6,18 @@ const Container = styled.section`
   padding-bottom: 4rem;
 `
 
-export default function Timeline({ posts, isOnProfile, setPosts }) {
+export default function Timeline({
+  posts,
+  isOnProfile,
+  setPosts,
+  profileUser,
+}) {
   return (
     <Container>
       {posts &&
         posts.map((post) => (
           <PostCard
+            profileUser={profileUser}
             setPosts={setPosts}
             isOnProfile={isOnProfile}
             post={post}

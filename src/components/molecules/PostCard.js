@@ -192,7 +192,7 @@ const Container = styled.article`
   }
 `
 
-export default function PostCard({ post, isOnProfile, setPosts }) {
+export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
   const [isLiked, setIsLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(0)
 
@@ -221,7 +221,6 @@ export default function PostCard({ post, isOnProfile, setPosts }) {
   }
 
   const handleDelete = async () => {
-    // TODO: add logic to delete the Post
     await deletePost(post.id, setPosts)
   }
 
@@ -253,7 +252,9 @@ export default function PostCard({ post, isOnProfile, setPosts }) {
         <Options destroy={handleDelete} />
       ) : null}
 
-      {isOnProfile && user.id !== post.creatorId ? (
+      {isOnProfile &&
+      user.id !== post.creatorId &&
+      profileUser.id === user.id ? (
         <div className="post-re-posted">
           <FaRetweet />
           reposted
