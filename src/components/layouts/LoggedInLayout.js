@@ -16,6 +16,7 @@ const Container = styled.main`
 
     .inner-left-bar {
       position: fixed;
+      z-index: 10;
       top: 0.5rem;
       left: 3rem;
       width: 15%;
