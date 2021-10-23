@@ -6,7 +6,7 @@ import { useState } from 'react'
 const Container = styled.div``
 
 export default function ProfileOrg({
-  user,
+  profileUser,
   setUser,
   setProfileUser,
   profilePosts,
@@ -23,7 +23,7 @@ export default function ProfileOrg({
     <>
       <Container>
         <ProfileHeader
-          profileUser={user}
+          profileUser={profileUser}
           setProfileUser={setProfileUser}
           isOnLikes={isOnLikes}
           setIsOnLikes={setIsOnLikes}
@@ -34,7 +34,7 @@ export default function ProfileOrg({
         {!isOnLikes ? (
           profilePosts.length > 0 ? (
             <Timeline
-              profileUser={user}
+              profileUser={profileUser}
               setPosts={setProfilePosts}
               isOnProfile={true}
               posts={profilePosts}
@@ -44,7 +44,7 @@ export default function ProfileOrg({
           )
         ) : likedPosts.length > 0 ? (
           <Timeline
-            profileUser={user}
+            profileUser={profileUser}
             setPosts={setProfilePosts}
             posts={likedPosts}
           />
@@ -57,7 +57,6 @@ export default function ProfileOrg({
         <EditProfileModal
           setIsEditingProfile={setIsEditingProfile}
           authUser={authUser}
-          setCurrentProfileUser={user}
           setUser={setUser}
           setProfileUser={setProfileUser}
           setProfilePosts={setProfilePosts}

@@ -58,7 +58,7 @@ export default function ProfileTemplate() {
 
           {profileUser ? (
             <ProfileOrg
-              user={profileUser}
+              profileUser={profileUser}
               setProfileUser={setProfileUser}
               setUser={setUser}
               authUser={user}

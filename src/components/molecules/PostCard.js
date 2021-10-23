@@ -193,10 +193,10 @@ const Container = styled.article`
 `
 
 export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
-  const [isLiked, setIsLiked] = useState(false)
+  const [isLiked, setIsLiked] = useState()
   const [likeCount, setLikeCount] = useState(0)
 
-  const [isRePosted, setIsRePosted] = useState(false)
+  const [isRePosted, setIsRePosted] = useState()
   const [rePostCount, setRePostCount] = useState(0)
 
   const { user } = useContext(userContext)
@@ -228,22 +228,24 @@ export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
     if (post.likes.includes(user.id)) {
       setIsLiked(true)
     }
+    if (post.likes) setLikeCount(post.likes.length)
   }, [post.likes, user])
 
   useEffect(() => {
     if (post.rePosts.includes(user.id)) {
       setIsRePosted(true)
     }
+    if (post.rePosts) setRePostCount(post.rePosts.length)
   }, [post.rePosts, user])
 
   useEffect(() => {
-    setLikeCount((prev) => (isLiked ? prev + 1 : prev !== 0 ? prev - 1 : 0))
+    if (isLiked === undefined) return
+    setLikeCount((prev) => (isLiked ? prev + 1 : prev - 1))
   }, [isLiked])
 
   useEffect(() => {
-    setRePostCount((prev) =>
-      isRePosted ? prev + 1 : prev !== 0 ? prev - 1 : 0
-    )
+    if (isRePosted === undefined) return
+    setRePostCount((prev) => (isRePosted ? prev + 1 : prev - 1))
   }, [isRePosted])
 
   return (
@@ -253,8 +255,9 @@ export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
       ) : null}
 
       {isOnProfile &&
-      user.id !== post.creatorId &&
-      profileUser.id === user.id ? (
+      ((user.id !== post.creatorId && profileUser?.id === user.id) ||
+        (user.id === post.creatorId && profileUser?.id !== user.id) ||
+        profileUser?.id !== post.creatorId) ? (
         <div className="post-re-posted">
           <FaRetweet />
           reposted
