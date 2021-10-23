@@ -102,18 +102,14 @@ export const signupWithFirebase = async ({
 
 /////////////////// Delete User
 export const deleteUserFromDb = async (user) => {
-  try {
-    await deleteUser(user)
-    await deleteDoc(doc(db, 'users', user.uid))
-    await deleteUserFromFollow(user.uid, 'followers')
-    await deleteUserFromFollow(user.uid, 'following')
-    await deleteUserInteractions(user.uid, 'likes')
-    await deleteUserInteractions(user.uid, 'rePosts')
-    await deleteUserPosts(user.uid)
-    await deleteUserComments(user.uid)
-  } catch (error) {
-    console.error(error.message)
-  }
+  await deleteUser(user)
+  await deleteDoc(doc(db, 'users', user.uid))
+  await deleteUserFromFollow(user.uid, 'followers')
+  await deleteUserFromFollow(user.uid, 'following')
+  await deleteUserInteractions(user.uid, 'likes')
+  await deleteUserInteractions(user.uid, 'rePosts')
+  await deleteUserPosts(user.uid)
+  await deleteUserComments(user.uid)
 }
 
 const deleteUserFromFollow = async (userId, follow) => {
