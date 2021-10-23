@@ -59,6 +59,7 @@ export const createComment = async (
 
     await setDoc(commentsRef, {
       creatorId: creator.id,
+      postId,
       id: commentId,
       content,
       createdAt: serverTimestamp(),
@@ -69,6 +70,7 @@ export const createComment = async (
     setComments((prev) => [
       {
         creatorId: creator.id,
+        postId,
         content,
         createdAt: new Date(),
         id: commentId,

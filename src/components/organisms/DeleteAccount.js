@@ -80,6 +80,7 @@ export default function DeleteAccount({ user }) {
             I'm sure I want to delete my account!
           </SettingsButton>
         </div>
+
         {error && <AuthMessage type="error" text={error} />}
       </Inner>
     </div>

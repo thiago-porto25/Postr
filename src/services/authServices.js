@@ -4,6 +4,7 @@ import {
   collectionGroup,
   getDocs,
   setDoc,
+  updateDoc,
   deleteDoc,
   serverTimestamp,
   doc,
@@ -19,6 +20,7 @@ import {
   limit,
   writeBatch,
   arrayRemove,
+  increment,
 } from '../firebase/config'
 
 /////////////////// Login
@@ -200,15 +202,18 @@ const deleteUserComments = async (userId) => {
     const q = query(commentsRef, where('creatorId', '==', userId))
     const querySnapshot = await getDocs(q)
 
-    querySnapshot.docs.forEach((doc) => {
+    for await (const document of querySnapshot.docs) {
       if (++currentBatchSize >= 500) {
         currentBatch = writeBatch(db)
         batches.push(currentBatch)
         currentBatchSize = 1
       }
+      const postRef = doc(db, 'posts', document.data().postId)
 
-      currentBatch.delete(doc.ref)
-    })
+      await updateDoc(postRef, { commentsNumber: increment(-1) })
+
+      currentBatch.delete(document.ref)
+    }
 
     await Promise.all(batches.map((batch) => batch.commit()))
   } catch (error) {
