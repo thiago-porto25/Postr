@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Spinner } from '.'
 
 const Button = styled.button`
   cursor: pointer;
@@ -20,8 +21,34 @@ const Button = styled.button`
       background-color: var(--errorLight);
     }
   }
+
+  .spinner-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    * {
+      width: 28px;
+      height: 28px;
+      border-top: 4px solid var(--errorLight);
+      border-right: 4px solid var(--errorLight);
+      border-bottom: 4px solid var(--errorLight);
+      border-left: 4px solid var(--error);
+    }
+  }
 `
 
-export default function SettingsButton({ isDelete, children }) {
-  return <Button className={isDelete && 'delete-account'}>{children}</Button>
+export default function SettingsButton({ isDelete, isLoading, children }) {
+  return (
+    <Button className={isDelete && 'delete-account'}>
+      {isLoading ? (
+        <div className="spinner-container">
+          <Spinner />
+        </div>
+      ) : (
+        children
+      )}
+    </Button>
+  )
 }

@@ -1,7 +1,10 @@
-import { SettingsButton } from '../atoms'
-import { SimpleHeader } from '../molecules'
-import * as ROUTES from '../../constants/routes'
+import { useState } from 'react'
 import styled from 'styled-components'
+
+import { SettingsButton, AuthMessage } from '../atoms'
+import { SimpleHeader } from '../molecules'
+
+import * as ROUTES from '../../constants/routes'
 import { deleteUserFromDb } from '../../services/authServices'
 
 const Inner = styled.div`
@@ -33,16 +36,23 @@ const Inner = styled.div`
 
   .final-delete-button-container {
     height: 4rem;
+    margin-bottom: 2rem;
   }
 `
 
 export default function DeleteAccount({ user }) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+
   const handleDelete = async () => {
     try {
+      setIsLoading(true)
       await deleteUserFromDb(user)
     } catch (error) {
       console.error(error.message)
+      setError(error.message)
     }
+    setIsLoading(false)
   }
 
   return (
@@ -66,10 +76,11 @@ export default function DeleteAccount({ user }) {
         </div>
 
         <div onClick={handleDelete} className="final-delete-button-container">
-          <SettingsButton isDelete={true}>
+          <SettingsButton isLoading={isLoading} isDelete={true}>
             I'm sure I want to delete my account!
           </SettingsButton>
         </div>
+        {error && <AuthMessage type="error" text={error} />}
       </Inner>
     </div>
   )
