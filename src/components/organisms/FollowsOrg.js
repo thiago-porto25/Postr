@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ProfileNav, FollowUserCard } from '../molecules'
+import { ProfileNav, FollowUserCard, NoPosts } from '../molecules'
 import {
   getProfileFollowers,
   getProfileFollowing,
@@ -47,8 +47,9 @@ export default function FollowsOrg({
         second="Followers"
       />
 
-      {isOnFollowers
-        ? followers.map((item) => (
+      {isOnFollowers ? (
+        followers[0] ? (
+          followers.map((item) => (
             <FollowUserCard
               key={item.id}
               user={user}
@@ -59,17 +60,24 @@ export default function FollowsOrg({
               isOn={isOnFollows}
             />
           ))
-        : following.map((item) => (
-            <FollowUserCard
-              key={item.id}
-              user={user}
-              profileUser={profileUser}
-              setProfileUser={setProfileUser}
-              suggestedUser={item}
-              setIsOn={setIsOnFollows}
-              isOn={isOnFollows}
-            />
-          ))}
+        ) : (
+          <NoPosts>This user has no Followers!</NoPosts>
+        )
+      ) : following[0] ? (
+        following.map((item) => (
+          <FollowUserCard
+            key={item.id}
+            user={user}
+            profileUser={profileUser}
+            setProfileUser={setProfileUser}
+            suggestedUser={item}
+            setIsOn={setIsOnFollows}
+            isOn={isOnFollows}
+          />
+        ))
+      ) : (
+        <NoPosts>This user is not Following anyone!</NoPosts>
+      )}
     </Container>
   )
 }
