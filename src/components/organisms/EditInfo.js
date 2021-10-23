@@ -42,14 +42,14 @@ export default function EditInfo({ user }) {
   const [message, setMessage] = useState({ type: '', text: '' })
 
   const isDisabled =
-    name === user.name &&
-    username === user.username &&
-    birthday === user.birthday
-      ? true
-      : false
+    (name === user.name &&
+      username === user.username &&
+      birthday === user.birthday) ||
+    isLoading
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (isLoading) return
 
     setIsLoading(true)
     setMessage({ type: '', text: '' })
@@ -65,7 +65,7 @@ export default function EditInfo({ user }) {
       setBirthday,
     })
 
-    setIsLoading(true)
+    setIsLoading(false)
   }
 
   useEffect(() => {
