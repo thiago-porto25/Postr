@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const Para = styled.p`
   text-align: center;
   padding: 0 0.5rem;
+  font-size: 15px;
 
   &.success {
     color: var(--success);
