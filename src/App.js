@@ -7,6 +7,7 @@ import { useAuthListener } from './hooks'
 
 import * as ROUTES from './constants/routes'
 import { IsUserRedirect, ProtectedRoute } from './helpers'
+import { SuspenseFallback } from './components/molecules'
 
 const Start = lazy(() => import('./pages/start'))
 const Login = lazy(() => import('./pages/login'))
@@ -29,7 +30,7 @@ function App() {
   return (
     <UserContext.Provider value={{ authUser, user, setUser }}>
       <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
-        <Suspense fallback={<h1>loading...</h1>}>
+        <Suspense fallback={<SuspenseFallback />}>
           <Switch>
             {/*/////// Redirected Routes ////////*/}
             <IsUserRedirect
