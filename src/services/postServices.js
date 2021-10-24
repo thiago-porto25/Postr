@@ -36,7 +36,7 @@ export const ToggleInteraction = async (
   hasInteracted,
   setInteraction,
   userId,
-  setProfilePosts,
+  setPosts,
   setLikedPosts
 ) => {
   try {
@@ -49,7 +49,7 @@ export const ToggleInteraction = async (
     setInteraction((prev) => !prev)
 
     if (hasInteracted) {
-      setProfilePosts((prev) =>
+      setPosts((prev) =>
         prev.map((post) => {
           if (post.id === docId) {
             return {
@@ -63,11 +63,12 @@ export const ToggleInteraction = async (
         })
       )
 
-      setLikedPosts((prev) => prev.filter((post) => post.id !== docId))
+      if (setLikedPosts)
+        setLikedPosts((prev) => prev.filter((post) => post.id !== docId))
     } else {
       let newLikedPost
 
-      setProfilePosts((prev) =>
+      setPosts((prev) =>
         prev.map((post) => {
           if (post.id === docId) {
             newLikedPost = {
@@ -80,7 +81,7 @@ export const ToggleInteraction = async (
         })
       )
 
-      setLikedPosts((prev) => [...prev, newLikedPost])
+      if (setLikedPosts) setLikedPosts((prev) => [...prev, newLikedPost])
     }
   } catch (error) {
     console.log(error.message)

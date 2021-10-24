@@ -9,7 +9,7 @@ const Container = styled.section`
 export default function Timeline({
   posts,
   isOnProfile,
-  setProfilePosts,
+  setPosts,
   setLikedPosts,
   profileUser,
 }) {
@@ -19,7 +19,7 @@ export default function Timeline({
         posts.map((post) => (
           <PostCard
             profileUser={profileUser}
-            setProfilePosts={setProfilePosts}
+            setPosts={setPosts}
             setLikedPosts={setLikedPosts}
             isOnProfile={isOnProfile}
             post={post}

@@ -35,7 +35,7 @@ export default function ProfileOrg({
           profilePosts.length > 0 ? (
             <Timeline
               profileUser={profileUser}
-              setProfilePosts={setProfilePosts}
+              setPosts={setProfilePosts}
               setLikedPosts={setLikedPosts}
               isOnProfile={true}
               posts={profilePosts}
@@ -46,7 +46,7 @@ export default function ProfileOrg({
         ) : likedPosts.length > 0 ? (
           <Timeline
             profileUser={profileUser}
-            setProfilePosts={setProfilePosts}
+            setPosts={setProfilePosts}
             setLikedPosts={setLikedPosts}
             posts={likedPosts}
           />

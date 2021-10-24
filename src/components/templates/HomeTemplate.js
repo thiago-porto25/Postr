@@ -7,14 +7,14 @@ import { useFollowedPosts } from '../../hooks'
 
 export default function HomeTemplate() {
   const { user } = useContext(UserContext)
-  const { posts } = useFollowedPosts(user)
+  const { posts, setPosts } = useFollowedPosts(user)
 
   return (
     <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
       <SimpleHeader>Homepage</SimpleHeader>
       <PostBox user={user} />
       {posts && posts.length > 0 ? (
-        <Timeline posts={posts} />
+        <Timeline posts={posts} setPosts={setPosts} />
       ) : (
         <NoPosts>Follow someone to see their Posts!</NoPosts>
       )}

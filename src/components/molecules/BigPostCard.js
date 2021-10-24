@@ -160,23 +160,15 @@ export default function BigPostCard({ post, user }) {
     if (post.likes.includes(user.id)) {
       setIsLiked(true)
     }
+    if (post.likes) setLikeCount(post.likes.length)
   }, [post.likes, user])
 
   useEffect(() => {
     if (post.rePosts.includes(user.id)) {
       setIsRePosted(true)
     }
+    if (post.rePosts) setRePostCount(post.rePosts.length)
   }, [post.rePosts, user])
-
-  useEffect(() => {
-    setLikeCount((prev) => (isLiked ? prev + 1 : prev !== 0 ? prev - 1 : 0))
-  }, [isLiked])
-
-  useEffect(() => {
-    setRePostCount((prev) =>
-      isRePosted ? prev + 1 : prev !== 0 ? prev - 1 : 0
-    )
-  }, [isRePosted])
 
   const creationDate = post.createdAt.toDate()
 

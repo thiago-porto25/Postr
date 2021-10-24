@@ -14,5 +14,5 @@ export default function useFollowedPosts(userObj) {
     if (userObj && userObj.following[0]) getPosts()
   }, [userObj])
 
-  return { posts }
+  return { posts, setPosts }
 }

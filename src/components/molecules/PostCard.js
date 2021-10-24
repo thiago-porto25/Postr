@@ -195,7 +195,7 @@ const Container = styled.article`
 export default function PostCard({
   post,
   isOnProfile,
-  setProfilePosts,
+  setPosts,
   setLikedPosts,
   profileUser,
 }) {
@@ -217,7 +217,7 @@ export default function PostCard({
       isLiked,
       setIsLiked,
       user.id,
-      setProfilePosts,
+      setPosts,
       setLikedPosts
     )
   }
@@ -231,13 +231,13 @@ export default function PostCard({
       isRePosted,
       setIsRePosted,
       user.id,
-      setProfilePosts,
+      setPosts,
       setLikedPosts
     )
   }
 
   const handleDelete = async () => {
-    await deletePost(post.id, setProfilePosts, setLikedPosts)
+    await deletePost(post.id, setPosts, setLikedPosts)
   }
 
   useEffect(() => {
