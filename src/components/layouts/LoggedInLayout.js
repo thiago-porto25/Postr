@@ -14,9 +14,16 @@ const Container = styled.main`
     grid-template-columns: 14fr 53fr 35fr;
   }
 
+  @media (max-width: 1000px) {
+    display: flex;
+  }
+
   .layout-left-sidebar-container {
-    border-right: 1px solid var(--xLightGrey);
     box-shadow: 1px 1px 1px #aaaaaa11;
+
+    @media (max-width: 1000px) {
+      width: 20%;
+    }
 
     .inner-left-bar {
       position: fixed;
@@ -32,10 +39,22 @@ const Container = styled.main`
     }
   }
   .layout-main-section-container {
+    border-right: 1px solid var(--xLightGrey);
+    border-left: 1px solid var(--xLightGrey);
+
+    @media (max-width: 1000px) {
+      width: 100%;
+      max-width: 550px;
+      margin: 0 auto;
+      margin-left: 4%;
+    }
   }
   .layout-right-sidebar-container {
-    border-left: 1px solid var(--xLightGrey);
     box-shadow: 1px 1px 1px #aaaaaa11;
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
 
     .inner-right-bar {
       position: fixed;
