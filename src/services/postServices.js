@@ -35,7 +35,9 @@ export const ToggleInteraction = async (
   interaction,
   hasInteracted,
   setInteraction,
-  userId
+  userId,
+  setProfilePosts,
+  setLikedPosts
 ) => {
   try {
     const postRef = doc(db, 'posts', docId)
@@ -45,6 +47,41 @@ export const ToggleInteraction = async (
     })
 
     setInteraction((prev) => !prev)
+
+    if (hasInteracted) {
+      setProfilePosts((prev) =>
+        prev.map((post) => {
+          if (post.id === docId) {
+            return {
+              ...post,
+              [interaction]: post[interaction].filter(
+                (item) => item !== userId
+              ),
+            }
+          }
+          return post
+        })
+      )
+
+      setLikedPosts((prev) => prev.filter((post) => post.id !== docId))
+    } else {
+      let newLikedPost
+
+      setProfilePosts((prev) =>
+        prev.map((post) => {
+          if (post.id === docId) {
+            newLikedPost = {
+              ...post,
+              [interaction]: [...post[interaction], userId],
+            }
+            return newLikedPost
+          }
+          return post
+        })
+      )
+
+      setLikedPosts((prev) => [...prev, newLikedPost])
+    }
   } catch (error) {
     console.log(error.message)
   }
@@ -184,14 +221,23 @@ export const createPost = async ({
   }
 }
 
-export const deletePost = async (postId, setPosts, redirect) => {
+export const deletePost = async (
+  postId,
+  setProfilePosts,
+  setLikedPosts,
+  redirect
+) => {
   try {
     const postRef = doc(db, 'posts', postId)
 
     await deleteDoc(postRef)
     await deletePostComments(postId)
 
-    if (setPosts) setPosts((prev) => prev.filter((post) => post.id !== postId))
+    if (setProfilePosts)
+      setProfilePosts((prev) => prev.filter((post) => post.id !== postId))
+
+    if (setLikedPosts)
+      setLikedPosts((prev) => prev.filter((post) => post.id !== postId))
 
     if (redirect) redirect()
   } catch (error) {

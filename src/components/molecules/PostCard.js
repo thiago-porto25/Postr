@@ -192,7 +192,13 @@ const Container = styled.article`
   }
 `
 
-export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
+export default function PostCard({
+  post,
+  isOnProfile,
+  setProfilePosts,
+  setLikedPosts,
+  profileUser,
+}) {
   const [isLiked, setIsLiked] = useState()
   const [likeCount, setLikeCount] = useState(0)
 
@@ -205,7 +211,15 @@ export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
   const handleLikeToggle = async (e) => {
     e.stopPropagation()
 
-    await ToggleInteraction(post.docId, 'likes', isLiked, setIsLiked, user.id)
+    await ToggleInteraction(
+      post.docId,
+      'likes',
+      isLiked,
+      setIsLiked,
+      user.id,
+      setProfilePosts,
+      setLikedPosts
+    )
   }
 
   const handleRePostToggle = async (e) => {
@@ -216,12 +230,14 @@ export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
       'rePosts',
       isRePosted,
       setIsRePosted,
-      user.id
+      user.id,
+      setProfilePosts,
+      setLikedPosts
     )
   }
 
   const handleDelete = async () => {
-    await deletePost(post.id, setPosts)
+    await deletePost(post.id, setProfilePosts, setLikedPosts)
   }
 
   useEffect(() => {
@@ -237,16 +253,6 @@ export default function PostCard({ post, isOnProfile, setPosts, profileUser }) {
     }
     if (post.rePosts) setRePostCount(post.rePosts.length)
   }, [post.rePosts, user])
-
-  useEffect(() => {
-    if (isLiked === undefined) return
-    setLikeCount((prev) => (isLiked ? prev + 1 : prev - 1))
-  }, [isLiked])
-
-  useEffect(() => {
-    if (isRePosted === undefined) return
-    setRePostCount((prev) => (isRePosted ? prev + 1 : prev - 1))
-  }, [isRePosted])
 
   return (
     <Container onClick={() => history.push(`/post/${post.id}`)}>
