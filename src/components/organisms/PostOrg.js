@@ -16,7 +16,7 @@ export default function PostOrg({ user }) {
     <Container>
       {post && post.id && user ? (
         <>
-          <BigPostCard post={post} user={user} />
+          <BigPostCard post={post} setPost={setPost} user={user} />
           <Comments
             post={post}
             user={user}

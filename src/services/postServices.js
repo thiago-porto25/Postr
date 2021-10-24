@@ -37,7 +37,8 @@ export const ToggleInteraction = async (
   setInteraction,
   userId,
   setPosts,
-  setLikedPosts
+  setLikedPosts,
+  setPost
 ) => {
   try {
     const postRef = doc(db, 'posts', docId)
@@ -48,40 +49,57 @@ export const ToggleInteraction = async (
 
     setInteraction((prev) => !prev)
 
-    if (hasInteracted) {
-      setPosts((prev) =>
-        prev.map((post) => {
-          if (post.id === docId) {
-            return {
-              ...post,
-              [interaction]: post[interaction].filter(
-                (item) => item !== userId
-              ),
+    if (setPosts) {
+      if (hasInteracted) {
+        setPosts((prev) =>
+          prev.map((post) => {
+            if (post.id === docId) {
+              return {
+                ...post,
+                [interaction]: post[interaction].filter(
+                  (item) => item !== userId
+                ),
+              }
             }
-          }
-          return post
-        })
-      )
+            return post
+          })
+        )
 
-      if (setLikedPosts)
-        setLikedPosts((prev) => prev.filter((post) => post.id !== docId))
-    } else {
-      let newLikedPost
+        if (setLikedPosts)
+          setLikedPosts((prev) => prev.filter((post) => post.id !== docId))
+      } else {
+        let newLikedPost
 
-      setPosts((prev) =>
-        prev.map((post) => {
-          if (post.id === docId) {
-            newLikedPost = {
-              ...post,
-              [interaction]: [...post[interaction], userId],
+        setPosts((prev) =>
+          prev.map((post) => {
+            if (post.id === docId) {
+              newLikedPost = {
+                ...post,
+                [interaction]: [...post[interaction], userId],
+              }
+              return newLikedPost
             }
-            return newLikedPost
-          }
-          return post
-        })
-      )
+            return post
+          })
+        )
 
-      if (setLikedPosts) setLikedPosts((prev) => [...prev, newLikedPost])
+        if (setLikedPosts) setLikedPosts((prev) => [...prev, newLikedPost])
+      }
+    }
+
+    if (setPost) {
+      if (hasInteracted) {
+        setPost((prevPost) => ({
+          ...prevPost,
+          [interaction]: prevPost[interaction].filter(
+            (item) => item !== userId
+          ),
+        }))
+      } else
+        setPost((prevPost) => ({
+          ...prevPost,
+          [interaction]: [...prevPost[interaction], userId],
+        }))
     }
   } catch (error) {
     console.log(error.message)

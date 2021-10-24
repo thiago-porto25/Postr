@@ -121,7 +121,7 @@ const Container = styled.article`
   }
 `
 
-export default function BigPostCard({ post, user }) {
+export default function BigPostCard({ post, user, setPost }) {
   const [isLiked, setIsLiked] = useState()
   const [likeCount, setLikeCount] = useState(0)
 
@@ -133,7 +133,16 @@ export default function BigPostCard({ post, user }) {
   const handleLikeToggle = async (e) => {
     e.stopPropagation()
 
-    await ToggleInteraction(post.id, 'likes', isLiked, setIsLiked, user.id)
+    await ToggleInteraction(
+      post.id,
+      'likes',
+      isLiked,
+      setIsLiked,
+      user.id,
+      undefined,
+      undefined,
+      setPost
+    )
   }
 
   const handleRePostToggle = async (e) => {
@@ -144,7 +153,10 @@ export default function BigPostCard({ post, user }) {
       'rePosts',
       isRePosted,
       setIsRePosted,
-      user.id
+      user.id,
+      undefined,
+      undefined,
+      setPost
     )
   }
 
