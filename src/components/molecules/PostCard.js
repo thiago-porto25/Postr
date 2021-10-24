@@ -115,7 +115,7 @@ const Container = styled.article`
 
       .post-interactions-container {
         display: flex;
-        gap: 8rem;
+        gap: 20%;
         align-items: center;
 
         .interaction-container {
