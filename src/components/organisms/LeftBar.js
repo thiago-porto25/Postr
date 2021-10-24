@@ -54,6 +54,23 @@ const Container = styled.section`
       height: 3.5rem;
       font-size: 19px;
     }
+
+    @media (max-width: 1200px) {
+      button {
+        width: fit-content;
+        padding: 0.9rem;
+
+        span {
+          display: none;
+        }
+      }
+      .post {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+      }
+    }
   }
 
   .leftbar-drop-user-card-container {
@@ -75,6 +92,16 @@ const Container = styled.section`
       svg {
         margin-left: -20px;
         font-size: 15px;
+      }
+
+      @media (max-width: 1200px) {
+        width: fit-content;
+
+        svg,
+        h2,
+        sub {
+          display: none;
+        }
       }
     }
 
@@ -100,6 +127,10 @@ const List = styled.ul`
 
     &:hover {
       background-color: var(--xLightGrey);
+    }
+
+    @media (max-width: 1200px) {
+      width: fit-content;
     }
   }
 `

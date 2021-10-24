@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Spinner } from './'
+import { RiAddBoxFill } from 'react-icons/ri'
 
 const Button = styled.button`
   font-family: 'Roboto', sans-serif;
@@ -53,6 +54,10 @@ const Button = styled.button`
     display: flex;
     justify-content: center;
   }
+
+  .post {
+    display: none;
+  }
 `
 
 export default function BigButton({ children, color, isLoading, ...rest }) {
@@ -63,7 +68,12 @@ export default function BigButton({ children, color, isLoading, ...rest }) {
           <Spinner />
         </div>
       ) : (
-        children
+        <>
+          <div className="post">
+            <RiAddBoxFill />
+          </div>
+          <span>{children}</span>
+        </>
       )}
     </Button>
   )

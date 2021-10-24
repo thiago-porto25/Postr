@@ -8,12 +8,18 @@ const Item = styled.li`
   gap: 10px;
   align-items: center;
   padding-left: 1rem;
-
   font-family: 'Ubuntu', sans-serif;
+  @media (max-width: 1200px) {
+    width: fit-content;
+    padding: 1rem;
+  }
 
   p {
     font-size: 20px;
-    margin: 1rem 0;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 
   svg {

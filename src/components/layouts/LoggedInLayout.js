@@ -10,6 +10,10 @@ const Container = styled.main`
   display: grid;
   grid-template-columns: 24fr 45fr 33fr;
 
+  @media (max-width: 1200px) {
+    grid-template-columns: 14fr 53fr 35fr;
+  }
+
   .layout-left-sidebar-container {
     border-right: 1px solid var(--xLightGrey);
     box-shadow: 1px 1px 1px #aaaaaa11;
@@ -20,6 +24,11 @@ const Container = styled.main`
       top: 0.5rem;
       left: 3rem;
       width: 15%;
+
+      @media (max-width: 1200px) {
+        left: 5%;
+        width: fit-content;
+      }
     }
   }
   .layout-main-section-container {
@@ -33,6 +42,11 @@ const Container = styled.main`
       top: 0.5rem;
       right: 0.5rem;
       width: 32%;
+
+      @media (max-width: 1200px) {
+        right: 0;
+        width: 37%;
+      }
     }
   }
 `
