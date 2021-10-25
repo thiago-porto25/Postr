@@ -12,7 +12,7 @@ export default function HomeTemplate() {
   return (
     <LoggedInLayout user={user} showSearchBar={true} showSuggestion={true}>
       <SimpleHeader>Homepage</SimpleHeader>
-      <PostBox user={user} />
+      <PostBox className="home-post-box" user={user} />
       {posts && posts.length > 0 ? (
         <Timeline posts={posts} setPosts={setPosts} />
       ) : (

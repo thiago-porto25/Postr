@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { LeftBar, RightBar, PostBoxModal } from '../organisms'
+import { MobileNav } from '../molecules'
+import { BigButton } from '../atoms'
 import { useState } from 'react'
 
 const Container = styled.main`
@@ -18,11 +20,22 @@ const Container = styled.main`
     display: flex;
   }
 
-  .layout-left-sidebar-container {
-    box-shadow: 1px 1px 1px #aaaaaa11;
+  @media (max-width: 600px) {
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .layout-left-sidebar-container {
     @media (max-width: 1000px) {
-      width: 20%;
+      width: 15%;
+    }
+
+    @media (max-width: 600px) {
+      display: none;
     }
 
     .inner-left-bar {
@@ -36,9 +49,18 @@ const Container = styled.main`
         left: 5%;
         width: fit-content;
       }
+
+      @media (max-width: 1000px) {
+        left: 10%;
+      }
+
+      @media (max-width: 700px) {
+        left: 2%;
+      }
     }
   }
   .layout-main-section-container {
+    box-shadow: 1px 1px 1px #aaaaaa11;
     border-right: 1px solid var(--xLightGrey);
     border-left: 1px solid var(--xLightGrey);
 
@@ -47,6 +69,10 @@ const Container = styled.main`
       max-width: 550px;
       margin: 0 auto;
       margin-left: 4%;
+    }
+
+    @media (max-width: 700px) {
+      margin: 0 auto;
     }
   }
   .layout-right-sidebar-container {
@@ -66,6 +92,44 @@ const Container = styled.main`
         right: 0;
         width: 37%;
       }
+    }
+  }
+
+  .home-post-box {
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  .mobile-post {
+    display: none;
+    position: fixed;
+    bottom: 4rem;
+    right: 1rem;
+
+    button {
+      padding: 0;
+    }
+
+    @media (max-width: 1200px) {
+      button {
+        width: fit-content;
+        padding: 0.9rem;
+
+        span {
+          display: none;
+        }
+      }
+      .post {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      display: block;
     }
   }
 `
@@ -109,6 +173,18 @@ export default function LoggedInLayout({
             />
           </div>
         </div>
+
+        <div className="mobile-post">
+          <BigButton onClick={() => setOpenModal(true)} color="blue">
+            Post
+          </BigButton>
+        </div>
+
+        <MobileNav
+          isOnFollows={isOnFollows}
+          setIsOnFollows={setIsOnFollows}
+          user={user}
+        />
       </Container>
 
       {openModal && (
