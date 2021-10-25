@@ -22,6 +22,11 @@ const Image = styled.img`
   &.extra-larger {
     height: 133px;
     width: 133px;
+
+    @media (max-width: 500px) {
+      width: 100px;
+      height: 100px;
+    }
   }
 `
 

@@ -10,6 +10,9 @@ const Container = styled.div`
 
     .profile-name {
       font-size: 20px;
+      width: 90%;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
     }
 
     .profile-username {
@@ -33,6 +36,10 @@ const Container = styled.div`
     font-size: 15px;
     display: flex;
     gap: 1rem;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
 
     p {
       display: flex;

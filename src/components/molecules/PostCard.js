@@ -5,7 +5,7 @@ import { FaRegComment, FaRegHeart, FaHeart, FaRetweet } from 'react-icons/fa'
 import { Dot } from '../atoms'
 import { Options } from '.'
 
-import { formatDistance } from 'date-fns'
+import { formatDistanceStrict } from 'date-fns'
 
 import { useContext, useEffect, useState } from 'react'
 import userContext from '../../context/userContext'
@@ -84,6 +84,71 @@ const Container = styled.article`
 
           &:hover > h1 {
             text-decoration: underline;
+          }
+
+          h1,
+          span {
+            overflow-x: hidden;
+            word-wrap: none;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            white-space: nowrap;
+          }
+
+          @media (max-width: 550px) {
+            h1,
+            span {
+              max-width: 120px;
+            }
+          }
+
+          @media (max-width: 460px) {
+            h1,
+            span {
+              max-width: 100px;
+            }
+          }
+
+          @media (max-width: 460px) {
+            h1 {
+              max-width: 80px;
+            }
+            span {
+              max-width: 70px;
+            }
+          }
+
+          @media (max-width: 350px) {
+            overflow-x: hidden;
+            word-wrap: none;
+            text-overflow: ellipsis;
+            max-width: 130px;
+
+            h1,
+            span {
+              overflow-x: initial;
+              word-wrap: initial;
+              text-overflow: initial;
+              max-width: none;
+              white-space: initial;
+            }
+          }
+        }
+
+        .date {
+          overflow-x: hidden;
+          display: inline;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          @media (max-width: 550px) {
+            width: 120px;
+          }
+
+          @media (max-width: 460px) {
+            width: 70px;
+          }
+          @media (max-width: 350px) {
+            width: 50px;
           }
         }
 
@@ -241,14 +306,14 @@ export default function PostCard({
   }
 
   useEffect(() => {
-    if (post.likes.includes(user.id)) {
+    if (post.likes.includes(user?.id)) {
       setIsLiked(true)
     }
     if (post.likes) setLikeCount(post.likes.length)
   }, [post.likes, user])
 
   useEffect(() => {
-    if (post.rePosts.includes(user.id)) {
+    if (post.rePosts.includes(user?.id)) {
       setIsRePosted(true)
     }
     if (post.rePosts) setRePostCount(post.rePosts.length)
@@ -302,10 +367,10 @@ export default function PostCard({
 
             <Dot />
 
-            <p>
+            <p className="date">
               {post.createdAt.toDate
-                ? formatDistance(post.createdAt.toDate(), new Date())
-                : formatDistance(post.createdAt, new Date())}
+                ? formatDistanceStrict(post.createdAt.toDate(), new Date())
+                : formatDistanceStrict(post.createdAt, new Date())}
             </p>
           </div>
 

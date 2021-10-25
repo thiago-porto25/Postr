@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Options } from '.'
 import { LoggedUserAvatar, Dot } from '../atoms'
 
-import { formatDistance } from 'date-fns'
+import { formatDistanceStrict } from 'date-fns'
 import { deleteComment } from '../../services/commentServices'
 
 const Container = styled.div`
@@ -53,6 +53,71 @@ const Container = styled.div`
           font-size: 17px;
           color: var(--black);
         }
+
+        h1,
+        span {
+          overflow-x: hidden;
+          word-wrap: none;
+          text-overflow: ellipsis;
+          max-width: 150px;
+          white-space: nowrap;
+        }
+
+        @media (max-width: 550px) {
+          h1,
+          span {
+            max-width: 120px;
+          }
+        }
+
+        @media (max-width: 460px) {
+          h1,
+          span {
+            max-width: 100px;
+          }
+        }
+
+        @media (max-width: 460px) {
+          h1 {
+            max-width: 80px;
+          }
+          span {
+            max-width: 70px;
+          }
+        }
+
+        @media (max-width: 350px) {
+          overflow-x: hidden;
+          word-wrap: none;
+          text-overflow: ellipsis;
+          max-width: 130px;
+
+          h1,
+          span {
+            overflow-x: initial;
+            word-wrap: initial;
+            text-overflow: initial;
+            max-width: none;
+            white-space: initial;
+          }
+        }
+      }
+    }
+
+    .date {
+      overflow-x: hidden;
+      display: inline;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      @media (max-width: 550px) {
+        width: 120px;
+      }
+
+      @media (max-width: 460px) {
+        width: 70px;
+      }
+      @media (max-width: 350px) {
+        width: 50px;
       }
     }
 
@@ -95,10 +160,10 @@ export default function CommentCard({
 
           <Dot />
 
-          <p>
+          <p className="date">
             {comment.createdAt.toDate
-              ? formatDistance(comment.createdAt.toDate(), new Date())
-              : formatDistance(comment.createdAt, new Date())}
+              ? formatDistanceStrict(comment.createdAt.toDate(), new Date())
+              : formatDistanceStrict(comment.createdAt, new Date())}
           </p>
         </div>
 

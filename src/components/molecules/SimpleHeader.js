@@ -20,6 +20,13 @@ const Container = styled.header`
     h1 {
       margin: 0;
       font-size: 20px;
+      width: 300px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+
+      @media (max-width: 400px) {
+        width: 220px;
+      }
     }
 
     sub {
