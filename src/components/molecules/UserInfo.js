@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Card = styled.section`
-  width: 100%;
+  width: 90%;
   height: 100%;
   display: flex;
 
@@ -43,14 +43,38 @@ const Card = styled.section`
   }
 
   .naming-large {
-    width: max-content;
     padding-right: 1rem;
+    width: 300px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @media (max-width: 460px) {
+      width: 200px;
+
+      h2 {
+        font-size: 20px !important;
+        max-width: 200px !important;
+        overflow-x: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    @media (max-width: 380px) {
+      width: 130px;
+
+      h2 {
+        max-width: 130px !important;
+      }
+    }
 
     h2 {
+      font-size: 20px;
+      text-overflow: ellipsis !important;
+      max-width: 300px;
       font-size: 25px;
       width: max-content;
-      max-width: none;
-      text-overflow: unset;
     }
 
     sub {

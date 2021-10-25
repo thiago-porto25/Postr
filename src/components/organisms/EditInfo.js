@@ -19,6 +19,10 @@ const Inner = styled.div`
     gap: 1rem;
     box-sizing: border-box;
 
+    @media (max-width: 450px) {
+      width: 80%;
+    }
+
     input {
       border: 1px solid var(--lightGrey);
 

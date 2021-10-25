@@ -24,8 +24,6 @@ export default function SearchResult({ searchTerm, result, setResult, user }) {
     if (searchTerm) receiveResult()
   }, [searchTerm, setResult])
 
-  console.log(result)
-
   return (
     <Container>
       {result && result[0] ? (

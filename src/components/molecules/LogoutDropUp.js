@@ -25,9 +25,14 @@ const Container = styled.div`
   p {
     transition: 150ms ease;
     padding: 1rem 1rem;
+    padding-top: 0.7rem;
+    padding-bottom: 1.8rem;
     border-radius: 30px;
     user-select: none;
     cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     &:hover {
       background-color: var(--xLightGrey);

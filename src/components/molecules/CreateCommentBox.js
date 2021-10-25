@@ -13,6 +13,11 @@ const Container = styled.div`
   .comment-button-container {
     button {
       padding: 0.5rem 1rem;
+
+      @media (max-width: 400px) {
+        font-size: 14px;
+        padding: 0.5rem 0.5rem;
+      }
     }
   }
 `
@@ -23,6 +28,19 @@ const Input = styled.input`
   border: none;
   outline: none;
   font-size: 19px;
+
+  &::-webkit-input-placeholder {
+    text-overflow: ellipsis;
+  }
+  &::-moz-placeholder {
+    text-overflow: ellipsis;
+  }
+  &:-ms-input-placeholder {
+    text-overflow: ellipsis;
+  }
+  &:-moz-placeholder {
+    text-overflow: ellipsis;
+  }
 `
 
 export default function CreateCommentBox({

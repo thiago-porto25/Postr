@@ -122,7 +122,7 @@ const Container = styled.article`
             overflow-x: hidden;
             word-wrap: none;
             text-overflow: ellipsis;
-            max-width: 130px;
+            max-width: 120px;
 
             h1,
             span {
@@ -130,7 +130,6 @@ const Container = styled.article`
               word-wrap: initial;
               text-overflow: initial;
               max-width: none;
-              white-space: initial;
             }
           }
         }
@@ -182,6 +181,11 @@ const Container = styled.article`
         display: flex;
         gap: 20%;
         align-items: center;
+
+        @media (max-width: 460px) {
+          gap: 20px;
+          justify-content: space-evenly;
+        }
 
         .interaction-container {
           display: flex;

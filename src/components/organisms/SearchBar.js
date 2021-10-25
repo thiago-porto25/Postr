@@ -17,6 +17,11 @@ const Container = styled.div`
   box-sizing: border-box;
   cursor: text;
 
+  @media (max-width: 450px) {
+    width: 83%;
+    padding: 0.5rem 0.5rem;
+  }
+
   &:focus-within {
     background-color: transparent;
     border: 1px solid var(--primary);

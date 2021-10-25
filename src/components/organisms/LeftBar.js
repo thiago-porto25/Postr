@@ -90,7 +90,7 @@ const Container = styled.section`
       }
 
       svg {
-        margin-left: -20px;
+        margin-left: 5px;
         font-size: 15px;
       }
 
