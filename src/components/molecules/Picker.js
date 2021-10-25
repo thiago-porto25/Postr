@@ -15,7 +15,8 @@ const Container = styled.div`
     column-gap: 3rem;
     row-gap: 1rem;
     justify-content: center;
-    padding: 1.5rem 0;
+    padding: 1.5rem 1.2rem;
+    box-sizing: border-box;
   }
 
   .picker-image-container {
