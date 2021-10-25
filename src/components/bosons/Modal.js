@@ -16,7 +16,7 @@ const ModalBackground = styled.div`
     background-color: var(--white);
     height: fit-content;
     max-width: 600px;
-    width: 100%;
+    width: 90%;
     border-radius: 20px;
 
     textarea {
@@ -25,6 +25,11 @@ const ModalBackground = styled.div`
 
     .emoji-mart {
       bottom: -210% !important;
+
+      @media (max-width: 600px) {
+        bottom: -212% !important;
+        left: 0% !important;
+      }
     }
 
     .modal-post-box-header {
