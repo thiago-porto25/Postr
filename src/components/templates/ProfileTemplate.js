@@ -29,6 +29,9 @@ export default function ProfileTemplate() {
       const response = await findUserByUsername(username)
 
       setProfileUser(response)
+      document.title = `${response.name.split(' ')[0]} (@${
+        response.username
+      }) - Postr`
     }
 
     if (username) getUser()
