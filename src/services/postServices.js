@@ -114,7 +114,7 @@ export const getFollowedPosts = async (userObj) => {
       postsRef,
       where('creatorId', 'in', userObj.following),
       orderBy('createdAt', 'desc'),
-      limit(100)
+      limit(300)
     )
 
     const querySnapshot = await getDocs(q)

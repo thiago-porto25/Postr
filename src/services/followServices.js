@@ -1,20 +1,13 @@
 import {
   db,
   collection,
-  getDoc,
   getDocs,
-  setDoc,
   updateDoc,
   arrayUnion,
   arrayRemove,
-  limit,
-  serverTimestamp,
   doc,
-  onSnapshot,
   query,
   where,
-  deleteDoc,
-  orderBy,
 } from '../firebase/config'
 
 export const followUser = async (followerId, followedId, setIsFollowing) => {
