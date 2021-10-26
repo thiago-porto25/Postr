@@ -57,7 +57,6 @@ export default function Options({ destroy }) {
 
   const handleDelete = async () => {
     await destroy()
-    setDropDownOpen(false)
   }
 
   useEffect(() => {
