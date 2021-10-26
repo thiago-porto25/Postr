@@ -22,7 +22,7 @@ export const followUser = async (followerId, followedId, setIsFollowing) => {
 
     setIsFollowing(true)
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -38,7 +38,7 @@ export const unFollowUser = async (followerId, followedId, setIsFollowing) => {
 
     setIsFollowing(false)
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -54,7 +54,7 @@ export const getProfileFollowers = async (followers) => {
 
     return followersResponse
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -70,6 +70,6 @@ export const getProfileFollowing = async (following) => {
 
     return followingResponse
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }

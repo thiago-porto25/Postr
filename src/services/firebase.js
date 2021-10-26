@@ -27,7 +27,7 @@ export async function saveProfileChanges(user, data) {
     await saveProfileChangesInUsersCollection(user, data)
     await saveProfileChangesInPosts(user, data)
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -42,7 +42,7 @@ async function saveProfileChangesInUsersCollection(user, data) {
       backgroundPhotoUrl: data.background,
     })
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -73,7 +73,7 @@ export async function saveProfileChangesInPosts(user, data) {
 
     await Promise.all(batches.map((batch) => batch.commit()))
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -95,6 +95,6 @@ export async function getSearchResult(term) {
       .map((doc) => doc.data())
       .sort((a, b) => b.followers.length - a.followers.length)
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }

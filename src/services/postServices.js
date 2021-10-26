@@ -26,7 +26,7 @@ export const getPostById = async (postId) => {
 
     return post.data()
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -103,7 +103,7 @@ export const ToggleInteraction = async (
         }))
     }
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -126,7 +126,7 @@ export const getFollowedPosts = async (userObj) => {
 
     return timelinePosts
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -167,7 +167,7 @@ export const getProfilePosts = async (userId) => {
 
     return returnedPosts
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
@@ -186,7 +186,7 @@ export const getProfileLikedPosts = async (userId) => {
 
     return likedPosts.sort((a, b) => b.createdAt - a.createdAt)
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 
