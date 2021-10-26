@@ -3,7 +3,7 @@ import { LoginTemplate } from '../components/templates'
 
 export default function Login() {
   useEffect(() => {
-    document.title = 'Log in - Postr'
+    document.title = 'Log in | Postr'
   }, [])
   return <LoginTemplate />
 }

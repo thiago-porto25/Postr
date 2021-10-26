@@ -3,7 +3,7 @@ import { PostTemplate } from '../components/templates'
 
 export default function Post() {
   useEffect(() => {
-    document.title = 'Post - Postr'
+    document.title = 'Post | Postr'
   }, [])
   return <PostTemplate />
 }

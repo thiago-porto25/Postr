@@ -31,7 +31,7 @@ export default function ProfileTemplate() {
       setProfileUser(response)
       document.title = `${response.name.split(' ')[0]} (@${
         response.username
-      }) - Postr`
+      }) | Postr`
     }
 
     if (username) getUser()

@@ -3,7 +3,7 @@ import { ResetPasswordTemplate } from '../components/templates'
 
 export default function ResetPassword() {
   useEffect(() => {
-    document.title = 'Reset password - Postr'
+    document.title = 'Reset password | Postr'
   }, [])
   return <ResetPasswordTemplate />
 }

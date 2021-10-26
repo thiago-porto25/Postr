@@ -3,7 +3,7 @@ import { SearchTemplate } from '../components/templates'
 
 export default function Search() {
   useEffect(() => {
-    document.title = 'Search - Postr'
+    document.title = 'Search | Postr'
   }, [])
   return <SearchTemplate />
 }
