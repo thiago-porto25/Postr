@@ -65,7 +65,7 @@ export const ToggleInteraction = async (
           })
         )
 
-        if (setLikedPosts)
+        if (setLikedPosts && interaction === 'likes')
           setLikedPosts((prev) => prev.filter((post) => post.id !== docId))
       } else {
         let newLikedPost
@@ -83,7 +83,8 @@ export const ToggleInteraction = async (
           })
         )
 
-        if (setLikedPosts) setLikedPosts((prev) => [...prev, newLikedPost])
+        if (setLikedPosts && interaction === 'likes')
+          setLikedPosts((prev) => [...prev, newLikedPost])
       }
     }
 
