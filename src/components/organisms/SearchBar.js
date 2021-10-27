@@ -76,7 +76,7 @@ export default function SearchBar({ searchTerm, setSearchTerm, noRedirect }) {
         onChange={({ target: { value } }) => setSearchValue(value)}
         placeholder="Search an username"
         onKeyUp={({ code }) => {
-          if (code === 'Enter' && searchValue) handleSearch()
+          if ((code === 'Enter' || code === '13') && searchValue) handleSearch()
         }}
       />
     </Container>
