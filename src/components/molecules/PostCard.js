@@ -18,6 +18,7 @@ const Container = styled.article`
   padding: 1rem 0.5rem 0.2rem 0.5rem;
   transition: background 200ms ease;
   cursor: pointer;
+  border-bottom: 1px solid var(--xLightGrey);
 
   &:hover {
     background-color: var(--xxLightGrey);
@@ -41,7 +42,6 @@ const Container = styled.article`
   .post-container {
     display: grid;
     grid-template-columns: 50px auto;
-    border-bottom: 1px solid var(--xLightGrey);
 
     .post-img-container {
       width: 50px;
@@ -74,6 +74,11 @@ const Container = styled.article`
           gap: inherit;
           align-items: inherit;
           text-decoration: none;
+          -webkit-tap-highlight-color: transparent;
+
+          &:active {
+            background-color: transparent;
+          }
         }
 
         .post-creator-info {
