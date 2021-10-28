@@ -68,15 +68,19 @@ export default function SearchBar({ searchTerm, setSearchTerm, noRedirect }) {
   return (
     <Container onClick={() => inputRef.current.focus()}>
       <IoSearchOutline />
+
       <Input
+        aria-label="Search a user by his username"
         ref={inputRef}
-        type="text"
+        type="search"
         maxLength="50"
         value={searchValue}
         onChange={({ target: { value } }) => setSearchValue(value)}
         placeholder="Search an username"
-        onKeyUp={({ code }) => {
-          if ((code === 'Enter' || code === '13') && searchValue) handleSearch()
+        onKeyDown={(e) => {
+          if ((e.code === 'Enter' || e.which === 13) && searchValue) {
+            handleSearch()
+          }
         }}
       />
     </Container>
