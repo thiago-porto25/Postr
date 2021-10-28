@@ -68,13 +68,16 @@ const Container = styled.article`
         display: flex;
         align-items: center;
         gap: 0.3rem;
+        background-color: transparent;
 
         a {
           display: inherit;
           gap: inherit;
           align-items: inherit;
           text-decoration: none;
+          background-color: transparent;
           -webkit-tap-highlight-color: transparent;
+          color: transparent;
 
           &:active {
             background-color: transparent;
@@ -86,6 +89,7 @@ const Container = styled.article`
           gap: inherit;
           align-items: inherit;
           cursor: pointer;
+          background-color: transparent;
 
           &:hover > h1 {
             text-decoration: underline;

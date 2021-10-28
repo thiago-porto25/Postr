@@ -44,6 +44,13 @@ const Container = styled.div`
         text-decoration: none;
         align-items: inherit;
         cursor: pointer;
+        background-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+        color: transparent;
+
+        &:active {
+          background-color: transparent;
+        }
 
         &:hover > h1 {
           text-decoration: underline;
