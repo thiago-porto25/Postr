@@ -72,10 +72,12 @@ export default function SearchBar({ searchTerm, setSearchTerm, noRedirect }) {
       <Input
         aria-label="Search a user by his username"
         ref={inputRef}
-        type="search"
+        type="text"
         maxLength="50"
         value={searchValue}
-        onChange={({ target: { value } }) => setSearchValue(value)}
+        onChange={({ target: { value } }) =>
+          setSearchValue(value.toLowerCase())
+        }
         placeholder="Search an username"
         onKeyDown={(e) => {
           if ((e.code === 'Enter' || e.which === 13) && searchValue) {
