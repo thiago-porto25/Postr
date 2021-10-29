@@ -44,8 +44,6 @@ const Container = styled.div`
         text-decoration: none;
         align-items: inherit;
         cursor: pointer;
-        background-color: transparent;
-        -webkit-tap-highlight-color: transparent;
         color: transparent;
         --webkit-background-clip: text;
 

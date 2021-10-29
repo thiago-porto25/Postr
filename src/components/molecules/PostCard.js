@@ -71,15 +71,13 @@ const Container = styled.article`
         display: flex;
         align-items: center;
         gap: 0.3rem;
-        background-color: transparent;
 
         a {
           display: inherit;
           gap: inherit;
           align-items: inherit;
           text-decoration: none;
-          background-color: transparent;
-          -webkit-tap-highlight-color: transparent;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
           --webkit-background-clip: text;
           color: transparent;
 

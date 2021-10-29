@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     color: #13171a;
     font-size: 16px;
     margin: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 
     @media (max-width: 660px) {
       &::-webkit-scrollbar {
