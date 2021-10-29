@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const Card = styled.section`
   width: 90%;
   height: 100%;
+  overflow-y: hidden;
   display: flex;
 
   .user-info-image {
@@ -45,7 +46,7 @@ const Card = styled.section`
   .naming-large {
     padding-right: 1rem;
     width: 300px;
-    overflow-x: hidden;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 
