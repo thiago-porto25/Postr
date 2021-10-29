@@ -46,13 +46,22 @@ export const getProfileFollowers = async (followers) => {
   try {
     const usersRef = collection(db, 'users')
 
-    const q = query(usersRef, where('id', 'in', followers))
+    const mutableFollowers = followers.map((item) => item)
+    const result = []
 
-    const querySnapshot = await getDocs(q)
+    while (mutableFollowers.length) {
+      const batch = mutableFollowers.splice(0, 10)
 
-    const followersResponse = querySnapshot.docs.map((doc) => doc.data())
+      const querySnapshot = await getDocs(
+        query(usersRef, where('id', 'in', [...batch]))
+      )
 
-    return followersResponse
+      result.push(...querySnapshot.docs.map((doc) => doc.data()))
+    }
+
+    console.log(result)
+
+    return result
   } catch (error) {
     console.error(error.message)
   }
@@ -62,13 +71,22 @@ export const getProfileFollowing = async (following) => {
   try {
     const usersRef = collection(db, 'users')
 
-    const q = query(usersRef, where('id', 'in', following))
+    const mutableFollowing = following.map((item) => item)
+    const result = []
 
-    const querySnapshot = await getDocs(q)
+    while (mutableFollowing.length) {
+      const batch = mutableFollowing.splice(0, 10)
 
-    const followingResponse = querySnapshot.docs.map((doc) => doc.data())
+      const querySnapshot = await getDocs(
+        query(usersRef, where('id', 'in', [...batch]))
+      )
 
-    return followingResponse
+      result.push(...querySnapshot.docs.map((doc) => doc.data()))
+    }
+
+    console.log(result)
+
+    return result
   } catch (error) {
     console.error(error.message)
   }
