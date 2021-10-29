@@ -77,6 +77,7 @@ const Container = styled.article`
           text-decoration: none;
           background-color: transparent;
           -webkit-tap-highlight-color: transparent;
+          --webkit-background-clip: text;
           color: transparent;
 
           &:active {
@@ -90,6 +91,7 @@ const Container = styled.article`
           align-items: inherit;
           cursor: pointer;
           background-color: transparent;
+          --webkit-background-clip: text;
 
           &:hover > h1 {
             text-decoration: underline;
@@ -102,6 +104,7 @@ const Container = styled.article`
             text-overflow: ellipsis;
             max-width: 150px;
             white-space: nowrap;
+            --webkit-background-clip: text;
           }
 
           @media (max-width: 550px) {

@@ -47,6 +47,7 @@ const Container = styled.div`
         background-color: transparent;
         -webkit-tap-highlight-color: transparent;
         color: transparent;
+        --webkit-background-clip: text;
 
         &:active {
           background-color: transparent;
@@ -68,6 +69,7 @@ const Container = styled.div`
           text-overflow: ellipsis;
           max-width: 150px;
           white-space: nowrap;
+          --webkit-background-clip: text;
         }
 
         @media (max-width: 550px) {
