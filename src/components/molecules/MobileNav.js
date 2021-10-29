@@ -26,7 +26,7 @@ const Container = styled.nav`
     color: var(--black);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 660px) {
     display: flex;
   }
 `
