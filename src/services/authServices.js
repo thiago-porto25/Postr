@@ -301,6 +301,8 @@ export const saveChangesToUser = async ({
 
       await setDoc(userRef, { name, birthday }, { merge: true })
 
+      await saveChangesToUserPosts(user, { name, username })
+
       return
     }
 
