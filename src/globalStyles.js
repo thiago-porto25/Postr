@@ -7,6 +7,15 @@ export const GlobalStyles = createGlobalStyle`
     color: #13171a;
     font-size: 16px;
     margin: 0;
+
+    @media (max-width: 660px) {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   }
 
   :root {
