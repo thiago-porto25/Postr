@@ -45,6 +45,7 @@ const Container = styled.article`
   .content {
     p {
       font-size: 23px;
+      word-wrap: break-word;
     }
   }
 

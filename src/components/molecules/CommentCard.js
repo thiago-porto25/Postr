@@ -107,7 +107,6 @@ const Container = styled.div`
             word-wrap: initial;
             text-overflow: initial;
             max-width: none;
-            white-space: initial;
           }
         }
       }
@@ -134,6 +133,7 @@ const Container = styled.div`
       p {
         margin-bottom: 0;
         margin-top: 0.7rem;
+        word-wrap: break-word;
       }
     }
   }

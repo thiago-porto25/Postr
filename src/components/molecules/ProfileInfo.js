@@ -29,6 +29,7 @@ const Container = styled.div`
   .bio {
     font-size: 15px;
     text-align: justify;
+    word-wrap: break-word;
   }
 
   .dates-container {

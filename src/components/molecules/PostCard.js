@@ -19,6 +19,7 @@ const Container = styled.article`
   transition: background 200ms ease;
   cursor: pointer;
   border-bottom: 1px solid var(--xLightGrey);
+  width: 100%;
 
   &:hover {
     background-color: var(--xxLightGrey);
@@ -41,12 +42,14 @@ const Container = styled.article`
 
   .post-container {
     display: grid;
-    grid-template-columns: 50px auto;
+    grid-template-columns: calc(50px + 0.2rem) auto;
 
     .post-img-container {
-      width: 50px;
+      width: calc(50px + 0.3rem);
       height: 50px;
       transition: 200ms ease-in-out;
+      box-sizing: border-box;
+      padding-left: 0.3rem;
 
       &:hover {
         filter: brightness(90%);
@@ -186,6 +189,7 @@ const Container = styled.article`
           text-align: justify;
           margin: 0.5rem 0;
           color: var(--black);
+          word-wrap: anywhere;
         }
       }
 
