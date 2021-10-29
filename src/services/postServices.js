@@ -110,21 +110,31 @@ export const ToggleInteraction = async (
 export const getFollowedPosts = async (userObj) => {
   try {
     const postsRef = collection(db, 'posts')
-    const q = query(
-      postsRef,
-      where('creatorId', 'in', userObj.following),
-      orderBy('createdAt', 'desc'),
-      limit(300)
-    )
 
-    const querySnapshot = await getDocs(q)
+    const mutableFollowing = userObj.following.map((item) => item)
+    const result = []
 
-    const timelinePosts = querySnapshot.docs.map((doc) => ({
-      docId: doc.id,
-      ...doc.data(),
-    }))
+    while (mutableFollowing.length) {
+      const batch = mutableFollowing.splice(0, 10)
 
-    return timelinePosts
+      const q = query(
+        postsRef,
+        where('creatorId', 'in', [...batch]),
+        orderBy('createdAt', 'desc'),
+        limit(300)
+      )
+
+      const querySnapshot = await getDocs(q)
+
+      result.push(
+        ...querySnapshot.docs.map((doc) => ({
+          docId: doc.id,
+          ...doc.data(),
+        }))
+      )
+    }
+
+    return result
   } catch (error) {
     console.error(error.message)
   }
@@ -137,12 +147,12 @@ export const getProfilePosts = async (userId) => {
     const postsQuery = query(
       postsRef,
       where('creatorId', '==', userId),
-      limit(100)
+      limit(300)
     )
     const rePostsQuery = query(
       postsRef,
       where('rePosts', 'array-contains', userId),
-      limit(50)
+      limit(300)
     )
 
     const query1Snapshot = await getDocs(postsQuery)
