@@ -3,7 +3,6 @@ import styled from 'styled-components'
 const Card = styled.section`
   width: 90%;
   height: 100%;
-  overflow-y: hidden;
   display: flex;
 
   .user-info-image {
@@ -23,7 +22,7 @@ const Card = styled.section`
     width: 100%;
     margin-left: 5%;
     display: inline-block;
-    overflow-x: hidden;
+    overflow: hidden;
 
     h2 {
       width: 100%;
@@ -31,7 +30,7 @@ const Card = styled.section`
       color: var(--black);
       font-size: 16px;
       margin: 0;
-      overflow-x: hidden;
+      overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -56,7 +55,7 @@ const Card = styled.section`
       h2 {
         font-size: 20px !important;
         max-width: 200px !important;
-        overflow-x: hidden;
+        overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
       }
